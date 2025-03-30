@@ -1,0 +1,25 @@
+name: EduVault
+
+services:
+  eduvault:
+    container_name: App_EduVault
+    image: ${DOCKER_REGISTRY-}eduvault
+    build:
+      context: .
+      dockerfile: EduVault/Dockerfile
+
+  postgresql:
+    container_name: DB_PostgreSQL
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=admin
+    image: postgres
+
+  mongodb:
+   container_name: DB_Mongo
+   ports:
+     - "27017:27017"
+   image: mongo
+   
