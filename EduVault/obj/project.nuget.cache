@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "3f7o41I9eHQ=",
+  "success": true,
+  "projectFilePath": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\EduVault.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\andro\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.21.0\\microsoft.visualstudio.azure.containers.tools.targets.1.21.0.nupkg.sha512"
+  ],
+  "logs": []
+}
