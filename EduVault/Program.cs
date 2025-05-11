@@ -1,7 +1,12 @@
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRazorPages();
+
 var app = builder.Build();
 
-app.Run(async (context) =>
+app.MapRazorPages();
+
+/*app.Run(async (context) =>
 {
     context.Response.ContentType = "text/html; charset=utf-8";
 
@@ -10,11 +15,11 @@ app.Run(async (context) =>
     var response = context.Response;
 
     if (path == "/date")
-        await response.WriteAsync($"Date: {now.ToString()}");
+        await response.WriteAsync($"Date: {now}");
     else if (path == "/hello")
         await response.WriteAsync("Драсте");
     else
-        await response.WriteAsync("Ничего не понял");
-});
+        await response.WriteAsync("ничего не понял"); ;
+});*/
 
 app.Run();

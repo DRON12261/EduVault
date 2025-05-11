@@ -28,3 +28,5 @@ S:\Projects\Visual Studio\EduVault\EduVault\obj\Debug\net8.0\refint\EduVault.dll
 S:\Projects\Visual Studio\EduVault\EduVault\obj\Debug\net8.0\EduVault.pdb
 S:\Projects\Visual Studio\EduVault\EduVault\obj\Debug\net8.0\EduVault.genruntimeconfig.cache
 S:\Projects\Visual Studio\EduVault\EduVault\obj\Debug\net8.0\ref\EduVault.dll
+S:\Projects\Visual Studio\EduVault\EduVault\obj\Debug\net8.0\EduVault.RazorAssemblyInfo.cache
+S:\Projects\Visual Studio\EduVault\EduVault\obj\Debug\net8.0\EduVault.RazorAssemblyInfo.cs
