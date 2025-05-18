@@ -3,7 +3,17 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
+<<<<<<< HEAD
 namespace EduVault
+=======
+builder.Services.AddRazorPages();
+
+var app = builder.Build();
+
+app.MapRazorPages();
+
+/*app.Run(async (context) =>
+>>>>>>> parent of 43814f3 (18.05.2025 - Frontend init)
 {
 	class Program
 	{
@@ -37,8 +47,18 @@ namespace EduVault
 			app.UseAuthorization();   // Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ middleware Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ð¸ 
 			app.MapRazorPages();
 
+<<<<<<< HEAD
 			app.UseStaticFiles();
 			app.UseRouting();
+=======
+    if (path == "/date")
+        await response.WriteAsync($"Date: {now}");
+    else if (path == "/hello")
+        await response.WriteAsync("Äðàñòå");
+    else
+        await response.WriteAsync("íè÷åãî íå ïîíÿë"); ;
+});*/
+>>>>>>> parent of 43814f3 (18.05.2025 - Frontend init)
 
 			app.MapControllerRoute(
 				name: "default",

@@ -7,9 +7,19 @@ namespace EduVault.Pages
 	[AllowAnonymous]
 	public class IndexModel : PageModel
     {
-        public IActionResult OnGet()
+        [BindProperty]
+        public string Login { get; set; } = "";
+        [BindProperty]
+        public string Password { get; set; } = "";
+        public string Message { get; private set; } = "Авторизуйтесь!";
+
+        public void OnGet()
         {
-            return RedirectToPage("Login");
+        }
+
+        public void OnPost()
+        {
+            Message = $"Логин: {Login}, Пароль: {Password}";
         }
     }
 }
