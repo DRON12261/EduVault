@@ -31,10 +31,10 @@ namespace EduVault
 			{
 				var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 				db.Database.EnsureCreated();
-				Console.WriteLine("Подключение к PostgreSQL успешно!");
+				Console.WriteLine("РџРѕРґРєР»СЋС‡РµРЅРёРµ Рє PostgreSQL СѓСЃРїРµС€РЅРѕ!");
 			}*/
-			app.UseAuthentication();   // добавление middleware аутентификации 
-			app.UseAuthorization();   // добавление middleware авторизации 
+			app.UseAuthentication();   // РґРѕР±Р°РІР»РµРЅРёРµ middleware Р°СѓС‚РµРЅС‚РёС„РёРєР°С†РёРё 
+			app.UseAuthorization();   // РґРѕР±Р°РІР»РµРЅРёРµ middleware Р°РІС‚РѕСЂРёР·Р°С†РёРё 
 			app.MapRazorPages();
 
 			app.UseStaticFiles();
@@ -54,9 +54,9 @@ namespace EduVault
 				if (path == "/date")
 					await response.WriteAsync($"Date: {now}");
 				else if (path == "/hello")
-					await response.WriteAsync("Драсте");
+					await response.WriteAsync("Р”СЂР°СЃС‚Рµ");
 				else
-					await response.WriteAsync("ничего не понял"); ;
+					await response.WriteAsync("РЅРёС‡РµРіРѕ РЅРµ РїРѕРЅСЏР»"); ;
 			});*/
 			return app;
 		}
