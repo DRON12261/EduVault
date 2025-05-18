@@ -1,4 +1,6 @@
-pgdata/
+/pgdata/
+/.vs/
+/EduVault/obj/
 
 
 
