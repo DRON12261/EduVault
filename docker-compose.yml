@@ -7,7 +7,9 @@ services:
     build:
       context: .
       dockerfile: EduVault/Dockerfile
-      
+    environment:
+      - ConnectionStrings__PostgresDocker=Host=postgresql;Port=5432;Database=EduVault;Username=postgres;Password=1Qwerty;
+
   postgresql:
     container_name: DB_PostgreSQL
     ports:
@@ -17,10 +19,19 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1Qwerty
     image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   mongodb:
    container_name: DB_Mongo
    ports:
      - "27017:27017"
    image: mongo
+volumes:
+  postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./pgdata
    
