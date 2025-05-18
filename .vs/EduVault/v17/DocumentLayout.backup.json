@@ -7,6 +7,26 @@
       "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{294FCC1D-935C-4F40-92E2-F31E97E93361}|docker-compose.dcproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{294FCC1D-935C-4F40-92E2-F31E97E93361}|docker-compose.dcproj|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\repositories\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\repositories\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,39 +35,8 @@
       "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{294FCC1D-935C-4F40-92E2-F31E97E93361}|docker-compose.dcproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{294FCC1D-935C-4F40-92E2-F31E97E93361}|docker-compose.dcproj|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\dbclasses\\accessrights.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\dbclasses\\accessrights.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\dbclasses\\accessrighttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\dbclasses\\accessrighttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\dbclasses\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\dbclasses\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\eduvault.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\eduvault.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\models\\accessrights.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\models\\accessrights.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -60,6 +49,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\pages\\_layout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\pages\\_layout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Repositories\\IUserRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:EduVault\\Repositories\\IUserRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -69,37 +62,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AccessRights.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\DBClasses\\AccessRights.cs",
-              "RelativeDocumentMoniker": "EduVault\\DBClasses\\AccessRights.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\DBClasses\\AccessRights.cs",
-              "RelativeToolTip": "EduVault\\DBClasses\\AccessRights.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T19:42:57.894Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AccessRightType.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\DBClasses\\AccessRightType.cs",
-              "RelativeDocumentMoniker": "EduVault\\DBClasses\\AccessRightType.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\DBClasses\\AccessRightType.cs",
-              "RelativeToolTip": "EduVault\\DBClasses\\AccessRightType.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T19:35:54.881Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "EduVault\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Controllers\\UserController.cs",
+              "RelativeToolTip": "EduVault\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T13:44:59.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\appsettings.json",
               "RelativeDocumentMoniker": "EduVault\\appsettings.json",
@@ -107,25 +87,23 @@
               "RelativeToolTip": "EduVault\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-16T19:23:15.58Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T19:23:15.58Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Repositories\\AppDbContext.cs",
               "RelativeDocumentMoniker": "EduVault\\Repositories\\AppDbContext.cs",
               "ToolTip": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Repositories\\AppDbContext.cs",
               "RelativeToolTip": "EduVault\\Repositories\\AppDbContext.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAYwBgAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAADIAAAAAAAAAAAAswFIAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T18:41:29.026Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T18:41:29.026Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 12,
               "Title": "IUserRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Repositories\\IUserRepository.cs",
               "RelativeDocumentMoniker": "EduVault\\Repositories\\IUserRepository.cs",
@@ -133,77 +111,49 @@
               "RelativeToolTip": "EduVault\\Repositories\\IUserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T18:34:18.563Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T18:34:18.563Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\DBClasses\\User.cs",
-              "RelativeDocumentMoniker": "EduVault\\DBClasses\\User.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\DBClasses\\User.cs",
-              "RelativeToolTip": "EduVault\\DBClasses\\User.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Models\\User.cs",
+              "RelativeDocumentMoniker": "EduVault\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Models\\User.cs",
+              "RelativeToolTip": "EduVault\\Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T16:15:55.343Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T16:15:55.343Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "EduVault",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\EduVault.csproj",
-              "RelativeDocumentMoniker": "EduVault\\EduVault.csproj",
-              "ToolTip": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\EduVault.csproj",
-              "RelativeToolTip": "EduVault\\EduVault.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-16T16:03:36.865Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 3,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "EduVault\\Repositories\\UserRepository.cs",
               "ToolTip": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Repositories\\UserRepository.cs",
               "RelativeToolTip": "EduVault\\Repositories\\UserRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-16T15:56:54.145Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Microsoft.VisualStudio.Docker.Compose.targets",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Sdks\\Microsoft.Docker.Sdk\\build\\Microsoft.VisualStudio.Docker.Compose.targets",
-              "ViewState": "AgIAALAAAAAAAAAAAAAvwMkAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2025-05-15T17:10:08.279Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "docker-compose.yml",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\docker-compose.yml",
               "RelativeDocumentMoniker": "docker-compose.yml",
               "ToolTip": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\docker-compose.yml",
               "RelativeToolTip": "docker-compose.yml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
               "WhenOpened": "2025-05-11T15:02:56.303Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 11,
               "Title": "_Layout.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Pages\\_Layout.cshtml.cs",
               "RelativeDocumentMoniker": "EduVault\\Pages\\_Layout.cshtml.cs",
@@ -211,12 +161,11 @@
               "RelativeToolTip": "EduVault\\Pages\\_Layout.cshtml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T15:48:48.809Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T15:48:48.809Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 10,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Pages\\_Layout.cshtml",
               "RelativeDocumentMoniker": "EduVault\\Pages\\_Layout.cshtml",
@@ -224,12 +173,11 @@
               "RelativeToolTip": "EduVault\\Pages\\_Layout.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-03T15:48:44.474Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T15:48:44.474Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 9,
               "Title": "Index.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Pages\\Index.cshtml.cs",
               "RelativeDocumentMoniker": "EduVault\\Pages\\Index.cshtml.cs",
@@ -237,12 +185,11 @@
               "RelativeToolTip": "EduVault\\Pages\\Index.cshtml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T15:02:53.8Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-20T15:02:53.8Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Pages\\Index.cshtml",
               "RelativeDocumentMoniker": "EduVault\\Pages\\Index.cshtml",
@@ -261,10 +208,22 @@
               "RelativeDocumentMoniker": "EduVault\\Program.cs",
               "ToolTip": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Program.cs",
               "RelativeToolTip": "EduVault\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAB9AAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAA5wCcAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-20T14:31:18.685Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AccessRights.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Models\\AccessRights.cs",
+              "RelativeDocumentMoniker": "EduVault\\Models\\AccessRights.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Models\\AccessRights.cs",
+              "RelativeToolTip": "EduVault\\Models\\AccessRights.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T19:42:57.894Z"
             }
           ]
         }

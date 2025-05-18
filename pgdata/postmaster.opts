@@ -1,1 +1,1 @@
-/usr/lib/postgresql/17/bin/postgres "-c" "listen_addresses=0.0.0.0" "-c" "max_connections=100"
+/usr/lib/postgresql/17/bin/postgres

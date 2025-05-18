@@ -19,11 +19,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1Qwerty
     image: postgres
-    command: [
-      "postgres",
-      "-c", "listen_addresses=0.0.0.0",
-      "-c", "max_connections=100"
-    ]
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

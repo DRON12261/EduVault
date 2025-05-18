@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EduVault.Pages
 {
-    public class IndexModel : PageModel
+	[AllowAnonymous]
+	public class IndexModel : PageModel
     {
         [BindProperty]
         public string Login { get; set; } = "";
