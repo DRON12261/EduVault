@@ -17,6 +17,7 @@ services:
       - S:\Projects\Visual Studio\EduVault\EduVault:/app:rw
       - S:\Projects\Visual Studio\EduVault:/src:rw
       - C:\Users\andro\vsdbg\vs2017u5:/remote_debugger:rw
+      - C:\Users\andro\.nuget\packages:/.nuget/packages:ro
       - C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages:/.nuget/fallbackpackages:ro
       - C:\Users\andro\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
       - C:\Users\andro\AppData\Roaming\ASP.NET\Https:/home/app/.aspnet/https:ro
@@ -28,7 +29,7 @@ services:
     entrypoint: "dotnet --roll-forward Major /VSTools/DistrolessHelper/DistrolessHelper.dll --wait"
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /.nuget/fallbackpackages  \"/app/bin/Debug/net8.0/EduVault.dll\""
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /.nuget/packages --additionalProbingPath /.nuget/fallbackpackages  \"/app/bin/Debug/net8.0/EduVault.dll\""
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "dotnet --roll-forward Major /VSTools/DistrolessHelper/DistrolessHelper.dll --stop dotnet"
     tty: true

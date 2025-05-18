@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EduVault")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aafdbad47b1790af13ba15aab262bcc1991bbc7c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0ba83177a9abe001a5291ccee4f728fbe72e432c")]
 [assembly: System.Reflection.AssemblyProductAttribute("EduVault")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EduVault")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
