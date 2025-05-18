@@ -1,8 +1,8 @@
-name: dockercompose8633863755715280692
+name: dockercompose6500096148212357217
 services:
   eduvault:
     build:
-      context: S:\Projects\Visual Studio\EduVault
+      context: C:\Users\User\Desktop\EduVault\EduVault
       dockerfile: EduVault/Dockerfile
       args:
         BUILD_CONFIGURATION: Debug
@@ -131,4 +131,4 @@ services:
         protocol: tcp
 networks:
   default:
-    name: dockercompose8633863755715280692_default
+    name: dockercompose6500096148212357217_default

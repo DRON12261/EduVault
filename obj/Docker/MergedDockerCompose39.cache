@@ -1,0 +1,81 @@
+name: dockercompose6500096148212357217
+services:
+  eduvault:
+    build:
+      context: C:\Users\User\Desktop\EduVault\EduVault
+      dockerfile: EduVault/Dockerfile
+    container_name: App_EduVault
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_HTTPS_PORTS: "8081"
+      ConnectionStrings__PostgresDocker: Host=postgresql;Port=5432;Database=EduVault;Username=postgres;Password=1Qwerty;
+    image: eduvault
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\User\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\User\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+  mongodb:
+    container_name: DB_Mongo
+    image: mongo
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 27017
+        published: "27017"
+        protocol: tcp
+  postgresql:
+    command:
+      - postgres
+      - -c
+      - listen_addresses=0.0.0.0
+      - -c
+      - max_connections=100
+    container_name: DB_PostgreSQL
+    environment:
+      POSTGRES_DB: EduVault
+      POSTGRES_PASSWORD: 1Qwerty
+      POSTGRES_USER: postgres
+    image: postgres
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 5432
+        published: "5432"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: postgres_data
+        target: /var/lib/postgresql/data
+        volume: {}
+networks:
+  default:
+    name: dockercompose6500096148212357217_default
+volumes:
+  postgres_data:
+    name: dockercompose6500096148212357217_postgres_data
+    driver: local
+    driver_opts:
+      device: C:\Users\User\Desktop\EduVault\EduVault\pgdata
+      o: bind
+      type: none
