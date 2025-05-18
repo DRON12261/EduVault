@@ -9,3 +9,4 @@ S:\Projects\Visual Studio\EduVault\bin\Debug\EduVault.pdb
 S:\Projects\Visual Studio\EduVault\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
 S:\Projects\Visual Studio\EduVault\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 S:\Projects\Visual Studio\EduVault\obj\Debug\docker-c.35A3FFBA.Up2Date
+S:\Projects\Visual Studio\EduVault\bin\Debug\EduVault.staticwebassets.runtime.json

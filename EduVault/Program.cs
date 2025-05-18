@@ -4,6 +4,8 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
+app.UseStaticFiles();
+
 app.MapRazorPages();
 
 /*app.Run(async (context) =>
@@ -17,9 +19,9 @@ app.MapRazorPages();
     if (path == "/date")
         await response.WriteAsync($"Date: {now}");
     else if (path == "/hello")
-        await response.WriteAsync("Драсте");
+        await response.WriteAsync("Р”СЂР°СЃС‚Рµ");
     else
-        await response.WriteAsync("ничего не понял"); ;
+        await response.WriteAsync("РЅРёС‡РµРіРѕ РЅРµ РїРѕРЅСЏР»"); ;
 });*/
 
 app.Run();

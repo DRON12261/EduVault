@@ -7,7 +7,7 @@ services:
     build:
       context: .
       dockerfile: EduVault/Dockerfile
-
+      
   postgresql:
     container_name: DB_PostgreSQL
     ports:

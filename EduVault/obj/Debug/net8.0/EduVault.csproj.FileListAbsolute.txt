@@ -30,3 +30,4 @@ S:\Projects\Visual Studio\EduVault\EduVault\obj\Debug\net8.0\EduVault.genruntime
 S:\Projects\Visual Studio\EduVault\EduVault\obj\Debug\net8.0\ref\EduVault.dll
 S:\Projects\Visual Studio\EduVault\EduVault\obj\Debug\net8.0\EduVault.RazorAssemblyInfo.cache
 S:\Projects\Visual Studio\EduVault\EduVault\obj\Debug\net8.0\EduVault.RazorAssemblyInfo.cs
+S:\Projects\Visual Studio\EduVault\EduVault\bin\Debug\net8.0\EduVault.staticwebassets.runtime.json
