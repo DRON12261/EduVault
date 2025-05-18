@@ -1,12 +1,125 @@
 {
   "Version": 1,
-  "Hash": "+VgPG1HD49B2X9U3XsjYFkUTuJXSwM3ixsz3mOJNiC8=",
+  "Hash": "uGAtBHbFIofyb9GNXgVSRgQQ9oEss7Uyrl+I2VEwEKI=",
   "Source": "EduVault",
   "BasePath": "_content/EduVault",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "EduVault\\wwwroot",
+      "Source": "EduVault",
+      "ContentRoot": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\wwwroot\\",
+      "BasePath": "_content/EduVault",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\wwwroot\\css\\site.css",
+      "SourceId": "EduVault",
+      "SourceType": "Discovered",
+      "ContentRoot": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\wwwroot\\",
+      "BasePath": "_content/EduVault",
+      "RelativePath": "css/site#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7tid9jg45c",
+      "Integrity": "e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "css/site.7tid9jg45c.css",
+      "AssetFile": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4850"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 May 2025 11:57:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7tid9jg45c"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.css",
+      "AssetFile": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4850"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 May 2025 11:57:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w="
+        }
+      ]
+    }
+  ]
 }

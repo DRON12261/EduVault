@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
-namespace EduVault
+namespace EduVault 
 {
 	class Program
 	{
@@ -31,10 +31,10 @@ namespace EduVault
 			{
 				var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 				db.Database.EnsureCreated();
-				Console.WriteLine("Подключение к PostgreSQL успешно!");
+				Console.WriteLine("              PostgreSQL        !");
 			}*/
-			app.UseAuthentication();   // добавление middleware аутентификации 
-			app.UseAuthorization();   // добавление middleware авторизации 
+			app.UseAuthentication();   //            middleware                
+			app.UseAuthorization();   //            middleware             
 			app.MapRazorPages();
 
 			app.UseStaticFiles();
@@ -54,9 +54,9 @@ namespace EduVault
 				if (path == "/date")
 					await response.WriteAsync($"Date: {now}");
 				else if (path == "/hello")
-					await response.WriteAsync("Драсте");
+					await response.WriteAsync("      ");
 				else
-					await response.WriteAsync("ничего не понял"); ;
+					await response.WriteAsync("               "); ;
 			});*/
 			return app;
 		}
