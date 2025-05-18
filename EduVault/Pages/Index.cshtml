@@ -1,4 +1,24 @@
-@page
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model EduVault.Pages.IndexModel
+
 @{
+    ViewBag.Title = "Страница авторизации";
+    Layout = "/Pages/_Layout.cshtml";
 }
+
+<form method="post" asp-antiforgery="true" class="row">
+    <div class="form-group">
+        <label asp-for="Login">Логин</label>
+        <input type="text" class="form-control" asp-for="Login" placeholder="Введите логин">
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Пароль</label>
+        <input type="password" class="form-control" asp-for="Password" placeholder="Введите пароль">
+    </div>
+    <div class="">@Model.Message</div>
+    <div>
+        <input type="submit" class="btn btn-primary" value="Войти">
+        <input type="submit" class="btn btn-primary" value="Войти через ТюмГУ">
+    </div>
+</form>

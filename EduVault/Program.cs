@@ -73,12 +73,15 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder
 
 var app = builder.Build();
 
+<<<<<<< HEAD
 using (var scope = app.Services.CreateScope())
 {
 	var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 	db.Database.EnsureCreated();
 	Console.WriteLine("Подключение к PostgreSQL успешно!");
 }
+=======
+>>>>>>> parent of 43814f3 (18.05.2025 - Frontend init)
 app.MapRazorPages();
 
 /*app.Run(async (context) =>

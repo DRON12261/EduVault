@@ -3,6 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -60,6 +61,26 @@
     {
       "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|c:\\users\\user\\desktop\\eduvault\\eduvault\\eduvault\\pages\\_layout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\pages\\_layout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|s:\\projects\\visual studio\\eduvault\\eduvault\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|s:\\projects\\visual studio\\eduvault\\eduvault\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|s:\\projects\\visual studio\\eduvault\\eduvault\\pages\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\pages\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|s:\\projects\\visual studio\\eduvault\\eduvault\\pages\\_layout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\pages\\_layout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|s:\\projects\\visual studio\\eduvault\\eduvault\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BBBBA82-2BFA-47A0-8153-50A310EAEEB8}|EduVault\\EduVault.csproj|solutionrelative:eduvault\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> parent of 43814f3 (18.05.2025 - Frontend init)
     }
   ],
   "DocumentGroupContainers": [
@@ -69,6 +90,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 14,
           "Children": [
             {
@@ -95,11 +117,27 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-16T19:35:54.881Z",
+=======
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_Layout.cshtml.cs",
+              "DocumentMoniker": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\Pages\\_Layout.cshtml.cs",
+              "RelativeDocumentMoniker": "EduVault\\Pages\\_Layout.cshtml.cs",
+              "ToolTip": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\Pages\\_Layout.cshtml.cs",
+              "RelativeToolTip": "EduVault\\Pages\\_Layout.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T15:48:48.809Z",
+>>>>>>> parent of 43814f3 (18.05.2025 - Frontend init)
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+<<<<<<< HEAD
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\appsettings.json",
               "RelativeDocumentMoniker": "EduVault\\appsettings.json",
@@ -108,10 +146,21 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-05-16T19:23:15.58Z",
+=======
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\Pages\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "EduVault\\Pages\\_Layout.cshtml",
+              "ToolTip": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\Pages\\_Layout.cshtml",
+              "RelativeToolTip": "EduVault\\Pages\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-03T15:48:44.474Z",
+>>>>>>> parent of 43814f3 (18.05.2025 - Frontend init)
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 1,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Repositories\\AppDbContext.cs",
@@ -147,10 +196,22 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-16T16:15:55.343Z",
+=======
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\Pages\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "EduVault\\Pages\\Index.cshtml.cs",
+              "ToolTip": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\Pages\\Index.cshtml.cs",
+              "RelativeToolTip": "EduVault\\Pages\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T15:02:53.8Z",
+>>>>>>> parent of 43814f3 (18.05.2025 - Frontend init)
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 10,
               "Title": "EduVault",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\EduVault.csproj",
@@ -160,10 +221,22 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-05-16T16:03:36.865Z",
+=======
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\Pages\\Index.cshtml",
+              "RelativeDocumentMoniker": "EduVault\\Pages\\Index.cshtml",
+              "ToolTip": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\Pages\\Index.cshtml",
+              "RelativeToolTip": "EduVault\\Pages\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-20T15:02:50Z",
+>>>>>>> parent of 43814f3 (18.05.2025 - Frontend init)
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 9,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Repositories\\UserRepository.cs",
@@ -171,9 +244,19 @@
               "ToolTip": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\Repositories\\UserRepository.cs",
               "RelativeToolTip": "EduVault\\Repositories\\UserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAADAAAAAAAAAA==",
+=======
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\Program.cs",
+              "RelativeDocumentMoniker": "EduVault\\Program.cs",
+              "ToolTip": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\Program.cs",
+              "RelativeToolTip": "EduVault\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAYAAAAAAAAAA==",
+>>>>>>> parent of 43814f3 (18.05.2025 - Frontend init)
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-16T15:56:54.145Z",
               "EditorCaption": ""
+<<<<<<< HEAD
             },
             {
               "$type": "Document",
@@ -265,6 +348,8 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-20T14:31:18.685Z",
               "EditorCaption": ""
+=======
+>>>>>>> parent of 43814f3 (18.05.2025 - Frontend init)
             }
           ]
         }
