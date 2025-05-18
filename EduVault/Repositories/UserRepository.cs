@@ -1,17 +1,8 @@
 ﻿using EduVault.DBClasses;
-using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace EduVault.Repositories
 {
-	public interface IUserRepository
-	{
-		Task<User> GetByIdAsync(int id);
-		Task AddAsync(User user);
-		Task UpdateAsync(User user);
-		Task DeleteAsync(int id);
-		Task<List<User>> GetAllAsync();
-	}
 	public class UserRepository: IUserRepository
 	{
 		private readonly AppDbContext _context;
@@ -39,16 +30,12 @@ namespace EduVault.Repositories
 		}
 		public async Task<List<User>> GetAllAsync()
 		{
-			return await _context.Users.ToListAsync();
+			return _context.Users.ToList();
 		}
 		public async Task DeleteAsync(int id)
 		{
-			var user = await _context.Users.FindAsync(id);
-			if (user != null)
-			{
-				_context.Users.Remove(user);
-				await _context.SaveChangesAsync();
-			}
+			
+			await _context.SaveChangesAsync();
 		}
 	}
 }
