@@ -1,5 +1,6 @@
-﻿@model List<EduVault.DBClasses.User>
+@model EduVault.Pages.UserListModel
 @{
+     ViewData["Title"] = "Список пользователей";
 }
 
 
@@ -16,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var user in Model)
+        @foreach (var user in Model.Users)
         {
             <tr>
                 <td>@user.Id</td>

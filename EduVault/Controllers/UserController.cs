@@ -1,4 +1,4 @@
-﻿using EduVault.DBClasses;
+using EduVault.Models;
 using EduVault.Repositories;
 using Microsoft.AspNetCore.Mvc;
 

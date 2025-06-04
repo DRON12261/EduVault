@@ -1,0 +1,22 @@
+@page
+@model EduVault.Pages.Auth.LoginModel
+@{
+    ViewData["Title"] = "Авторизация";
+}
+
+<div class="form-container">
+    <h2>Авторизация</h2>
+    <form method="post" asp-antiforgery="true">
+        @Html.AntiForgeryToken()
+        <div class="auth-form-group">
+            <input name="Input.Login" type="text" placeholder="Логин" required>
+        </div>
+        <div class="auth-form-group">
+            <input name="Input.Password" type="password" placeholder="Пароль" required>
+        </div>
+        <div class="auth-form-group" style="display: flex; gap: 0.8rem;">
+            <button type="submit" class="btn-primary">Войти</button>
+            <button type="button" class="btn-secondary">Войти с помощью УЗ ТюмГУ</button>
+        </div>
+    </form>
+</div>

@@ -1,4 +1,4 @@
-﻿namespace EduVault.DBClasses
+namespace EduVault.Models
 {
 	public interface IRecipient
 	{

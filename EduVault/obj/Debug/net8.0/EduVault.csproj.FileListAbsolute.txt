@@ -79,3 +79,5 @@ C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\Npgsql.EntityF
 C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\User\Desktop\EduVault\EduVault\EduVault\obj\Debug\net8.0\EduVault.csproj.AssemblyReference.cache
 C:\Users\User\Desktop\EduVault\EduVault\EduVault\obj\Debug\net8.0\EduVault.csproj.Up2Date
+C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\EduVault.staticwebassets.runtime.json
+C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\BCrypt.Net-Next.dll

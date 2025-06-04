@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uGAtBHbFIofyb9GNXgVSRgQQ9oEss7Uyrl+I2VEwEKI=",
+  "Hash": "9I1Z0y0NCmMBY/Huju3kvaDvFoVK6dRov7lRlyHBuXM=",
   "Source": "EduVault",
   "BasePath": "_content/EduVault",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "EduVault\\wwwroot",
       "Source": "EduVault",
-      "ContentRoot": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\wwwroot\\",
       "BasePath": "_content/EduVault",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\wwwroot\\css\\site.css",
+      "Identity": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\wwwroot\\css\\site.css",
       "SourceId": "EduVault",
       "SourceType": "Discovered",
-      "ContentRoot": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\wwwroot\\",
       "BasePath": "_content/EduVault",
       "RelativePath": "css/site#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "7tid9jg45c",
-      "Integrity": "e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w=",
+      "Fingerprint": "90hucrrhip",
+      "Integrity": "mXlHh3njgEtwMiqaKSsPrzhURFSl5cq5L5IWJCNQj1w=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -40,8 +40,8 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/site.7tid9jg45c.css",
-      "AssetFile": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\wwwroot\\css\\site.css",
+      "Route": "css/site.90hucrrhip.css",
+      "AssetFile": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -50,7 +50,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4850"
+          "Value": "4590"
         },
         {
           "Name": "Content-Type",
@@ -58,11 +58,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w=\""
+          "Value": "\"mXlHh3njgEtwMiqaKSsPrzhURFSl5cq5L5IWJCNQj1w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 18 May 2025 11:57:19 GMT"
+          "Value": "Sun, 18 May 2025 15:01:34 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -72,7 +72,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "7tid9jg45c"
+          "Value": "90hucrrhip"
         },
         {
           "Name": "label",
@@ -80,13 +80,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w="
+          "Value": "sha256-mXlHh3njgEtwMiqaKSsPrzhURFSl5cq5L5IWJCNQj1w="
         }
       ]
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\wwwroot\\css\\site.css",
+      "AssetFile": "C:\\Users\\User\\Desktop\\EduVault\\EduVault\\EduVault\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -95,7 +95,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4850"
+          "Value": "4590"
         },
         {
           "Name": "Content-Type",
@@ -103,11 +103,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w=\""
+          "Value": "\"mXlHh3njgEtwMiqaKSsPrzhURFSl5cq5L5IWJCNQj1w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 18 May 2025 11:57:19 GMT"
+          "Value": "Sun, 18 May 2025 15:01:34 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -117,7 +117,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w="
+          "Value": "sha256-mXlHh3njgEtwMiqaKSsPrzhURFSl5cq5L5IWJCNQj1w="
         }
       ]
     }

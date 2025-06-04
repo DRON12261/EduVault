@@ -1,11 +1,11 @@
-﻿namespace EduVault.DBClasses
+namespace EduVault.Models
 {
 	public class User : IRecipient
 	{
 		private long _id;
 		private string _name;
 		private string _login;
-		private string _password;
+		private string _passwordHash;
 		private byte _userType;
 		private List<Role> _roles;
 		public long Id { get { return _id; } }
@@ -29,7 +29,7 @@
 			}
 		}
 		public string Login { get { return _login; } set { _login = value; } }
-		public string Password { get { return _password; } set { _password = value; } }
+		public string PasswordHash { get { return _passwordHash; } set { _passwordHash = value; } }
 		public byte UserType { get { return _userType; } set { _userType = value; } }
 		public List<Role> Roles { get { return _roles; } set { _roles = value; } }
 		User()

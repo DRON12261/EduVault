@@ -9,7 +9,7 @@ namespace EduVault.Pages
     {
         public IActionResult OnGet()
         {
-            return RedirectToPage("Login");
+            return RedirectToPage("Auth/Login");
         }
     }
 }

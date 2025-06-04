@@ -35,3 +35,5 @@ C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.Caching.M
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.Options.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.Primitives.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Npgsql.dll
+C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\EduVault.staticwebassets.runtime.json
+C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\BCrypt.Net-Next.dll

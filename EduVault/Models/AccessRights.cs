@@ -1,7 +1,7 @@
-﻿using System.Xml.Linq;
+using System.Xml.Linq;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EduVault.DBClasses
+namespace EduVault.Models
 {
 	public class AccessRights
 	{
