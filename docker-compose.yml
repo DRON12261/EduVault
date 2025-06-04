@@ -19,8 +19,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1Qwerty
     image: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    #volumes:
+    #  - postgres_data:/var/lib/postgresql/data
 
   mongodb:
    container_name: DB_Mongo

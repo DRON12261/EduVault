@@ -5,17 +5,17 @@
 }
 
 <div class="form-container">
-    <h2>Авторизация</h2>
+    <h2 style="margin-bottom: 1rem">Авторизация</h2>
     <form method="post" asp-antiforgery="true">
         <div class="auth-form-group">
-            <input type="text" placeholder="Логин" required>
+            <input type="text" placeholder="Логин" style="padding: 1rem;" required>
         </div>
         <div class="auth-form-group">
-            <input type="password" placeholder="Пароль" required>
+            <input type="password" placeholder="Пароль" style="padding: 1rem;" required>
         </div>
-        <div class="auth-form-group" style="display: flex; gap: 0.8rem;">
-            <button type="submit" class="btn-primary">Войти</button>
-            <button type="button" class="btn-secondary">Войти с помощью ТюмГУ</button>
+        <div class="auth-form-group" style="display: flex; gap: 0.8rem; width:100%">
+            <button type="submit" class="btn-primary" style="width:50%">Войти</button>
+            <button type="button" class="btn-alt" style="width:50%">Войти в УЗ ТюмГУ</button>
         </div>
     </form>
 </div>

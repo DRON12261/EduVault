@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uGAtBHbFIofyb9GNXgVSRgQQ9oEss7Uyrl+I2VEwEKI=",
+  "Hash": "zKhi5G9aV6Tec3IgtCGSbNX1TYN7Ap2vuTG1UUM+oyk=",
   "Source": "EduVault",
   "BasePath": "_content/EduVault",
   "Mode": "Default",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "7tid9jg45c",
-      "Integrity": "e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w=",
+      "Fingerprint": "bfqg18i4ro",
+      "Integrity": "OTVCV+jT/GnBjE0zfORCIteMws3lCVmrruPJ2rpKEdY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -40,7 +40,7 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/site.7tid9jg45c.css",
+      "Route": "css/site.bfqg18i4ro.css",
       "AssetFile": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -50,7 +50,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4850"
+          "Value": "5093"
         },
         {
           "Name": "Content-Type",
@@ -58,11 +58,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w=\""
+          "Value": "\"OTVCV+jT/GnBjE0zfORCIteMws3lCVmrruPJ2rpKEdY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 18 May 2025 11:57:19 GMT"
+          "Value": "Wed, 21 May 2025 01:46:23 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -72,7 +72,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "7tid9jg45c"
+          "Value": "bfqg18i4ro"
         },
         {
           "Name": "label",
@@ -80,7 +80,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w="
+          "Value": "sha256-OTVCV+jT/GnBjE0zfORCIteMws3lCVmrruPJ2rpKEdY="
         }
       ]
     },
@@ -95,7 +95,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4850"
+          "Value": "5093"
         },
         {
           "Name": "Content-Type",
@@ -103,11 +103,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w=\""
+          "Value": "\"OTVCV+jT/GnBjE0zfORCIteMws3lCVmrruPJ2rpKEdY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 18 May 2025 11:57:19 GMT"
+          "Value": "Wed, 21 May 2025 01:46:23 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -117,7 +117,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-e3XJ4EHjME5qaKghp/z9O+8Yj1Il92oiu6OmlXW1e8w="
+          "Value": "sha256-OTVCV+jT/GnBjE0zfORCIteMws3lCVmrruPJ2rpKEdY="
         }
       ]
     }

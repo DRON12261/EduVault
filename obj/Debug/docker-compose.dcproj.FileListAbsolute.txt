@@ -35,3 +35,19 @@ C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.Caching.M
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.Options.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.Primitives.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Npgsql.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\EduVault.staticwebassets.runtime.json
+S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.EntityFrameworkCore.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.EntityFrameworkCore.Relational.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Caching.Abstractions.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.EntityFrameworkCore.Abstractions.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Logging.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Caching.Memory.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Options.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Primitives.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Npgsql.dll

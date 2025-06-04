@@ -10,8 +10,23 @@
 <body>
     <header>
         <div class="logo">EduVault</div>
+        <div class="user-info" style="font-size:150%; font-weight: 500;">
+            @if (@ViewData["Title"]?.ToString() == "Справочник")
+            {
+                <span>Список файлов</span>
+            }
+            @if (@ViewData["Title"]?.ToString() == "Карточка документа")
+            {
+                <span>
+                    Карточка файла: <span style="font-size:80%; font-weight: 200;">Проверка отчётов студентов на соответствие требованиям</span>
+                </span>
+            }
+        </div>
         <div class="user-info">
-            <span>Иван Петров</span>
+            @if (@ViewData["Title"]?.ToString() != "Авторизация")
+            {
+                <span>Иван Петров</span>
+            }
         </div>
     </header>
 
