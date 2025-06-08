@@ -1,16 +1,16 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAssetEndpoint Include="_content/EduVault/css/site.5ambbtxalb.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"5ambbtxalb"},{"Name":"integrity","Value":"sha256-c6vIGhgzoS\u002BPCuFtd6nacuRK2eH0ZNJw5eLqU8ue/Sk="},{"Name":"label","Value":"_content/EduVault/css/site.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4908"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022c6vIGhgzoS\u002BPCuFtd6nacuRK2eH0ZNJw5eLqU8ue/Sk=\u0022"},{"Name":"Last-Modified","Value":"Sat, 07 Jun 2025 14:59:59 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/EduVault/css/site.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-c6vIGhgzoS\u002BPCuFtd6nacuRK2eH0ZNJw5eLqU8ue/Sk="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4908"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022c6vIGhgzoS\u002BPCuFtd6nacuRK2eH0ZNJw5eLqU8ue/Sk=\u0022"},{"Name":"Last-Modified","Value":"Sat, 07 Jun 2025 14:59:59 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-KfPk8mzkIxpettm24Pnabe2KrRQ4LpUgLbTzYi7KhEg="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"5493"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022KfPk8mzkIxpettm24Pnabe2KrRQ4LpUgLbTzYi7KhEg=\u0022"},{"Name":"Last-Modified","Value":"Sun, 08 Jun 2025 13:41:51 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/EduVault/css/site.x2wffxlbdt.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"x2wffxlbdt"},{"Name":"integrity","Value":"sha256-KfPk8mzkIxpettm24Pnabe2KrRQ4LpUgLbTzYi7KhEg="},{"Name":"label","Value":"_content/EduVault/css/site.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"5493"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022KfPk8mzkIxpettm24Pnabe2KrRQ4LpUgLbTzYi7KhEg=\u0022"},{"Name":"Last-Modified","Value":"Sun, 08 Jun 2025 13:41:51 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
   </ItemGroup>
 </Project>
