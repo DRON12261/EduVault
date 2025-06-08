@@ -8,6 +8,7 @@ namespace EduVault.Services
     {
         Task<OperationResult> CheckSystemUser();
         Task<List<User>> GetAllUsersAsync();
+        Task<User> GetUserByIdAsync(long id);
         Task<OperationResult> CreateUserAsync(UserCreationDto dto);
         Task<OperationResult> DeleteUserById(long id);
     }
@@ -31,6 +32,11 @@ namespace EduVault.Services
         public async Task<List<User>> GetAllUsersAsync()
         {
             return await _userRepository.GetAllAsync();
+        }
+
+        public async Task<User> GetUserByIdAsync(long id)
+        {
+            return await _userRepository.GetByIdAsync(id);
         }
         public async Task<OperationResult> CreateUserAsync(UserCreationDto dto)
         {

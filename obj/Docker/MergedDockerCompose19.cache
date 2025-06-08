@@ -1,8 +1,8 @@
-name: dockercompose8633863755715280692
+name: dockercompose6500096148212357217
 services:
   eduvault:
     build:
-      context: S:\Projects\Visual Studio\EduVault
+      context: C:\Users\User\Desktop\EduVault\EduVault
       dockerfile: EduVault/Dockerfile
       args:
         BUILD_CONFIGURATION: Debug
@@ -52,34 +52,34 @@ services:
     tty: true
     volumes:
       - type: bind
-        source: C:\Users\andro\AppData\Roaming\Microsoft\UserSecrets
+        source: C:\Users\User\AppData\Roaming\Microsoft\UserSecrets
         target: /home/app/.microsoft/usersecrets
         read_only: true
         bind:
           create_host_path: true
       - type: bind
-        source: C:\Users\andro\AppData\Roaming\ASP.NET\Https
+        source: C:\Users\User\AppData\Roaming\ASP.NET\Https
         target: /home/app/.aspnet/https
         read_only: true
         bind:
           create_host_path: true
       - type: bind
-        source: S:\Projects\Visual Studio\EduVault\EduVault
+        source: C:\Users\User\Desktop\EduVault\EduVault\EduVault
         target: /app
         bind:
           create_host_path: true
       - type: bind
-        source: S:\Projects\Visual Studio\EduVault
+        source: C:\Users\User\Desktop\EduVault\EduVault
         target: /src
         bind:
           create_host_path: true
       - type: bind
-        source: C:\Users\andro\vsdbg\vs2017u5
+        source: C:\Users\User\vsdbg\vs2017u5
         target: /remote_debugger
         bind:
           create_host_path: true
       - type: bind
-        source: C:\Users\andro\.nuget\packages
+        source: C:\Users\User\.nuget\packages
         target: /.nuget/packages
         read_only: true
         bind:
@@ -91,13 +91,13 @@ services:
         bind:
           create_host_path: true
       - type: bind
-        source: C:\Users\andro\AppData\Roaming\ASP.NET\Https
+        source: C:\Users\User\AppData\Roaming\ASP.NET\Https
         target: /root/.aspnet/https
         read_only: true
         bind:
           create_host_path: true
       - type: bind
-        source: C:\Users\andro\AppData\Roaming\Microsoft\UserSecrets
+        source: C:\Users\User\AppData\Roaming\Microsoft\UserSecrets
         target: /root/.microsoft/usersecrets
         read_only: true
         bind:
@@ -122,7 +122,8 @@ services:
       MONGO_INITDB_ROOT_USERNAME: mongo
     image: mongo
     networks:
-      app-network: null
+      app-network:
+        ipv4_address: 172.20.0.2
     ports:
       - mode: ingress
         target: 27017
@@ -154,15 +155,15 @@ services:
         volume: {}
 networks:
   app-network:
-    name: dockercompose8633863755715280692_app-network
+    name: dockercompose6500096148212357217_app-network
     driver: bridge
 volumes:
   mongodb_data:
-    name: dockercompose8633863755715280692_mongodb_data
+    name: dockercompose6500096148212357217_mongodb_data
   postgres_data:
-    name: dockercompose8633863755715280692_postgres_data
+    name: dockercompose6500096148212357217_postgres_data
     driver: local
     driver_opts:
-      device: S:\Projects\Visual Studio\EduVault\pgdata
+      device: C:\Users\User\Desktop\EduVault\EduVault\pgdata
       o: bind
       type: none
