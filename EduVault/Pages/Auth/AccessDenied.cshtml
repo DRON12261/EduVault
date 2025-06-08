@@ -1,0 +1,26 @@
+@page
+@model EduVault.Pages.Auth.AccessDeniedModel
+@{
+    ViewData["Title"] = "Доступ запрещен";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="text-danger">@ViewData["Title"]</h1>
+            <p class="lead">
+                <i class="fas fa-ban fa-3x text-danger mb-4"></i>
+            </p>
+            <p>
+                У вас недостаточно прав для просмотра этой страницы.
+            </p>
+            <p>
+                Пожалуйста, обратитесь к администратору системы или войдите под другой учетной записью.
+            </p>
+            <div class="mt-4">
+                <a href="/" class="btn btn-primary">На главную</a>
+                <a href="/Auth/Login" class="btn btn-secondary">Попробовать снова</a>
+            </div>
+        </div>
+    </div>
+</div>

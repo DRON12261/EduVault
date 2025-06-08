@@ -1,0 +1,20 @@
+@page
+@model EduVault.Pages.Users.CreateUserModel
+@{
+}
+
+<div class="form-container">
+    <h2>Добавить пользователя</h2>
+    <form method="post" asp-antiforgery="true">
+        @Html.AntiForgeryToken()
+        <div class="create-user-form-group">
+            <input name="Input.Name" type="text" placeholder="Имя" required>
+            <input name="Input.Login" type="text" placeholder="Логин" required>
+            <input name="Input.Password" type="password" placeholder="Пароль" required>
+        </div>
+        <div class="create-user-form-group" style="display: flex; gap: 0.8rem;">
+            <button type="submit" class="btn-primary">Добавить</button>
+            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Отмена</button>
+        </div>
+    </form>
+    </div>

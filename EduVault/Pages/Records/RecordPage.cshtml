@@ -1,0 +1,96 @@
+@page
+@model EduVault.Pages.Records.RecordModel
+@{
+    ViewData["Title"] = "Карточка документа";
+}
+
+<div class="record-container">
+    <div>
+        <div class="record-info">Пример документа</div>
+        <div class="card-actions">
+            <button class="btn-primary">Сохранить карточку</button>
+            <button class="btn-primary">Открыть файл</button>
+            <button class="btn-primary">Обновить файл</button>
+            <button class="btn-secondary">Удалить файл</button>
+            <button class="btn-secondary">Удалить карточку</button>
+            <div class="card-info" style="margin-right: 0; margin-left: auto;">ИД: 27</div>
+        </div>
+
+        <div class="card-content">
+            <div class="card-form-group">
+                <label>Название:</label>
+                <input type="text" value="Пример документа">
+            </div>
+            <div class="card-form-group">
+                <label>Тип файла:</label>
+                <input type="text" value="Тип файла 1">
+            </div>
+            <div class="card-form-group">
+                <label>Дата создания:</label>
+                <input type="text" value="15.06.2021" readonly>
+            </div>
+            <div class="card-form-group">
+                <label>Тип файла:</label>
+                <input type="text" value="Отчёт по курсовой работе">
+            </div>
+        </div>
+    </div>
+
+    <div class="rights-panel">
+        <div style="display:flex;">
+            <h3 style="display:inline;">Права доступа</h3>
+            <button class="btn-alt" style="padding: 0.2rem 0.5rem; display:inline; margin-left: auto; margin-right: 0;">+</button>
+        </div>
+        <div class="rights-table-wrapper">
+            <table class="rights-table">
+                <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>Тип прав</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--@for (int i = 1; i <= 12; i++)
+                    {
+                                <tr>
+                                    <td title="Пользователь @i">User @i</td>
+                                    <td>@(i % 3 == 0 ? "Изменение" : "Чтение")</td>
+                                    <td>
+                                        <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
+                                    </td>
+                                </tr>
+                    }-->
+                    <tr>
+                        <td>Антон Епифанцев</td>
+                        <td>Изменение</td>
+                        <td>
+                            <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Чипак Данила</td>
+                        <td>Полный доступ</td>
+                        <td>
+                            <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Иван Петров</td>
+                        <td>Полный доступ</td>
+                        <td>
+                            <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Все пользователи</td>
+                        <td>Чтение</td>
+                        <td>
+                            <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

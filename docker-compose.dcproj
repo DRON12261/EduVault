@@ -4,7 +4,7 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>294fcc1d-935c-4f40-92e2-f31e97e93361</ProjectGuid>
+    <Projectlong>294fcc1d-935c-4f40-92e2-f31e97e93361</Projectlong>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>eduvault</DockerServiceName>

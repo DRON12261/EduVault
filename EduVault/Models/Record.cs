@@ -1,11 +1,15 @@
-﻿namespace EduVault.DBClasses
+using EduVault.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+
+namespace EduVault.Models
 {
 	public class Record
 	{
 		private long _id;
 		private string _name;
 		private string _filePath;
-		private User _author;
+		private long _author;
 		private FileType _fileType;
 		private Field[] _fields;
 
@@ -30,17 +34,17 @@
 			}
 		}
 		public string FilePath { get { return _filePath; } set { _filePath = value; } }
-		public User Author { get { return _author; } set { _author = value; } }
+		public long Author { get { return _author; } set { _author = value; } }
 		public FileType FileType { get { return _fileType; } set { _fileType = value; } }
 		public Field[] Fields { get { return _fields; } set { _fields = value; } }
-		Record()
-		{
-
-		}
-		~Record()
-		{
-
-		}
+        public Record(RecordCreationDto dto)
+        {
+            Name = dto.Name;
+            Author = dto.Author;
+            FileType = dto.FileType;
+        }
+        Record(){}
+		~Record(){}
 
 		public AccessRights[] GetAccessRights()
 		{

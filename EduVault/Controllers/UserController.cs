@@ -1,4 +1,4 @@
-﻿using EduVault.DBClasses;
+using EduVault.Models;
 using EduVault.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +15,7 @@ namespace EduVault.Controllers
 			_repository = repository;
 		}
 
-		[HttpPost]
+        [HttpPost]
 		public async Task<IActionResult> CreateUser(User user)
 		{
 			await _repository.AddAsync(user);

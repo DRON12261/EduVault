@@ -1,17 +1,19 @@
-name: dockercompose8633863755715280692
+name: dockercompose6500096148212357217
 services:
   eduvault:
     build:
-      context: S:\Projects\Visual Studio\EduVault
+      context: C:\Users\User\Desktop\EduVault\EduVault
       dockerfile: EduVault/Dockerfile
     container_name: App_EduVault
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_HTTP_PORTS: "8080"
       ASPNETCORE_HTTPS_PORTS: "8081"
+      ConnectionStrings__MongoDocker: Host=;Port=27017;DatabaseName=;
+      ConnectionStrings__PostgresDocker: Host=postgresql;Port=5432;Database=EduVault;Username=postgres;Password=1Qwerty;
     image: eduvault
     networks:
-      default: null
+      app-network: null
     ports:
       - mode: ingress
         target: 8080
@@ -21,40 +23,65 @@ services:
         protocol: tcp
     volumes:
       - type: bind
-        source: C:\Users\andro\AppData\Roaming/Microsoft/UserSecrets
+        source: C:\Users\User\AppData\Roaming/Microsoft/UserSecrets
         target: /home/app/.microsoft/usersecrets
         read_only: true
         bind:
           create_host_path: true
       - type: bind
-        source: C:\Users\andro\AppData\Roaming/ASP.NET/Https
+        source: C:\Users\User\AppData\Roaming/ASP.NET/Https
         target: /home/app/.aspnet/https
         read_only: true
         bind:
           create_host_path: true
   mongodb:
     container_name: DB_Mongo
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: 1Qwerty
+      MONGO_INITDB_ROOT_USERNAME: mongo
     image: mongo
     networks:
-      default: null
+      app-network: null
     ports:
       - mode: ingress
         target: 27017
         published: "27017"
         protocol: tcp
+    volumes:
+      - type: volume
+        source: mongodb_data
+        target: /data/db
+        volume: {}
   postgresql:
     container_name: DB_PostgreSQL
     environment:
-      POSTGRES_PASSWORD: root
-      POSTGRES_USER: admin
+      POSTGRES_DB: EduVault
+      POSTGRES_PASSWORD: 1Qwerty
+      POSTGRES_USER: postgres
     image: postgres
     networks:
-      default: null
+      app-network: null
     ports:
       - mode: ingress
         target: 5432
         published: "5432"
         protocol: tcp
+    volumes:
+      - type: volume
+        source: postgres_data
+        target: /var/lib/postgresql/data
+        volume: {}
 networks:
-  default:
-    name: dockercompose8633863755715280692_default
+  app-network:
+    name: dockercompose6500096148212357217_app-network
+    driver: bridge
+volumes:
+  mongodb_data:
+    name: dockercompose6500096148212357217_mongodb_data
+  postgres_data:
+    name: dockercompose6500096148212357217_postgres_data
+    driver: local
+    driver_opts:
+      device: C:\Users\User\Desktop\EduVault\EduVault\pgdata
+      o: bind
+      type: none

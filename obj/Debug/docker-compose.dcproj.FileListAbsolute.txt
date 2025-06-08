@@ -1,27 +1,15 @@
-S:\Projects\Visual Studio\EduVault\bin\Debug\EduVault.deps.json
-S:\Projects\Visual Studio\EduVault\bin\Debug\EduVault.runtimeconfig.json
-S:\Projects\Visual Studio\EduVault\bin\Debug\appsettings.Development.json
-S:\Projects\Visual Studio\EduVault\bin\Debug\appsettings.json
-S:\Projects\Visual Studio\EduVault\bin\Debug\EduVault.staticwebassets.endpoints.json
-S:\Projects\Visual Studio\EduVault\bin\Debug\EduVault.exe
-S:\Projects\Visual Studio\EduVault\bin\Debug\EduVault.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\EduVault.pdb
-S:\Projects\Visual Studio\EduVault\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
-S:\Projects\Visual Studio\EduVault\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
-S:\Projects\Visual Studio\EduVault\obj\Debug\docker-c.35A3FFBA.Up2Date
-C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\appsettings.Development.json
-C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\appsettings.json
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\EduVault.deps.json
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\EduVault.runtimeconfig.json
+C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\appsettings.Development.json
+C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\appsettings.json
+C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\EduVault.staticwebassets.runtime.json
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\EduVault.staticwebassets.endpoints.json
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\EduVault.exe
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\EduVault.dll
-C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\EduVault.pdb
-C:\Users\User\Desktop\EduVault\EduVault\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
-C:\Users\User\Desktop\EduVault\EduVault\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\EduVault\EduVault\obj\Debug\docker-c.35A3FFBA.Up2Date
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.EntityFrameworkCore.dll
+C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\BCrypt.Net-Next.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.Primitives.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.EntityFrameworkCore.Relational.dll
@@ -33,21 +21,8 @@ C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.Dependenc
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.Logging.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.Options.dll
-C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Microsoft.Extensions.Primitives.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Npgsql.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\EduVault.staticwebassets.runtime.json
-S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.EntityFrameworkCore.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\Npgsql.EntityFrameworkCore.PostgreSQL.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.EntityFrameworkCore.Relational.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Caching.Abstractions.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.EntityFrameworkCore.Abstractions.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\System.Diagnostics.DiagnosticSource.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Logging.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Caching.Memory.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Options.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\Microsoft.Extensions.Primitives.dll
-S:\Projects\Visual Studio\EduVault\bin\Debug\Npgsql.dll
+C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\EduVault.pdb
+C:\Users\User\Desktop\EduVault\EduVault\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
+C:\Users\User\Desktop\EduVault\EduVault\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\EduVault\EduVault\obj\Debug\docker-c.35A3FFBA.Up2Date

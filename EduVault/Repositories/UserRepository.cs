@@ -1,4 +1,5 @@
-﻿using EduVault.DBClasses;
+using EduVault.Data;
+using EduVault.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -6,44 +7,58 @@ namespace EduVault.Repositories
 {
 	public interface IUserRepository
 	{
-		Task<User> GetByIdAsync(int id);
+		Task<User> GetByIdAsync(long id);
+        Task<User> GetByLoginAsync(string login);
 		Task AddAsync(User user);
 		Task UpdateAsync(User user);
-		Task DeleteAsync(int id);
+		Task DeleteAsync(long id);
 		Task<List<User>> GetAllAsync();
 	}
 	public class UserRepository: IUserRepository
 	{
-		private readonly AppDbContext _context;
+        //private readonly AppDbContext _context;
+        private readonly IDbContextFactory<PostgresDBContext> _contextFactory;
 
-		public UserRepository(AppDbContext context)
+		public UserRepository(IDbContextFactory<PostgresDBContext> contextFactory)
 		{
-			_context = context;
+            _contextFactory = contextFactory;
 		}
 
-		public async Task<User> GetByIdAsync(int id)
+		public async Task<User> GetByIdAsync(long id)
 		{
+            await using PostgresDBContext _context = _contextFactory.CreateDbContext();
 			return await _context.Users.FindAsync(id);
 		}
 
-		public async Task AddAsync(User user)
+        public async Task<User> GetByLoginAsync(string login)
+        {
+            await using PostgresDBContext _context = _contextFactory.CreateDbContext();
+            return await _context.Users.FirstOrDefaultAsync(user => user.Login == login);
+        }
+        public async Task AddAsync(User user)
 		{
-			await _context.Users.AddAsync(user);
+            await using PostgresDBContext _context = _contextFactory.CreateDbContext();
+            await _context.Users.AddAsync(user);
 			await _context.SaveChangesAsync();
 		}
 
 		public async Task UpdateAsync(User user)
 		{
-			await _context.Users.AddAsync(user);
+            await using PostgresDBContext _context = _contextFactory.CreateDbContext();
+            await _context.Users.AddAsync(user);
 			await _context.SaveChangesAsync();
 		}
 		public async Task<List<User>> GetAllAsync()
 		{
-			return await _context.Users.ToListAsync();
+            await using PostgresDBContext _context = _contextFactory.CreateDbContext();
+            return await _context.Users
+                .AsNoTracking()
+                .ToListAsync();
 		}
-		public async Task DeleteAsync(int id)
+		public async Task DeleteAsync(long id)
 		{
-			var user = await _context.Users.FindAsync(id);
+            await using PostgresDBContext _context = _contextFactory.CreateDbContext();
+            var user = await _context.Users.FindAsync(id);
 			if (user != null)
 			{
 				_context.Users.Remove(user);
