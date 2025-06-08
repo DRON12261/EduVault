@@ -15,7 +15,7 @@ namespace EduVault.Controllers
 			_repository = repository;
 		}
 
-		[HttpPost]
+        [HttpPost]
 		public async Task<IActionResult> CreateUser(User user)
 		{
 			await _repository.AddAsync(user);

@@ -4,18 +4,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EduVault - @ViewData["Title"]</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
-        <div class="logo">EduVault</div>
+        <div class="logo"><a asp-page="/Index" style="text-decoration: none; color: inherit;">EduVault</a></div>
         <div class="user-info">
-            <span></span>
-            <a href="/UserList">Список пользователей</a>
+            @{
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    //@if(User.IsInRole())
+                    <a asp-page="/Users/Index" class="nav-link userlink">Список пользователей</a>
+                    <span id="userLogin">@User.Identity.Name</span>
+                    <form method="post" asp-page="/Index">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите выйти из системы?')">Выйти</button>
+                    </form>
+                }
+            }
         </div>
     </header>
-
+    
     <main>
         @RenderBody()
     </main>

@@ -2,7 +2,7 @@ namespace EduVault.Models
 {
 	public interface IRecipient
 	{
-		long Id { get; }
+        long Id { get; }
 		string Name { get; set; }
 	}
 }

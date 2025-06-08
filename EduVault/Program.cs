@@ -1,8 +1,9 @@
-using EduVault.Data;
-using EduVault.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using EduVault.Data;
+using EduVault.Repositories;
+using EduVault.Services;
 
 namespace EduVault 
 {
@@ -17,13 +18,15 @@ namespace EduVault
 
 		public static WebApplicationBuilder TuneBuilder(WebApplicationBuilder builder)
 		{
-			builder.Services.AddRazorPages();
-			builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresDocker")));
-			builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddDbContext<PostgresDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresDocker")), ServiceLifetime.Scoped);
+            builder.Services.AddDbContextFactory<PostgresDBContext>(options =>options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresDocker")), ServiceLifetime.Scoped);
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
+                    options.Cookie.Name = "EduVault.AuthCookie";
                     options.LoginPath = "/Auth/Login"; // Куда перенаправлять неавторизованных пользователей
                     options.AccessDeniedPath = "/Auth/AccessDenied"; // Куда перенаправлять при отказе в доступе
                     options.ExpireTimeSpan = TimeSpan.FromDays(7); // Время жизни куки
@@ -32,7 +35,8 @@ namespace EduVault
                 });
             builder.Services.AddAuthorization();
 			builder.Services.AddControllersWithViews();
-			return builder;
+            builder.Services.AddRazorPages();
+            return builder;
 		}
 		public static WebApplication TuneApp(WebApplication app)
 		{

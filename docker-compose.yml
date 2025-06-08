@@ -9,6 +9,12 @@ services:
       dockerfile: EduVault/Dockerfile
     environment:
       - ConnectionStrings__PostgresDocker=Host=postgresql;Port=5432;Database=EduVault;Username=postgres;Password=1Qwerty;
+      - ConnectionStrings__MongoDocker=mongodb://mongo:1Qwerty@mongodb:27017/EduVault?authSource=admin
+    depends_on:
+      - postgresql
+      - mongodb
+    networks:
+      - app-network
 
   postgresql:
     container_name: DB_PostgreSQL
@@ -21,12 +27,22 @@ services:
     image: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
 
   mongodb:
-   container_name: DB_Mongo
-   ports:
+    container_name: DB_Mongo
+    ports:
      - "27017:27017"
-   image: mongo
+    environment:
+     - MONGO_INITDB_DATABASE=EduVault
+     - MONGO_INITDB_ROOT_USERNAME=mongo
+     - MONGO_INITDB_ROOT_PASSWORD=1Qwerty
+    volumes:
+     - mongodb_data:/data/db
+    image: mongo
+    networks:
+      - app-network
 volumes:
   postgres_data:
     driver: local
@@ -34,4 +50,9 @@ volumes:
       type: none
       o: bind
       device: ./pgdata
+  mongodb_data:
+    
+networks:
+  app-network:
+    driver: bridge
    

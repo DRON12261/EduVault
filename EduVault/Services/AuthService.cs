@@ -7,26 +7,28 @@ using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using bCrypt = BCrypt.Net.BCrypt;
 
-public interface IAuthService
+namespace EduVault.Services
 {
-    Task<bool> ValidateUserAsync(string login, string password);
-}
-
-public class AuthService : IAuthService
-{
-    private readonly IUserRepository _userRepository;
-
-    public AuthService(IUserRepository userRepository)
+    public interface IAuthService
     {
-        _userRepository = userRepository;
+        Task<bool> ValidateUserAsync(string login, string password);
     }
-
-    public async Task<bool> ValidateUserAsync(string login, string password)
+    public class AuthService : IAuthService
     {
-        var user = await _userRepository.GetByLoginAsync(login);
-        if (user == null)
-            return false;
+        private readonly IUserRepository _userRepository;
 
-        return true;//bCrypt.Verify(password, user.PasswordHash);
+        public AuthService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
+        public async Task<bool> ValidateUserAsync(string login, string password)
+        {
+            var user = await _userRepository.GetByLoginAsync(login);
+            if (user == null)
+                return false;
+
+            return bCrypt.Verify(password, user.PasswordHash);
+        }
     }
 }

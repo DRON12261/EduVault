@@ -1,0 +1,22 @@
+@page
+@model EduVault.Pages.Records.CreateRecordModel
+@{
+}
+
+
+<div class="form-container">
+    <h2>Создать карточку</h2>
+    <form method="post" asp-antiforgery="true">
+        @Html.AntiForgeryToken()
+        <div class="create-record-form-group">
+            <input name="Input.Name" type="text" placeholder="Название карточки" required>
+            <input name="Input.Author" type="text" required>
+            <input name="Input.Author" type="text" required>
+            <input name="file" type="file" class="form-control" required/>
+        </div>
+        <div class="create-record-form-group" style="display: flex; gap: 0.8rem;">
+            <button type="submit" class="btn-primary">Создать</button>
+            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Отмена</button>
+        </div>
+    </form>
+</div>

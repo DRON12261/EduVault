@@ -7,6 +7,7 @@ using System.Security.Claims;
 using Npgsql;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.ComponentModel.DataAnnotations;
+using EduVault.Services;
 
 namespace EduVault.Pages.Auth
 {
@@ -32,7 +33,11 @@ namespace EduVault.Pages.Auth
             [DataType(DataType.Password)]
             public string Password { get; set; }
         }
-
+        public IActionResult OnGet()
+        {
+            // Проверяем авторизацию через наличие кастомных кук
+            return HttpContext.Request.Cookies.ContainsKey("EduVault.AuthCookie")? RedirectToPage("/Records/Index") : Page();
+        }
         public async Task<IActionResult> OnPostAsync()
         {
             
@@ -48,18 +53,19 @@ namespace EduVault.Pages.Auth
 
             // Создание куки
             var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, Input.Login),
-            new Claim(ClaimTypes.Role, "User") // Пример роли
-        };
+            {
+                new Claim(ClaimTypes.Name, Input.Login),
+                new Claim(ClaimTypes.Role, "User") // Пример роли
+            };
 
+            
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(identity));
-
+            
             // Перенаправление на целевую страницу
-            return RedirectToPage("/Table");
+            return RedirectToPage("/Records/Index");
         }
     }
 }

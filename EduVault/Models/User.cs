@@ -1,3 +1,5 @@
+using EduVault.Services;
+
 namespace EduVault.Models
 {
 	public class User : IRecipient
@@ -32,13 +34,18 @@ namespace EduVault.Models
 		public string PasswordHash { get { return _passwordHash; } set { _passwordHash = value; } }
 		public byte UserType { get { return _userType; } set { _userType = value; } }
 		public List<Role> Roles { get { return _roles; } set { _roles = value; } }
-		User()
+        public User(string login, string password)
 		{
-
+            Login = login;
+            PasswordHash = password;
 		}
-		~User()
-		{
-
-		}
+        public User(UserCreationDto dto)
+        {
+            Name = dto.Name;
+            Login = dto.Login;
+            PasswordHash = dto.Password;
+        }
+        User() {}
+        ~User(){}
 	}
 }

@@ -1,7 +1,9 @@
 @page
+@namespace EduVault.Pages
 @model EduVault.Pages.Auth.LoginModel
 @{
     ViewData["Title"] = "Авторизация";
+
 }
 
 <div class="form-container">
@@ -16,7 +18,7 @@
         </div>
         <div class="auth-form-group" style="display: flex; gap: 0.8rem;">
             <button type="submit" class="btn-primary">Войти</button>
-            <button type="button" class="btn-secondary">Войти с помощью УЗ ТюмГУ</button>
+            <button type="submit" class="btn-secondary">Войти с помощью УЗ ТюмГУ</button>
         </div>
     </form>
 </div>

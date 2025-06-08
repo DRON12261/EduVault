@@ -3,7 +3,7 @@
   "ManifestType": "Build",
   "Endpoints": [
     {
-      "Route": "css/site.90hucrrhip.css",
+      "Route": "css/site.5ambbtxalb.css",
       "AssetFile": "css/site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -17,7 +17,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4590"
+          "Value": "4908"
         },
         {
           "Name": "Content-Type",
@@ -25,21 +25,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"mXlHh3njgEtwMiqaKSsPrzhURFSl5cq5L5IWJCNQj1w=\""
+          "Value": "\"c6vIGhgzoS+PCuFtd6nacuRK2eH0ZNJw5eLqU8ue/Sk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 18 May 2025 15:01:34 GMT"
+          "Value": "Sat, 07 Jun 2025 14:59:59 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "90hucrrhip"
+          "Value": "5ambbtxalb"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-mXlHh3njgEtwMiqaKSsPrzhURFSl5cq5L5IWJCNQj1w="
+          "Value": "sha256-c6vIGhgzoS+PCuFtd6nacuRK2eH0ZNJw5eLqU8ue/Sk="
         },
         {
           "Name": "label",
@@ -62,7 +62,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4590"
+          "Value": "4908"
         },
         {
           "Name": "Content-Type",
@@ -70,17 +70,17 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"mXlHh3njgEtwMiqaKSsPrzhURFSl5cq5L5IWJCNQj1w=\""
+          "Value": "\"c6vIGhgzoS+PCuFtd6nacuRK2eH0ZNJw5eLqU8ue/Sk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 18 May 2025 15:01:34 GMT"
+          "Value": "Sat, 07 Jun 2025 14:59:59 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-mXlHh3njgEtwMiqaKSsPrzhURFSl5cq5L5IWJCNQj1w="
+          "Value": "sha256-c6vIGhgzoS+PCuFtd6nacuRK2eH0ZNJw5eLqU8ue/Sk="
         }
       ]
     }
