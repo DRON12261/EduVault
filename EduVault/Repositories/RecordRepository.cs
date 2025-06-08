@@ -26,17 +26,17 @@ namespace EduVault.Repositories
             return await _context.Records.FindAsync(id);
         }
 
-        public async Task AddAsync(Record user)
+        public async Task AddAsync(Record record)
         {
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
-            await _context.Records.AddAsync(user);
+            await _context.Records.AddAsync(record);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Record user)
+        public async Task UpdateAsync(Record record)
         {
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
-            await _context.Records.AddAsync(user);
+            await _context.Records.AddAsync(record);
             await _context.SaveChangesAsync();
         }
         public async Task<List<Record>> GetAllAsync()
@@ -49,10 +49,10 @@ namespace EduVault.Repositories
         public async Task DeleteAsync(long id)
         {
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
-            var user = await _context.Users.FindAsync(id);
-            if (user != null)
+            var record = await _context.Records.FindAsync(id);
+            if (record != null)
             {
-                _context.Users.Remove(user);
+                _context.Records.Remove(record);
                 await _context.SaveChangesAsync();
             }
         }

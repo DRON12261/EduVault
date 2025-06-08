@@ -16,9 +16,11 @@ namespace EduVault.Pages.Auth
     public class LoginModel : PageModel
     {
         private readonly IAuthService _authService;
-        public LoginModel(IAuthService authService)
+        private readonly IUserService _userService;
+        public LoginModel(IAuthService authService, IUserService userService)
         {
             _authService = authService;
+            _userService = userService;
             Input = new InputModel();
         }
 
@@ -33,8 +35,9 @@ namespace EduVault.Pages.Auth
             [DataType(DataType.Password)]
             public string Password { get; set; }
         }
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            await _userService.CheckSystemUser();
             // Проверяем авторизацию через наличие кастомных кук
             return HttpContext.Request.Cookies.ContainsKey("EduVault.AuthCookie")? RedirectToPage("/Records/Index") : Page();
         }

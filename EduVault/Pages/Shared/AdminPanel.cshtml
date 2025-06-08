@@ -1,0 +1,12 @@
+@page
+@model EduVault.Pages.Shared.AdminPanelModel
+@{
+}
+<div class="form-container">
+    <h2>Панель администратора</h2>
+    <div class="create-record-form-group" style="display: flex; gap: 0.8rem;">
+        <a asp-page="/Users/Index" class="nav-link userlink">Список пользователей</a>
+        <a asp-page="/Roles/Index" class="nav-link userlink">Список ролей</a>
+        <a asp-page="/FileTypes/Index" class="nav-link userlink">Типы файлов</a>
+    </div>
+</div>

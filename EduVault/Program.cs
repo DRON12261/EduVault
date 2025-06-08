@@ -21,8 +21,12 @@ namespace EduVault
             builder.Services.AddDbContext<PostgresDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresDocker")), ServiceLifetime.Scoped);
             builder.Services.AddDbContextFactory<PostgresDBContext>(options =>options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresDocker")), ServiceLifetime.Scoped);
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IFileTypeRepository, FileTypeRepository>();
+            builder.Services.AddScoped<IRecordRepository, RecordRepository>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IFileTypeService, FileTypeService>();
+            builder.Services.AddScoped<IRecordService, RecordService>();
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
@@ -34,7 +38,6 @@ namespace EduVault
                     options.SlidingExpiration = true; // Обновлять срок жизни куки при активности
                 });
             builder.Services.AddAuthorization();
-			builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
             return builder;
 		}

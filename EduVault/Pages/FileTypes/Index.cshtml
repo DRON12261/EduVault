@@ -1,0 +1,32 @@
+@page
+@model EduVault.Pages.FileTypes.IndexModel
+@{
+}
+
+<h1>Список типов файлов</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Тип файла</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var filetype in Model.FileTypes)
+        {
+            <tr>
+                <td>@filetype.Id</td>
+                <td>@filetype.Name</td>
+                <td>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@filetype.Id">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите удалить тип @filetype.Name?')">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-page="./CreateFileType" class="btn btn-primary">Добавить тип файла</a>

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using EduVault.Models;
 using EduVault.Data;
-using EduVault.Controllers;
 using EduVault.Services;
 using Npgsql.TypeMapping;
 

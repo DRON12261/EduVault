@@ -27,13 +27,11 @@ namespace EduVault.Models
 			}
 		}
 		public FileTypeField[] FileTypeFields { get { return _fileTypeFields; } set { _fileTypeFields = value; } }
-		FileType()
-		{
-
-		}
-		~FileType()
-		{
-
-		}
+        public FileType(string name)
+        {
+            Name = name;
+        }
+        FileType(){}
+		~FileType(){}
 	}
 }

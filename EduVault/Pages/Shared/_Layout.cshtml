@@ -15,7 +15,7 @@
                 @if (User.Identity?.IsAuthenticated == true)
                 {
                     //@if(User.IsInRole())
-                    <a asp-page="/Users/Index" class="nav-link userlink">Список пользователей</a>
+                    <a asp-page="/Shared/AdminPanel" class="nav-link userlink">Панель администратора</a>
                     <span id="userLogin">@User.Identity.Name</span>
                     <form method="post" asp-page="/Index">
                         @Html.AntiForgeryToken()

@@ -19,7 +19,7 @@ services:
   postgresql:
     container_name: DB_PostgreSQL
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       - POSTGRES_DB=EduVault
       - POSTGRES_USER=postgres
@@ -33,13 +33,13 @@ services:
   mongodb:
     container_name: DB_Mongo
     ports:
-     - "27017:27017"
+      - "27018:27017"
     environment:
-     - MONGO_INITDB_DATABASE=EduVault
-     - MONGO_INITDB_ROOT_USERNAME=mongo
-     - MONGO_INITDB_ROOT_PASSWORD=1Qwerty
+      - MONGO_INITDB_DATABASE=EduVault
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=1Qwerty
     volumes:
-     - mongodb_data:/data/db
+      - mongodb_data:/data/db
     image: mongo
     networks:
       - app-network
