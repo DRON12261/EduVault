@@ -23,10 +23,12 @@ namespace EduVault
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IFileTypeRepository, FileTypeRepository>();
             builder.Services.AddScoped<IRecordRepository, RecordRepository>();
+            builder.Services.AddScoped<IRoleRepository, RoleRepository>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IFileTypeService, FileTypeService>();
             builder.Services.AddScoped<IRecordService, RecordService>();
+            builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {

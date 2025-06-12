@@ -17,12 +17,12 @@ namespace EduVault.Pages.FileTypes
         }
         public async Task OnGetAsync()
         {
-            FileTypes = await _fileTypeService.GetAllFileTypesAsync() ?? new List<FileType>();
+            FileTypes = await _fileTypeService.GetAllAsync() ?? new List<FileType>();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(long id)
         {
-            OperationResult result = await _fileTypeService.DeleteFileTypeById(id);
+            OperationResult result = await _fileTypeService.DeleteById(id);
 
             if (!(result.StatusCode == OperationStatusCode.Success))
             {

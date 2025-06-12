@@ -8,6 +8,7 @@ using Npgsql;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.ComponentModel.DataAnnotations;
 using EduVault.Services;
+using EduVault.Models.DataTransferObjects;
 
 namespace EduVault.Pages.Auth
 {
@@ -21,34 +22,25 @@ namespace EduVault.Pages.Auth
         {
             _authService = authService;
             _userService = userService;
-            Input = new InputModel();
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
-
-        public class InputModel
-        {
-            [Required]
-            public string Login { get; set; }
-            [Required]
-            [DataType(DataType.Password)]
-            public string Password { get; set; }
-        }
+        public AuthDTO Input { get; set; }
         public async Task<IActionResult> OnGetAsync()
         {
+            Input = new AuthDTO();
             await _userService.CheckSystemUser();
             // Проверяем авторизацию через наличие кастомных кук
             return HttpContext.Request.Cookies.ContainsKey("EduVault.AuthCookie")? RedirectToPage("/Records/Index") : Page();
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            
             if (!ModelState.IsValid)
                 return Page();
 
             // Проверка логина и пароля
-            if (!await _authService.ValidateUserAsync(Input.Login, Input.Password))
+            var role = await _authService.ValidateUserAsync(Input);
+            if (await _authService.ValidateUserAsync(Input)==null)
             {
                 ModelState.AddModelError(string.Empty, "Неверные данные");
                 return RedirectToPage("/Auth/AccessDenied");
@@ -58,7 +50,7 @@ namespace EduVault.Pages.Auth
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, Input.Login),
-                new Claim(ClaimTypes.Role, "User") // Пример роли
+                new Claim(ClaimTypes.Role, role.Name)
             };
 
             

@@ -14,11 +14,20 @@
             <input name="Input.Login" type="text" placeholder="Логин" style="padding: 1rem;" required>
         </div>
         <div class="auth-form-group">
-            <input name="Input.Password" type="password" placeholder="Пароль" style="padding: 1rem;" required>
+            <div class="password-container">
+                <input name="Input.Password" id="password" type="password" placeholder="Пароль" style="padding: 1rem;" required>
+                <button type="button" id="togglePassword" class="btn btn-outline-secondary">
+                    <i class="bi bi-eye"></i> 
+                </button>
+            </div>
         </div>
         <div class="auth-form-group" style="display: flex; gap: 0.8rem; width:100%">
             <button type="submit" class="btn-primary" style="width:50%">Войти</button>
-            <button type="button" class="btn-alt" style="width:50%">Войти с помощью УЗ ТюмГУ</button>
+            <button type="button" class="btn-alt" style="width:50%; background-color:#4fade0">Войти с помощью УЗ ТюмГУ</button>
         </div>
     </form>
 </div>
+
+@section Scripts {
+    <script src="~/js/revealPwd.js"></script>
+}

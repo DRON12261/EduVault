@@ -13,8 +13,9 @@ namespace EduVault.Data
 		public DbSet<FileTypeField> FileTypeFields { get; set; }
 		public DbSet<Record> Records { get; set; }
 		public DbSet<Relation> Relationships { get; set; }
-		public DbSet<Role> Roles { get; set; }
+		public DbSet<Models.Group> Groups { get; set; }
 		public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
 		public PostgresDBContext(DbContextOptions<PostgresDBContext> options) : base(options) { }
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -55,9 +56,9 @@ namespace EduVault.Data
 				entity.HasKey(relation => relation.Id);
 			});
 
-			modelBuilder.Entity<Role>(entity =>
+			modelBuilder.Entity<Models.Group>(entity =>
 			{
-				entity.HasKey(role => role.Id);
+				entity.HasKey(group => group.Id);
 			});
 
 			modelBuilder.Entity<User>(entity =>
@@ -65,29 +66,41 @@ namespace EduVault.Data
 				entity.HasKey(user => user.Id);
 
                 entity.Property(user => user.Id)
-                    .HasColumnName("user_id")
+                    .HasColumnName("User_id")
                     .UseIdentityAlwaysColumn()
                     .ValueGeneratedOnAdd();
 
                 entity.Property(user => user.Login)
-					.HasColumnName("login")
+					.HasColumnName("Login")
 					.HasColumnType("character varying")
 					.IsRequired();
 
 				entity.Property(user => user.PasswordHash)
-					.HasColumnName("password")
+					.HasColumnName("Password")
 					.HasColumnType("character varying")
 					.IsRequired();
 
 				entity.Property(user => user.Name)
-					.HasColumnName("name")
+					.HasColumnName("Name")
 					.HasColumnType("character varying")
 					.IsRequired(false); // NULL разрешен
 
 				entity.Property(user => user.UserType)
-					.HasColumnName("usertype")
-					.HasColumnType("bigint");
-			});
-		}
+					.HasColumnName("UserType")
+					.HasColumnType("byte");
+
+                entity.Property(user => user.Roleid)
+                    .HasColumnName("Roleid")
+                    .HasColumnType("bigint");
+            });
+            modelBuilder.Entity<Role>(entity =>
+            {
+                entity.HasKey(role => role.Id);
+                entity.Property(role => role.Id)
+                    .HasColumnName("Role_id")
+                    .UseIdentityAlwaysColumn()
+                    .ValueGeneratedOnAdd();
+            });
+        }
 	}
 }

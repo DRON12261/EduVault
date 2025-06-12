@@ -6,44 +6,43 @@
     <title>EduVault - @ViewData["Title"]</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/bootstrap-icons/font/bootstrap-icons.css" />
 </head>
 <body>
     <header>
         <div class="logo"><a asp-page="/Index" style="text-decoration: none; color: inherit;">EduVault</a></div>
         <div class="user-info" style="font-size:150%; font-weight: 500;">
-            @if (@ViewData["Title"]?.ToString() == "Справочник")
-            {
-                <span>Список файлов</span>
-            }
-            @if (@ViewData["Title"]?.ToString() == "Карточка документа")
-            {
-                <span>
-                    Карточка файла: <span style="font-size:80%; font-weight: 200;">Проверка отчётов студентов на соответствие требованиям</span>
-                </span>
-            }
+            <span>
+                @if (ViewData["Title"]?.ToString() != "Авторизация"){@ViewData["Title"]}
+            </span>
         </div>
         <div class="user-info">
-            @if (@ViewData["Title"]?.ToString() != "Авторизация")
+            @if (User.Identity?.IsAuthenticated == true)
             {
-                <span>Иван Петров</span>
-            }
-        </div>
-        <div class="user-info">
-            @{
-                @if (User.Identity?.IsAuthenticated == true)
+                @if (User.IsInRole("Администратор"))
                 {
-                    //@if(User.IsInRole())
-                    <a asp-page="/Shared/AdminPanel" class="nav-link userlink">Панель администратора</a>
-                    <span id="userLogin">@User.Identity.Name</span>
-                    <form method="post" asp-page="/Index">
-                        @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите выйти из системы?')">Выйти</button>
-                    </form>
+                    <div class="admin-dropdown">
+                        <button class="admin-dropdown-btn">
+                            <i class="bi bi-gear"></i> Администрирование
+                        </button>
+                        <div class="admin-dropdown-content">
+                            <a asp-page="/Users/Index"><i class="bi bi-person"></i> Пользователи</a>
+                            <a asp-page="/Roles/Index"><i class="bi bi-people"></i> Группы</a>
+                            <a asp-page="/FileTypes/Index"><i class="bi bi-file-earmark"></i> Типы файлов</a>
+                        </div>
+                    </div>
                 }
+                <span id="userLogin" style="margin: 0 10px;">@User.Identity.Name</span>
+                <form method="post" asp-page="/Index" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите выйти из системы?')">
+                        <i class="bi bi-box-arrow-right"></i> Выйти
+                    </button>
+                </form>
             }
         </div>
     </header>
-    
+
     <main>
         @RenderBody()
     </main>

@@ -42,7 +42,7 @@ namespace EduVault.Repositories
         public async Task UpdateAsync(FileType filetype)
         {
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
-            await _context.FileTypes.AddAsync(filetype);
+            _context.FileTypes.Update(filetype);
             await _context.SaveChangesAsync();
         }
         public async Task<List<FileType>> GetAllAsync()

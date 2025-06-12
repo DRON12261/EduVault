@@ -6,7 +6,7 @@ namespace EduVault.Models
 		private string _name;
 		private bool _isRequired;
 		private bool _isPrefilled;
-		public long Id { get { return _id; } }
+		public long Id { get { return _id; } set { _id = value; } }
 		public string Name
 		{
 			get

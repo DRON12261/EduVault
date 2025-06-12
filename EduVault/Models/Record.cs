@@ -13,7 +13,7 @@ namespace EduVault.Models
 		private FileType _fileType;
 		private Field[] _fields;
 
-		public long Id { get { return _id; } }
+		public long Id { get { return _id; } set { _id = value; } }
 		public string Name
 		{
 			get

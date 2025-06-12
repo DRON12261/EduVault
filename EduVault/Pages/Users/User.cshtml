@@ -1,0 +1,46 @@
+@page "/Users/User/{mode}/{id?}"
+@model EduVault.Pages.Users.UserModel
+@{
+}
+
+<div class="form-container">
+    <h2>
+        @(Model.Mode == "create"?"Создать":"Редактировать") пользователя
+    </h2>
+    <form method="post" asp-page-handler="Save" asp-antiforgery="true">
+        @Html.AntiForgeryToken()
+        <div class="create-user-form-group">
+            @if (Model.Mode == "edit")
+            {
+                <input asp-for="Input.Id" type="text" placeholder="Id" readonly disabled>
+            }
+            <input asp-for="Input.Name" type="text" placeholder="Имя" required>
+            <input asp-for="Input.Login" type="text" placeholder="Логин" required>
+            @if (Model.Mode == "create")
+            {
+                <div class="password-container">
+                    <input asp-for="Input.Password" id="password" type="password" placeholder="Пароль" style="padding: 1rem;" required>
+                    <button type="button" id="togglePassword" class="btn btn-outline-secondary">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+            }
+            <select asp-for="Input.Role"
+                    asp-items="@(new SelectList(Model.Roles, "Id", "Name"))"
+                    class="form-control">
+                <option value="">-- Выберите роль --</option>
+            </select>
+        </div>
+        <div class="create-user-form-group" style="display: flex; gap: 0.8rem;">
+            <button type="submit" class="btn-primary">@(Model.Mode == "create" ? "Создать" : "Сохранить")</button>
+            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Отмена</button>
+        </div>
+    </form>
+ </div>
+
+@section Scripts {
+    @if (Model.Mode == "create")
+    {
+        <script src="~/js/revealPwd.js"></script>
+    }
+}

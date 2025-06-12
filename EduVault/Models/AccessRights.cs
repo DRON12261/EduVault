@@ -10,7 +10,7 @@ namespace EduVault.Models
 		private Record _record;
 		private AccessRightsType _ARType;
 
-		public long Id { get { return _id; } }
+		public long Id { get { return _id; } set { _id = value; } }
 		[NotMapped]
 		public IRecipient Recipient { get { return _recipient; } set { _recipient = value; } }
 		public Record Record { get { return _record; } set { _record = value; } }

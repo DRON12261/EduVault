@@ -1,0 +1,22 @@
+@page "/FileTypes/FileType/{mode}/{id?}"
+@model EduVault.Pages.FileTypes.FileTypeModel
+@{
+    ViewData["Title"] = ((Model.Mode == "create") ? "Создание" : "Редактирование") + " типа файла";
+}
+
+<div class="form-container">
+    <form method="post" asp-antiforgery="true" asp-page-handler="Save">
+        @Html.AntiForgeryToken()
+        <div class="create-filetype-form-group">
+            @if (Model.Mode == "edit")
+            {
+                <input asp-for="Input.Id" type="text" placeholder="Id" readonly disabled>
+            }
+            <input asp-for="Input.Name" type="text" placeholder="Тип файла" required>
+        </div>
+        <div class="create-filetype-form-group" style="display: flex; gap: 0.8rem;">
+            <button type="submit" class="btn-primary">@(Model.Mode == "create" ? "Создать" : "Сохранить")</button>
+            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Отмена</button>
+        </div>
+    </form>
+ </div>

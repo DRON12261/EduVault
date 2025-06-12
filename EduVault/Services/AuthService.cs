@@ -1,5 +1,6 @@
 // Services/AuthService.cs
 using EduVault.Models;
+using EduVault.Models.DataTransferObjects;
 using EduVault.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Npgsql;
@@ -11,24 +12,26 @@ namespace EduVault.Services
 {
     public interface IAuthService
     {
-        Task<bool> ValidateUserAsync(string login, string password);
+        Task<Role> ValidateUserAsync(AuthDTO authDTO);
     }
     public class AuthService : IAuthService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
 
-        public AuthService(IUserRepository userRepository)
+        public AuthService(IUserRepository userRepository, IRoleRepository roleRepository)
         {
             _userRepository = userRepository;
+            _roleRepository = roleRepository;
         }
 
-        public async Task<bool> ValidateUserAsync(string login, string password)
+        public async Task<Role> ValidateUserAsync(AuthDTO authDTO)
         {
-            var user = await _userRepository.GetByLoginAsync(login);
-            if (user == null)
-                return false;
+            User user = await _userRepository.GetByLoginAsync(authDTO.Login);
+            if (user == null || !bCrypt.Verify(authDTO.Password, user.PasswordHash))
+                return null;
 
-            return bCrypt.Verify(password, user.PasswordHash);
+            return await _roleRepository.GetByIdAsync(user.Roleid);
         }
     }
 }

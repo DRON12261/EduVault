@@ -1,4 +1,5 @@
 using EduVault.Models;
+using EduVault.Models.DataTransferObjects;
 using EduVault.Repositories;
 using bCrypt = BCrypt.Net.BCrypt;
 
@@ -7,10 +8,11 @@ namespace EduVault.Services
     public interface IUserService
     {
         Task<OperationResult> CheckSystemUser();
-        Task<List<User>> GetAllUsersAsync();
-        Task<User> GetUserByIdAsync(long id);
-        Task<OperationResult> CreateUserAsync(UserCreationDto dto);
-        Task<OperationResult> DeleteUserById(long id);
+        Task<List<User>> GetAllAsync();
+        Task<User> GetByIdAsync(long id);
+        Task<OperationResult> CreateAsync(UserDTO userDTO);
+        Task<OperationResult> UpdateAsync(UserDTO userDTO);
+        Task<OperationResult> DeleteById(long id);
     }
     public class UserService : IUserService
     {
@@ -26,31 +28,36 @@ namespace EduVault.Services
             {
                 return OperationResult.Failed("Системный пользователь уже создан!", OperationStatusCode.Conflict);
             }
-            await _userRepository.AddAsync(new User(new UserCreationDto("testUser", "test", "test")));
+            await _userRepository.AddAsync(new User("testUser", "test", "test", 1));
             return OperationResult.Success();
         }
-        public async Task<List<User>> GetAllUsersAsync()
+        public async Task<List<User>> GetAllAsync()
         {
             return await _userRepository.GetAllAsync();
         }
 
-        public async Task<User> GetUserByIdAsync(long id)
+        public async Task<User> GetByIdAsync(long id)
         {
             return await _userRepository.GetByIdAsync(id);
         }
-        public async Task<OperationResult> CreateUserAsync(UserCreationDto dto)
+        public async Task<OperationResult> CreateAsync(UserDTO userDTO)
         {
-            // Валидация
-            if (await _userRepository.GetByLoginAsync(dto.Login) != null)
+            if (await _userRepository.GetByLoginAsync(userDTO.Login) != null)
                 return OperationResult.Failed("Логин занят", OperationStatusCode.Conflict);
 
-            // Создание entity
-            var user = new User(dto);
-
-            await _userRepository.AddAsync(user);
+            userDTO.Password = bCrypt.HashPassword(userDTO.Password);
+            await _userRepository.AddAsync(new User(userDTO));
             return OperationResult.Success();
         }
-        public async Task<OperationResult> DeleteUserById(long id)
+        public async Task<OperationResult> UpdateAsync(UserDTO userDTO)
+        {
+            if (await _userRepository.GetByIdAsync(userDTO.Id) == null)
+                return OperationResult.Failed("Пользователя с таким Id не существует!", OperationStatusCode.NotFound);
+
+            await _userRepository.UpdateAsync(new User(userDTO));
+            return OperationResult.Success();
+        }
+        public async Task<OperationResult> DeleteById(long id)
         {
             if (await _userRepository.GetByIdAsync(id) == null)
             {
@@ -58,20 +65,6 @@ namespace EduVault.Services
             }
             await _userRepository.DeleteAsync(id);
             return OperationResult.Success();
-        }
-    }
-    public class UserCreationDto
-    {
-        public string Name { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        //public UserType UserType { get; set; }
-        //public bool SendConfirmationEmail { get; set; } = true;
-        public UserCreationDto(string name, string login, string password)
-        {
-            Name = name;
-            Login = login;
-            Password = bCrypt.HashPassword(password);
         }
     }
 

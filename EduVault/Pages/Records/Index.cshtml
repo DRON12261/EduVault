@@ -1,7 +1,10 @@
 @page
 @model EduVault.Pages.Records.IndexModel
 @{
-    ViewData["Title"] = "Справочник";
+    ViewData["Title"] = "Список карточек";
+}
+@section Scripts {
+    
 }
 
 <div style="display: grid; grid-template-columns: 1fr auto; gap: 2rem; height: calc(100vh - 100px);">
@@ -16,13 +19,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Items)
+                @foreach (var record in Model.Items)
                 {
-                    <tr class="clickable-row" onclick="window.location.href='/Record?id=@item.Id'">
-                        <td>@item.Id</td>
-                        <td>@item.Title</td>
-                        <td>@item.FileType</td>
-                        <td>@item.CreationDate.ToString("dd.MM.yyyy")</td>
+                    <tr class="clickable-row" onclick="window.location='/Records/Record/edit?id=@record.Id'">
+                        <td>@record.Id</td>
+                        <td>@record.Title</td>
+                        <td>@record.FileType</td>
+                        <td>@record.CreationDate.ToString("dd.MM.yyyy")</td>
                     </tr>
                 }
             </tbody>
@@ -31,9 +34,7 @@
 
     <div style="display: flex; flex-direction: column; gap: 2rem;">
         <div style="text-align: right;">
-            <a asp-page="./CreateRecord" class="btn-primary" style="display: inline-block;">
-                Создать карточку
-            </a>
+            <a asp-page="./Record" asp-route-mode="create" class="btn-primary" style="display: inline-block;">Создать карточку</a>
         </div>
 
         <div class="filter-panel">
@@ -58,11 +59,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    <script>
-        function handleRowClick(id) {
-            window.location.href = `/Record?id=${id}`;
-        }
-    </script>
-}

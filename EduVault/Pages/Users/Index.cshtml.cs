@@ -20,12 +20,12 @@ namespace EduVault.Pages.Users
 
         public async Task OnGetAsync()
         {
-            Users =  await _userService.GetAllUsersAsync() ?? new List<User>();
+            Users =  await _userService.GetAllAsync() ?? new List<User>();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(long id)
         {
-            OperationResult result = await _userService.DeleteUserById(id);
+            OperationResult result = await _userService.DeleteById(id);
 
             if (!(result.StatusCode == OperationStatusCode.Success))
             {
