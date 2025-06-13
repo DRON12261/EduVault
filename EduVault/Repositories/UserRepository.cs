@@ -9,7 +9,7 @@ namespace EduVault.Repositories
 	{
 		Task<User> GetByIdAsync(long id);
         Task<User> GetByLoginAsync(string login);
-		Task AddAsync(User user);
+		Task CreateAsync(User user);
 		Task UpdateAsync(User user);
 		Task DeleteAsync(long id);
 		Task<List<User>> GetAllAsync();
@@ -35,7 +35,7 @@ namespace EduVault.Repositories
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
             return await _context.Users.FirstOrDefaultAsync(user => user.Login == login);
         }
-        public async Task AddAsync(User user)
+        public async Task CreateAsync(User user)
 		{
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
             await _context.Users.AddAsync(user);
@@ -45,7 +45,7 @@ namespace EduVault.Repositories
 		public async Task UpdateAsync(User user)
 		{
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
-            await _context.Users.AddAsync(user);
+            _context.Users.Update(user);
 			await _context.SaveChangesAsync();
 		}
 		public async Task<List<User>> GetAllAsync()

@@ -10,60 +10,67 @@ namespace EduVault.Services
         Task<OperationResult> CheckSystemUser();
         Task<List<User>> GetAllAsync();
         Task<User> GetByIdAsync(long id);
+        Task<User> GetByLoginAsync(string login);
         Task<OperationResult> CreateAsync(UserDTO userDTO);
         Task<OperationResult> UpdateAsync(UserDTO userDTO);
         Task<OperationResult> DeleteById(long id);
     }
     public class UserService : IUserService
     {
-        private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private readonly IUserRepository _repository;
+        public UserService(IUserRepository repository)
         {
-            _userRepository = userRepository;
+            _repository = repository;
         }
         
         public async Task<OperationResult> CheckSystemUser()
         {
-            if(await _userRepository.GetByLoginAsync("test") != null)
+            if(await _repository.GetByLoginAsync("test") != null)
             {
                 return OperationResult.Failed("Системный пользователь уже создан!", OperationStatusCode.Conflict);
             }
-            await _userRepository.AddAsync(new User("testUser", "test", "test", 1));
+            await _repository.CreateAsync(new User("testUser", "test", "test", 1));
             return OperationResult.Success();
         }
         public async Task<List<User>> GetAllAsync()
         {
-            return await _userRepository.GetAllAsync();
+            return await _repository.GetAllAsync();
         }
 
         public async Task<User> GetByIdAsync(long id)
         {
-            return await _userRepository.GetByIdAsync(id);
+            return await _repository.GetByIdAsync(id);
+        }
+        public async Task<User> GetByLoginAsync(string login)
+        {
+            return await _repository.GetByLoginAsync(login);
         }
         public async Task<OperationResult> CreateAsync(UserDTO userDTO)
         {
-            if (await _userRepository.GetByLoginAsync(userDTO.Login) != null)
+            if (await _repository.GetByLoginAsync(userDTO.Login) != null)
                 return OperationResult.Failed("Логин занят", OperationStatusCode.Conflict);
 
             userDTO.Password = bCrypt.HashPassword(userDTO.Password);
-            await _userRepository.AddAsync(new User(userDTO));
+            await _repository.CreateAsync(new User(userDTO));
             return OperationResult.Success();
         }
         public async Task<OperationResult> UpdateAsync(UserDTO userDTO)
         {
-            if (await _userRepository.GetByIdAsync(userDTO.Id) == null)
+            if (await _repository.GetByIdAsync(userDTO.Id) == null)
                 return OperationResult.Failed("Пользователя с таким Id не существует!", OperationStatusCode.NotFound);
+            if (await _repository.GetByLoginAsync(userDTO.Login) != null)
+                return OperationResult.Failed("Логин занят", OperationStatusCode.Conflict);
 
-            await _userRepository.UpdateAsync(new User(userDTO));
+            await _repository.UpdateAsync(new User(userDTO));
             return OperationResult.Success();
         }
         public async Task<OperationResult> DeleteById(long id)
         {
-            if (await _userRepository.GetByIdAsync(id) == null)
+            if (await _repository.GetByIdAsync(id) == null)
             {
                 return OperationResult.Failed("Пользователя с таким Id не существует", OperationStatusCode.NotFound);
             }
-            await _userRepository.DeleteAsync(id);
+            await _repository.DeleteAsync(id);
             return OperationResult.Success();
         }
     }
@@ -71,14 +78,14 @@ namespace EduVault.Services
     public class OperationResult
     {
         public bool Succeeded { get; init; }
-        public string ErrorMessage { get; init; }
+        public string Message { get; init; }
         public OperationStatusCode StatusCode { get; init; }
 
-        public static OperationResult Success()
-        => new() { Succeeded = true, StatusCode = OperationStatusCode.Success };
+        public static OperationResult Success(string message="")
+        => new() { Succeeded = true, Message = message,  StatusCode = OperationStatusCode.Success };
 
         public static OperationResult Failed(string error, OperationStatusCode status)
-            => new() { Succeeded = false, ErrorMessage = error, StatusCode = status };
+            => new() { Succeeded = false, Message = error, StatusCode = status };
     }
     public enum OperationStatusCode
     {

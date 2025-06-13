@@ -1,0 +1,22 @@
+@page "/Groups/Group/{mode}/{id?}"
+@model EduVault.Pages.Groups.GroupModel
+@{
+    ViewData["Title"] = ((Model.Mode == "create") ? "Создание" : "Редактирование") + " группы";
+}
+
+<div class="form-container">
+    <form method="post" asp-antiforgery="true" asp-page-handler="Save">
+        @Html.AntiForgeryToken()
+        <div class="create-group-form-group">
+            @if (Model.Mode == "edit")
+            {
+                <input asp-for="Input.Id" type="text" placeholder="Id" readonly>
+            }
+            <input asp-for="Input.Name" type="text" placeholder="Название группы" required>
+        </div>
+        <div class="create-group-form-group" style="display: flex; gap: 0.8rem;">
+            <button type="submit" class="btn-primary">@(Model.Mode == "create" ? "Создать" : "Сохранить")</button>
+            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Отмена</button>
+        </div>
+    </form>
+</div>

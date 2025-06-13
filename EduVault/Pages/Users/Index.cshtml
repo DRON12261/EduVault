@@ -6,48 +6,77 @@
 }
 
 <div class="button-toolbar mb-3" style="display: flex; gap: 0.5rem; align-items: center;">
-    <form method="post" asp-page="./@ViewData["Entity"]" asp-route-mode="create" style="display: inline-block; margin: 0;">
+    <form asp-page="./@ViewData["Entity"]" asp-route-mode="create" style="display: inline-block; margin: 0;">
         @Html.AntiForgeryToken()
         <button id="createBtn" type="submit" class="btn btn-primary">
             <i class="bi bi-plus-circle"></i> Добавить
         </button>
     </form>
-    <form id="editForm" method="post" asp-page="./@ViewData["Entity"]" asp-route-mode="edit" style="display: inline-block; margin: 0;">
+    <form id="editForm" asp-page="./@ViewData["Entity"]" asp-route-mode="edit" style="display: inline-block; margin: 0;">
         @Html.AntiForgeryToken()
-        <button id="editBtn"  type="submit" class="btn btn-warning" disabled>
+        <button id="editBtn" type="submit" class="btn btn-warning" disabled>
             <i class="bi bi-pencil-square"></i> Редактировать
         </button>
     </form>
-    <form method="post" asp-page-handler="Delete" style="display: inline-block; margin: 0;">
+    <form asp-page-handler="Delete" style="display: inline-block; margin: 0;">
         @Html.AntiForgeryToken()
         <input type="hidden" id="deleteId" name="id" />
-        <button id="deleteBtn" type="submit" class="btn btn-danger" disabled>
+        <button id="deleteBtn" type="submit" class="btn btn-danger" disabled onclick="return confirm('Вы уверены, что хотите удалить запись? \r\nЭто действие необратимо!')">
             <i class="bi bi-trash"></i> Удалить
         </button>
     </form>
 </div>
-<table class="table table-hover">
-    <thead class="table-light">
-        <tr>
-            <th>ID</th>
-            <th>Имя</th>
-            <th>Логин</th>
-            <th>Тип</th>
-            <th>Действия</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model.Users)
-        {
-            <tr class="clickable-row" data-id="@user.Id" onclick="selectRow(this, '@user.Id')">
-                <td>@user.Id</td>
-                <td>@user.Name</td>
-                <td>@user.Login</td>
-                <td>@user.UserType</td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+<div style="display: grid; grid-template-columns: 1fr auto; gap: 2rem; height: calc(100vh - 100px);">
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>ИД</th>
+                    <th>Имя</th>
+                    <th>Логин</th>
+                    <th>Тип пользователя</th>
+                    <th>Роль</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+            {
+                <tr class="clickable-row" data-id="@user.Id" onclick="selectRow(this, '@user.Id')">
+                    <td>@user.Id</td>
+                    <td>@user.Name</td>
+                    <td>@user.Login</td>
+                    <td>@user.UserType</td>
+                    <td>@Model.Roles.FirstOrDefault(role=>role.Id==user.RoleId).Name</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+        <div class="filter-panel">
+            <h3>Фильтры</h3>
+            <div class="form-group">
+                <label>ИД:</label>
+                <input type="number">
+            </div>
+            <div class="form-group">
+                <label>Название:</label>
+                <input type="text">
+            </div>
+            <div class="form-group">
+                <label>Тип файла:</label>
+                <select>
+                    <option>Все</option>
+                    <option>Тип файла 1</option>
+                    <option>Тип файла 2</option>
+                </select>
+            </div>
+            <button class="btn-primary" style="margin-top: auto;">Поиск</button>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     <script src="~/js/rowSelection.js"></script>

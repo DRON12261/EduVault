@@ -5,36 +5,55 @@
 }
 
 <div class="record-container">
-    <div>
-        <div class="record-info">Пример документа</div>
-        <div class="card-actions">
-            <button class="btn-primary">Сохранить карточку</button>
-            <button class="btn-primary">Открыть файл</button>
-            <button class="btn-primary">Обновить файл</button>
-            <button class="btn-secondary">Удалить файл</button>
-            <button class="btn-secondary">Удалить карточку</button>
-            <div class="card-info" style="margin-right: 0; margin-left: auto;">ИД: 27</div>
-        </div>
+    <form method="post" asp-antiforgery="true">
+        <div>
+            <div class="card-actions">
+                <button type="submit" asp-page-handler="Save" class="btn-primary">@(Model.Mode == "create" ? "Создать" : "Сохранить") карточку</button>
+                <button class="btn-primary">Открыть файл</button>
+                <button class="btn-primary">Обновить файл</button>
+                <button class="btn-secondary">Удалить файл</button>
+                <button class="btn-secondary">Удалить карточку</button>
+                <!--<div class="card-info" style="margin-right: 0; margin-left: auto;">ИД: 27</div>-->
+            </div>
 
-        <div class="card-content">
-            <div class="card-form-group">
-                <label>Название:</label>
-                <input type="text" value="Пример документа">
-            </div>
-            <div class="card-form-group">
-                <label>Тип файла:</label>
-                <input type="text" value="Тип файла 1">
-            </div>
-            <div class="card-form-group">
-                <label>Дата создания:</label>
-                <input type="text" value="15.06.2021" readonly>
-            </div>
-            <div class="card-form-group">
-                <label>Тип файла:</label>
-                <input type="text" value="Отчёт по курсовой работе">
+            <div class="card-content">
+                <fieldset class="form-group">
+                    <legend>Базовые поля</legend>
+                    @if (Model.Mode == "edit")
+                    {
+                        <input asp-for="Input.Id" type="text" placeholder="Id" readonly>
+                    }
+                    <div class="card-form-group">
+                        <label>Название:</label>
+                        <input asp-for="Input.Name" type="text" placeholder="Имя" required>
+                    </div>
+                    <div class="card-form-group">
+                        <label>Тип файла:</label>
+                        <select asp-for="Input.FileType"
+                        asp-items="@(new SelectList(Model.FileTypes, "Id", "Name"))"
+                        class="form-control card-form-group" required>
+                            <option value="">-- Выберите тип файла --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Файл:</label>
+                        <input asp-for="Input.FilePath" type="text" placeholder="Файл" required>
+                    </div>
+                    @if (Model.Mode == "edit")
+                    {
+                        <div class="card-form-group">
+                            <label>Автор карточки:</label>
+                            <input type="text" asp-for="Input.RecordAuthor" readonly>
+                        </div>
+                        <div class="card-form-group">
+                            <label>Дата создания карточки:</label>
+                            <input type="date" asp-for="Input.RecordCreationDate" readonly>
+                        </div>
+                    }
+                </fieldset>
             </div>
         </div>
-    </div>
+    </form>
 
     <div class="rights-panel">
         <div style="display:flex;">
@@ -53,13 +72,13 @@
                 <tbody>
                     <!--@for (int i = 1; i <= 12; i++)
                     {
-                                <tr>
-                                    <td title="Пользователь @i">User @i</td>
-                                    <td>@(i % 3 == 0 ? "Изменение" : "Чтение")</td>
-                                    <td>
-                                        <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <td title="Пользователь @i">User @i</td>
+                            <td>@(i % 3 == 0 ? "Изменение" : "Чтение")</td>
+                            <td>
+                                <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
+                            </td>
+                        </tr>
                     }-->
                     <tr>
                         <td>Антон Епифанцев</td>

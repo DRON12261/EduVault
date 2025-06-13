@@ -1,3 +1,5 @@
+using EduVault.Models;
+using EduVault.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,77 +12,38 @@ namespace EduVault.Pages.Records
     [Authorize]   
     public class IndexModel : PageModel
     {
-        public List<TableItem> Items { get; set; } = new();
+        private IRecordService _recordService;
+        private IFileTypeService _fileTypeService;
+        private IUserService _userService;
 
-        public void OnGet()
+        public List<Record> Records { get; set; } = new();
+        public List<FileType> FileTypes { get; set; } = new();
+        public List<User> Users { get; set; } = new();
+
+        public IndexModel(IRecordService recordService, IFileTypeService fileTypeService, IUserService userService)
         {
-            /*for (int i = 1; i <= 50; i++)
-            {
-                Items.Add(new TableItem
-                {
-                    Id = i,
-                    Title = $"Документ {i}",
-                    FileType = i % 2 == 0 ? "Тип файла 1" : "Тип файла 2",
-                    CreationDate = DateTime.Now.AddDays(-i)
-                });
-            }*/
-            Items.Add(new TableItem
-            {
-                Id = 6,
-                Title = "Презентация \"Создание web-приложения\" Скочко А.Е., Чипак Д.И., 2024",
-                FileType = "Презентация",
-                CreationDate = DateTime.Parse("2024-02-17")
-            });
-            Items.Add(new TableItem
-            {
-                Id = 7,
-                Title = "Исходный код игры \"Три в Ряд\" Чипак Д.И., 2020",
-                FileType = "Программный код",
-                CreationDate = DateTime.Parse("2020-12-05")
-            });
-            Items.Add(new TableItem
-            {
-                Id = 8,
-                Title = "Курс.Р \"Разработка игры Три в ряд\" Чипак Д.И., 2020",
-                FileType = "Отчет по курсовой работе",
-                CreationDate = DateTime.Parse("2020-12-05")
-            });
-            Items.Add(new TableItem
-            {
-                Id = 12,
-                Title = "Презентация \"Разработка приложения для построения 3D моделей с помощью трассировки лучей\" Скочко А.Е., Чипак Д.И., Ибраев Е.И. 2024",
-                FileType = "Презентация",
-                CreationDate = DateTime.Parse("2024-01-21")
-            });
-            Items.Add(new TableItem
-            {
-                Id = 13,
-                Title = "ВКР \"Разработка системы проведения контрольных мероприятий в образовательных организациях Тюменской области\" Скочко А.Е., Чипак Д.И., 2023",
-                FileType = "Отчет по ВКР",
-                CreationDate = DateTime.Parse("2023-10-13")
-            });
-            Items.Add(new TableItem
-            {
-                Id = 15,
-                Title = "Курс.Р \"Трассировка лучей\" Скочко А.Е., Чипак Д.И., Ибраев Е.И., 2019",
-                FileType = "Отчет по курсовой работе",
-                CreationDate = DateTime.Parse("2019-09-30")
-            });
-            Items.Add(new TableItem
-            {
-                Id = 27,
-                Title = "Курсовая \"Проверка отчётов студентов на соответствие требованиям\"",
-                FileType = "Отчет по курсовой работе",
-                CreationDate = DateTime.Parse("2021-06-15")
-            });
+            _recordService = recordService;
+            _fileTypeService = fileTypeService;
+            _userService = userService;
         }
-
-        public class TableItem
+        public async Task OnGetAsync()
         {
-            public int Id { get; set; }
-            public string Title { get; set; }
-            public string FileType { get; set; }
-            public DateTime CreationDate { get; set; }
+            Users = await _userService.GetAllAsync() ?? new();
+            FileTypes = await _fileTypeService.GetAllAsync() ?? new();
+            Records = await _recordService.GetAllAsync() ?? new();
+        }
+        public async Task<IActionResult> OnPostDeleteAsync(long id)
+        {
+            OperationResult result = await _recordService.DeleteById(id);
+
+            if (!(result.StatusCode == OperationStatusCode.Success))
+            {
+                TempData["ResultMessage"] = result.Message;
+                return RedirectToPage();
+            }
+
+            TempData["ResultMessage"] = "Пользователь успешно удалён";
+            return RedirectToPage();
         }
     }
 }

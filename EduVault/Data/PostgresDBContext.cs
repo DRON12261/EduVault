@@ -89,9 +89,9 @@ namespace EduVault.Data
 					.HasColumnName("UserType")
 					.HasColumnType("byte");
 
-                entity.Property(user => user.Roleid)
-                    .HasColumnName("Roleid")
-                    .HasColumnType("bigint");
+                entity.Property(user => user.RoleId)
+                    .HasColumnName("RoleId")
+                    .HasColumnType("integer");
             });
             modelBuilder.Entity<Role>(entity =>
             {

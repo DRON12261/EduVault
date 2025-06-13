@@ -32,7 +32,7 @@ namespace EduVault.Services
             if (await _fileTypeRepository.GetByNameAsync(fileTypeDTO.Name) != null)
                 return OperationResult.Failed("Такой тип файлов уже существует!", OperationStatusCode.Conflict);
 
-            await _fileTypeRepository.AddAsync(new FileType(fileTypeDTO));
+            await _fileTypeRepository.CreateAsync(new FileType(fileTypeDTO));
             return OperationResult.Success();
         }
         public async Task<OperationResult> UpdateAsync(FileTypeDTO fileTypeDTO)

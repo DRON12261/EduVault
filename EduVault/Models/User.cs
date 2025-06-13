@@ -1,5 +1,6 @@
 using EduVault.Services;
 using EduVault.Models.DataTransferObjects;
+using bCrypt = BCrypt.Net.BCrypt;
 
 namespace EduVault.Models
 {
@@ -10,7 +11,7 @@ namespace EduVault.Models
 		private string _login;
 		private string _passwordHash;
 		private byte _userType;
-        private long _roleid;
+        private int _roleId;
 		private List<Group> _groups;
 		public long Id { get { return _id; } set { _id = value; } }
 		public string Name
@@ -35,22 +36,22 @@ namespace EduVault.Models
 		public string Login { get { return _login; } set { _login = value; } }
 		public string PasswordHash { get { return _passwordHash; } set { _passwordHash = value; } }
 		public byte UserType { get { return _userType; } set { _userType = value; } }
-        public long Roleid { get { return _roleid; } set { _roleid = value; } }
+        public int RoleId { get { return _roleId; } set { _roleId = value; } }
 		public List<Group> Groups { get { return _groups; } set { _groups = value; } }
-        public User(string name, string login, string password, long roleid)
+        public User(string name, string login, string password, int roleId)
 		{
             Name = name;
             Login = login;
             PasswordHash = password;
-            Roleid = roleid;
-
+            RoleId = roleId;
         }
         public User(UserDTO userDTO)
         {
+            Id = userDTO.Id;
             Name = userDTO.Name;
             Login = userDTO.Login;
-            PasswordHash = userDTO.Password;
-            Roleid = userDTO.Role;
+            PasswordHash = bCrypt.HashPassword(userDTO.Password);
+            RoleId = userDTO.Role;
         }
         User() {}
         ~User(){}

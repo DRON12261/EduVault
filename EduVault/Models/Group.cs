@@ -1,3 +1,5 @@
+using EduVault.Models.DataTransferObjects;
+
 namespace EduVault.Models
 {
 	public class Group : IRecipient
@@ -26,13 +28,12 @@ namespace EduVault.Models
 			}
 		}
 		public List<User> Users { get { return _users; } set { _users = value; } }
-		Group()
-		{
-
-		}
-		~Group()
-		{
-
-		}
+        public Group(GroupDTO groupDTO)
+        {
+            Id = groupDTO.Id;
+            Name = groupDTO.Name;
+        }
+        Group(){}
+		~Group(){}
 	}
 }

@@ -6,7 +6,7 @@ namespace EduVault.Repositories
 {
     public interface IRoleRepository
     {
-        Task<Role> GetByIdAsync(long id);
+        Task<Role> GetByIdAsync(int id);
         Task<List<Role>> GetAllAsync();
     }
     public class RoleRepository: IRoleRepository
@@ -16,7 +16,7 @@ namespace EduVault.Repositories
         {
             _contextFactory = contextFactory;
         }
-        public async Task<Role> GetByIdAsync(long id)
+        public async Task<Role> GetByIdAsync(int id)
         {
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
             return await _context.Roles.FindAsync(id);

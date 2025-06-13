@@ -1,25 +1,27 @@
 using EduVault.Models;
 using EduVault.Models.DataTransferObjects;
 using EduVault.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
 namespace EduVault.Pages.FileTypes
 {
+    [Authorize(Roles = "Администратор")]
     public class FileTypeModel : PageModel
     {
-        private IFileTypeService _fileTypeService;
-        public FileTypeModel(IFileTypeService fileTypeService)
+        private IFileTypeService _service;
+        public FileTypeModel(IFileTypeService service)
         {
-            _fileTypeService = fileTypeService;
+            _service = service;
         }
 
         [BindProperty(SupportsGet = true)]
-        public string Mode { get; set; } // "create", "edit"
+        public string Mode { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public long Id { get; set; } // Для редактирования
+        public long Id { get; set; }
         [BindProperty]
         public FileTypeDTO Input { get; set; }
 
@@ -32,11 +34,11 @@ namespace EduVault.Pages.FileTypes
         {
             if (Mode == "create")
             {
-                Input = new FileTypeDTO(); // Инициализация пустой модели для создания
+                Input = new FileTypeDTO();
             }
             else if (Mode == "edit")
             {
-                Input = new FileTypeDTO(await _fileTypeService.GetByIdAsync(Id));// Загрузка данных пользователя по Id
+                Input = new FileTypeDTO(await _service.GetByIdAsync(Id));
             }
             return Page();
         }
@@ -46,13 +48,13 @@ namespace EduVault.Pages.FileTypes
                 return Page();
             if (Mode == "create")
             {
-                await _fileTypeService.CreateAsync(Input);
+                await _service.CreateAsync(Input);
             }
             else if (Mode == "edit")
             {
-                await _fileTypeService.UpdateAsync(Input);
+                await _service.UpdateAsync(Input);
             }
-            return RedirectToPage("/FileTypes/Index");
+            return RedirectToPage("./Index");
         }
     }
 }

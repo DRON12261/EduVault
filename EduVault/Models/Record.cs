@@ -1,6 +1,7 @@
 using EduVault.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using EduVault.Models.DataTransferObjects;
 
 namespace EduVault.Models
 {
@@ -9,8 +10,9 @@ namespace EduVault.Models
 		private long _id;
 		private string _name;
 		private string _filePath;
-		private long _author;
-		private FileType _fileType;
+		private long _recordAuthorId;
+		private long _fileTypeId;
+        private DateTime _recordCreationDate;
 		private Field[] _fields;
 
 		public long Id { get { return _id; } set { _id = value; } }
@@ -34,14 +36,18 @@ namespace EduVault.Models
 			}
 		}
 		public string FilePath { get { return _filePath; } set { _filePath = value; } }
-		public long Author { get { return _author; } set { _author = value; } }
-		public FileType FileType { get { return _fileType; } set { _fileType = value; } }
-		public Field[] Fields { get { return _fields; } set { _fields = value; } }
-        public Record(RecordCreationDto dto)
+		public long RecordAuthorId { get { return _recordAuthorId; } set { _recordAuthorId = value; } }
+		public long FileTypeId { get { return _fileTypeId; } set { _fileTypeId = value; } }
+        public DateTime RecordCreationDate { get { return _recordCreationDate; } set { _recordCreationDate = value; } }
+        public Field[] Fields { get { return _fields; } set { _fields = value; } }
+        public Record(RecordDTO dto)
         {
+            Id = dto.Id;
             Name = dto.Name;
-            Author = dto.Author;
-            FileType = dto.FileType;
+            FilePath = dto.FilePath;
+            RecordAuthorId = dto.RecordAuthor;
+            FileTypeId = dto.FileType;
+            RecordCreationDate = dto.RecordCreationDate;
         }
         Record(){}
 		~Record(){}

@@ -8,7 +8,7 @@ namespace EduVault.Repositories
     public interface IRecordRepository
     {
         Task<Record> GetByIdAsync(long id);
-        Task AddAsync(Record record);
+        Task CreateAsync(Record record);
         Task UpdateAsync(Record record);
         Task DeleteAsync(long id);
         Task<List<Record>> GetAllAsync();
@@ -26,7 +26,7 @@ namespace EduVault.Repositories
             return await _context.Records.FindAsync(id);
         }
 
-        public async Task AddAsync(Record record)
+        public async Task CreateAsync(Record record)
         {
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
             await _context.Records.AddAsync(record);
@@ -36,7 +36,7 @@ namespace EduVault.Repositories
         public async Task UpdateAsync(Record record)
         {
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
-            await _context.Records.AddAsync(record);
+            _context.Records.Update(record);
             await _context.SaveChangesAsync();
         }
         public async Task<List<Record>> GetAllAsync()

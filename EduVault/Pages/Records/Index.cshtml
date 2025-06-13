@@ -2,30 +2,52 @@
 @model EduVault.Pages.Records.IndexModel
 @{
     ViewData["Title"] = "Список карточек";
+    ViewData["Entity"] = "Record";
 }
-@section Scripts {
-    
-}
+
+<div class="button-toolbar mb-3" style="display: flex; gap: 0.5rem; align-items: center;">
+    <form asp-page="./@ViewData["Entity"]" asp-route-mode="create" style="display: inline-block; margin: 0;">
+        @Html.AntiForgeryToken()
+        <button id="createBtn" type="submit" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Добавить
+        </button>
+    </form>
+    <form id="editForm" asp-page="./@ViewData["Entity"]" asp-route-mode="edit" style="display: inline-block; margin: 0;">
+        @Html.AntiForgeryToken()
+        <button id="editBtn" type="submit" class="btn btn-warning" disabled>
+            <i class="bi bi-pencil-square"></i> Редактировать
+        </button>
+    </form>
+    <form asp-page-handler="Delete" style="display: inline-block; margin: 0;">
+        @Html.AntiForgeryToken()
+        <input type="hidden" id="deleteId" name="id" />
+        <button id="deleteBtn" type="submit" class="btn btn-danger" disabled onclick="return confirm('Вы уверены, что хотите удалить запись? \r\nЭто действие необратимо!')">
+            <i class="bi bi-trash"></i> Удалить
+        </button>
+    </form>
+</div>
 
 <div style="display: grid; grid-template-columns: 1fr auto; gap: 2rem; height: calc(100vh - 100px);">
     <div class="table-container">
-        <table>
-            <thead>
+        <table class="table table-hover">
+            <thead class="table-light">
                 <tr>
                     <th>ИД</th>
                     <th>Название</th>
                     <th>Тип файла</th>
-                    <th>Дата создания</th>
+                    <th>Автор карточки</th>
+                    <th>Дата создания карточки</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var record in Model.Items)
+                @foreach (var record in Model.Records)
                 {
-                    <tr class="clickable-row" onclick="window.location='/Records/Record/edit?id=@record.Id'">
+                    <tr class="clickable-row" data-id="@record.Id" onclick="selectRow(this, '@record.Id')">
                         <td>@record.Id</td>
-                        <td>@record.Title</td>
-                        <td>@record.FileType</td>
-                        <td>@record.CreationDate.ToString("dd.MM.yyyy")</td>
+                        <td>@record.Name</td>
+                        <td>@Model.FileTypes.FirstOrDefault(ft => ft.Id == record.FileTypeId).Name</td>
+                        <td>@Model.Users.FirstOrDefault(u => u.Id == record.RecordAuthorId).Name</td>
+                        <td>@record.RecordCreationDate.ToString("dd.MM.yyyy")</td>
                     </tr>
                 }
             </tbody>
@@ -33,10 +55,6 @@
     </div>
 
     <div style="display: flex; flex-direction: column; gap: 2rem;">
-        <div style="text-align: right;">
-            <a asp-page="./Record" asp-route-mode="create" class="btn-primary" style="display: inline-block;">Создать карточку</a>
-        </div>
-
         <div class="filter-panel">
             <h3>Фильтры</h3>
             <div class="form-group">
@@ -59,3 +77,21 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/rowSelection.js"></script>
+
+    <style>
+        .clickable-row {
+            cursor: pointer;
+        }
+
+        .clickable-row:hover {
+            background-color: #f8f9fa;
+        }
+
+        .table-active {
+            background-color: #e9ecef !important;
+        }
+    </style>
+}

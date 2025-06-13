@@ -10,7 +10,7 @@
         <div class="create-filetype-form-group">
             @if (Model.Mode == "edit")
             {
-                <input asp-for="Input.Id" type="text" placeholder="Id" readonly disabled>
+                <input asp-for="Input.Id" type="text" placeholder="Id" readonly>
             }
             <input asp-for="Input.Name" type="text" placeholder="Тип файла" required>
         </div>
