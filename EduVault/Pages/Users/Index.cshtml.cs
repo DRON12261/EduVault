@@ -8,18 +8,22 @@ using Npgsql.TypeMapping;
 
 namespace EduVault.Pages.Users
 {
-	//[Authorize]
+	[Authorize(Roles="Администратор")]
 	public class IndexModel : PageModel
 	{
+        private IRoleService _roleService;
         private IUserService _userService;
         public List<User> Users { get; set; } = new List<User>();
-        public IndexModel(IUserService userService)
+        public List<Role> Roles { get; set; } = new List<Role>();
+        public IndexModel(IRoleService roleService, IUserService userService)
         {
+            _roleService = roleService;
             _userService = userService;
         }
 
         public async Task OnGetAsync()
         {
+            Roles = await _roleService.GetAllAsync() ?? new List<Role>();
             Users =  await _userService.GetAllAsync() ?? new List<User>();
         }
 
@@ -29,7 +33,7 @@ namespace EduVault.Pages.Users
 
             if (!(result.StatusCode == OperationStatusCode.Success))
             {
-                TempData["ResultMessage"] = result.ErrorMessage;
+                TempData["ResultMessage"] = result.Message;
                 return RedirectToPage();
             }
 

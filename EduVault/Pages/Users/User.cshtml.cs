@@ -1,6 +1,7 @@
 using EduVault.Models;
 using EduVault.Models.DataTransferObjects;
 using EduVault.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EduVault.Pages.Users
 {
+    [Authorize(Roles = "Администратор")]
     public class UserModel : PageModel
     {
         private IUserService _userService;
@@ -19,10 +21,10 @@ namespace EduVault.Pages.Users
         }
 
         [BindProperty(SupportsGet = true)]
-        public string Mode { get; set; } // "create", "edit"
+        public string Mode { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public long Id { get; set; } // Для редактирования
+        public long Id { get; set; }
         public List<Role> Roles { get; set; }
         [BindProperty]
         public UserDTO Input { get; set; }
@@ -36,11 +38,11 @@ namespace EduVault.Pages.Users
             Roles = await _roleService.GetAllAsync();
             if (Mode == "create")
             {
-                Input = new UserDTO(); // Инициализация пустой модели для создания
+                Input = new UserDTO();
             }
             else if (Mode == "edit")
             {
-                Input = new UserDTO(await _userService.GetByIdAsync(Id));// Загрузка данных пользователя по Id
+                Input = new UserDTO(await _userService.GetByIdAsync(Id));
             }
             return Page();
         }
@@ -48,7 +50,10 @@ namespace EduVault.Pages.Users
         public async Task<IActionResult> OnPostSaveAsync()
         {
             if (!ModelState.IsValid)
+            {
+                Roles = await _roleService.GetAllAsync();
                 return Page();
+            }
             if (Mode == "create")
             {
                 await _userService.CreateAsync(Input);
@@ -57,7 +62,6 @@ namespace EduVault.Pages.Users
             {
                 await _userService.UpdateAsync(Input);
             }
-            
             return RedirectToPage("/Users/Index");
         }
     }

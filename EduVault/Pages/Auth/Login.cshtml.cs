@@ -40,7 +40,7 @@ namespace EduVault.Pages.Auth
 
             // Проверка логина и пароля
             var role = await _authService.ValidateUserAsync(Input);
-            if (await _authService.ValidateUserAsync(Input)==null)
+            if (role == null)
             {
                 ModelState.AddModelError(string.Empty, "Неверные данные");
                 return RedirectToPage("/Auth/AccessDenied");

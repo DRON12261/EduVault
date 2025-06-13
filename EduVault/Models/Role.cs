@@ -4,10 +4,10 @@ namespace EduVault.Models
 {
     public class Role
     {
-        private long _id;
+        private int _id;
         private string _name;
 
-        public long Id { get { return _id; } set { _id = value; } }
+        public int Id { get { return _id; } set { _id = value; } }
         public string Name
         {
             get

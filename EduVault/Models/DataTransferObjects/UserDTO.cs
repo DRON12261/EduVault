@@ -8,16 +8,17 @@ namespace EduVault.Models.DataTransferObjects
         public string Name { get; set; }
         [Required]
         public string Login { get; set; }
-        [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        public long Role { get; set; }
+        [Required]
+        public int Role { get; set; }
         public UserDTO(User user)
         {
             Id = user.Id;
             Name = user.Name;
             Login = user.Login;
-            Role = user.Roleid;
+            Password = user.PasswordHash;
+            Role = user.RoleId;
         }
         public UserDTO() {}
     }

@@ -7,22 +7,22 @@ namespace EduVault.Services
     public interface IRoleService
     {
         Task<List<Role>> GetAllAsync();
-        Task<Role> GetByIdAsync(long id);
+        Task<Role> GetByIdAsync(int id);
     }
     public class RoleService : IRoleService
     {
-        private readonly IRoleRepository _roleRepository;
-        public RoleService(IRoleRepository roleRepository)
+        private readonly IRoleRepository _repository;
+        public RoleService(IRoleRepository repository)
         {
-            _roleRepository = roleRepository;
+            _repository = repository;
         }
         public async Task<List<Role>> GetAllAsync()
         {
-            return await _roleRepository.GetAllAsync();
+            return await _repository.GetAllAsync();
         }
-        public async Task<Role> GetByIdAsync(long id)
+        public async Task<Role> GetByIdAsync(int id)
         {
-            return await _roleRepository.GetByIdAsync(id);
+            return await _repository.GetByIdAsync(id);
         }
         
     }

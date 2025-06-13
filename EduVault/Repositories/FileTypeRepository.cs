@@ -10,7 +10,7 @@ namespace EduVault.Repositories
     {
         Task<FileType> GetByIdAsync(long id);
         Task<FileType> GetByNameAsync(string name);
-        Task AddAsync(FileType fileType);
+        Task CreateAsync(FileType fileType);
         Task UpdateAsync(FileType fileType);
         Task DeleteAsync(long id);
         Task<List<FileType>> GetAllAsync();
@@ -32,7 +32,7 @@ namespace EduVault.Repositories
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
             return await _context.FileTypes.FirstOrDefaultAsync(fileType => fileType.Name == name);
         }
-        public async Task AddAsync(FileType filetype)
+        public async Task CreateAsync(FileType filetype)
         {
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
             await _context.FileTypes.AddAsync(filetype);

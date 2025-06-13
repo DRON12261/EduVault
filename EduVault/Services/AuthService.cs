@@ -31,7 +31,7 @@ namespace EduVault.Services
             if (user == null || !bCrypt.Verify(authDTO.Password, user.PasswordHash))
                 return null;
 
-            return await _roleRepository.GetByIdAsync(user.Roleid);
+            return await _roleRepository.GetByIdAsync(user.RoleId);
         }
     }
 }
