@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using EduVault.Data;
 using EduVault.Repositories;
 using EduVault.Services;
+using MongoDB.Driver;
 
 namespace EduVault 
 {
@@ -31,6 +32,20 @@ namespace EduVault
             builder.Services.AddScoped<IRecordService, RecordService>();
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IGroupService, GroupService>();
+            builder.Services.AddScoped<MongoFileService>();
+            builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
+            {
+                var config = serviceProvider.GetRequiredService<IConfiguration>();
+                var connectionString = config.GetConnectionString("MongoDocker");
+                return new MongoClient(connectionString);
+            });
+
+            builder.Services.AddScoped(serviceProvider =>
+            {
+                var client = serviceProvider.GetRequiredService<IMongoClient>();
+                var config = serviceProvider.GetRequiredService<IConfiguration>();
+                return client.GetDatabase(config["MongoDB:EduVault"]);
+            });
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {

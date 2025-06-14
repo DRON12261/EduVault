@@ -488,3 +488,9 @@ S:\Projects\Visual Studio\EduVault\EduVault\bin\Debug\net8.0\runtimes\win\lib\ne
 S:\Projects\Visual Studio\EduVault\EduVault\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 S:\Projects\Visual Studio\EduVault\EduVault\obj\Debug\net8.0\EduVault.csproj.AssemblyReference.cache
 S:\Projects\Visual Studio\EduVault\EduVault\obj\Debug\net8.0\EduVault.csproj.Up2Date
+C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\DnsClient.dll
+C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\MongoDB.Bson.dll
+C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\MongoDB.Driver.dll
+C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\SharpCompress.dll
+C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\Snappier.dll
+C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\ZstdSharp.dll

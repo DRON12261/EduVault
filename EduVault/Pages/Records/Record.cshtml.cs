@@ -1,22 +1,26 @@
 using EduVault.Models;
 using EduVault.Models.DataTransferObjects;
 using EduVault.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data;
 
 namespace EduVault.Pages.Records
 {
+    [Authorize]
     public class RecordModel : PageModel
     {
         private IRecordService _recordService;
         private IFileTypeService _fileTypeService;
         private IUserService _userService;
-        public RecordModel(IRecordService recordService, IFileTypeService fileTypeService, IUserService userService)
+        private IAccessRightsService _accessRightsService;
+        public RecordModel(IRecordService recordService, IFileTypeService fileTypeService, IUserService userService, IAccessRightsService accessRightsService)
         {
             _recordService = recordService;
             _fileTypeService = fileTypeService;
             _userService = userService;
+            _accessRightsService = accessRightsService;
         }
         [BindProperty(SupportsGet = true)]
         public string Mode { get; set; } // "create", "edit"
@@ -25,6 +29,7 @@ namespace EduVault.Pages.Records
         public long Id { get; set; } // Для редактирования
         public List<FileType> FileTypes { get; set; } = new();
         public List<Field> Fields { get; set; } = new();
+        public List<AccessRightsDTO> AccessRights { get; set; } = new();
         public User Author { get; set; }
         [BindProperty]
         public RecordDTO Input { get; set; }
@@ -42,6 +47,7 @@ namespace EduVault.Pages.Records
             }
             else if (Mode == "edit")
             {
+                AccessRights = await _accessRightsService.GetAccessRightsForRecordAsync(Id);
                 Input = new RecordDTO(await _recordService.GetByIdAsync(Id));// Загрузка данных пользователя по Id
             }
             return Page();
