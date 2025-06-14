@@ -3,6 +3,7 @@ using EduVault.Models;
 using EduVault.Models.DataTransferObjects;
 using EduVault.Repositories;
 using Microsoft.CodeAnalysis.Scripting;
+using Microsoft.EntityFrameworkCore;
 
 namespace EduVault.Services
 {
