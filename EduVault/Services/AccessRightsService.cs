@@ -7,7 +7,7 @@ namespace EduVault.Services
 {
     public interface IAccessRightsService
     {
-        Task<List<AccessRightsDTO>> GetAccessRightsForRecordAsync(long recordId);
+        //Task<List<AccessRightsDTO>> GetAccessRightsForRecordAsync(long recordId);
     }
     public class AccessRightsService: IAccessRightsService
     {
@@ -16,7 +16,7 @@ namespace EduVault.Services
         {
             _repository = repository;
         }
-        public async Task<List<AccessRightsDTO>> GetAccessRightsForRecordAsync(long recordId)
+        /*public async Task<List<AccessRightsDTO>> GetAccessRightsForRecordAsync(long recordId)
         {
             return await _dbContext.AccessRights
                 .Where(ar => ar.RecordId == recordId)
@@ -35,6 +35,6 @@ namespace EduVault.Services
                         RightTypeName = art.Name
                     })
                 .ToListAsync();
-        }
+        }*/
     }
 }

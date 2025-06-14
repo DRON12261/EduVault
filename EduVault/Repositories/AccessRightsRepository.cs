@@ -6,7 +6,7 @@ namespace EduVault.Repositories
 {
     public interface IAccessRightsRepository
     {
-        Task<List<AccessRightsDTO>> GetAccessRightsForRecordAsync(long recordId);
+       // Task<List<AccessRightsDTO>> GetAccessRightsForRecordAsync(long recordId);
     }
     public class AccessRightsRepository: IAccessRightsRepository
     {
@@ -15,9 +15,9 @@ namespace EduVault.Repositories
         {
             _contextFactory = contextFactory;
         }
-        public Task<List<AccessRightsDTO>> GetAccessRightsForRecordAsync(long recordId)
+        /*public Task<List<AccessRightsDTO>> GetAccessRightsForRecordAsync(long recordId)
         {
 
-        }
+        }*/
     }
 }

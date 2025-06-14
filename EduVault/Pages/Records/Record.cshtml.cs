@@ -47,7 +47,7 @@ namespace EduVault.Pages.Records
             }
             else if (Mode == "edit")
             {
-                AccessRights = await _accessRightsService.GetAccessRightsForRecordAsync(Id);
+                //AccessRights = await _accessRightsService.GetAccessRightsForRecordAsync(Id);
                 Input = new RecordDTO(await _recordService.GetByIdAsync(Id));// Загрузка данных пользователя по Id
             }
             return Page();
