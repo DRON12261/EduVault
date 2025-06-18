@@ -19,6 +19,7 @@
         <div class="user-info">
             @if (User.Identity?.IsAuthenticated == true)
             {
+                <span id="userLogin" style="margin: 0 10px;">@User.Identity.Name</span>
                 @if (User.IsInRole("Администратор"))
                 {
                     <div class="admin-dropdown">
@@ -32,7 +33,6 @@
                         </div>
                     </div>
                 }
-                <span id="userLogin" style="margin: 0 10px;">@User.Identity.Name</span>
                 <form method="post" asp-page="/Index" class="d-inline">
                     @Html.AntiForgeryToken()
                     <button type="submit" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите выйти из системы?')">

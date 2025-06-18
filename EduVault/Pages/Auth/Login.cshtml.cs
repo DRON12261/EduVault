@@ -31,7 +31,8 @@ namespace EduVault.Pages.Auth
             Input = new AuthDTO();
             await _userService.CheckSystemUser();
             // Проверяем авторизацию через наличие кастомных кук
-            return HttpContext.Request.Cookies.ContainsKey("EduVault.AuthCookie")? RedirectToPage("/Records/Index") : Page();
+            //return HttpContext.Request.Cookies.ContainsKey("EduVault.AuthCookie")? RedirectToPage("/Records/Index") : Page();
+            return Page();
         }
         public async Task<IActionResult> OnPostAsync()
         {

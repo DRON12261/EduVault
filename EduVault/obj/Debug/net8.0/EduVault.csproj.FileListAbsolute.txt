@@ -494,3 +494,9 @@ C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\MongoDB.Driver
 C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\SharpCompress.dll
 C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\Snappier.dll
 C:\Users\User\Desktop\EduVault\EduVault\EduVault\bin\Debug\net8.0\ZstdSharp.dll
+S:\Projects\Visual Studio\EduVault\EduVault\bin\Debug\net8.0\DnsClient.dll
+S:\Projects\Visual Studio\EduVault\EduVault\bin\Debug\net8.0\MongoDB.Bson.dll
+S:\Projects\Visual Studio\EduVault\EduVault\bin\Debug\net8.0\MongoDB.Driver.dll
+S:\Projects\Visual Studio\EduVault\EduVault\bin\Debug\net8.0\SharpCompress.dll
+S:\Projects\Visual Studio\EduVault\EduVault\bin\Debug\net8.0\Snappier.dll
+S:\Projects\Visual Studio\EduVault\EduVault\bin\Debug\net8.0\ZstdSharp.dll

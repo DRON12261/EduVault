@@ -14,13 +14,13 @@ namespace EduVault.Pages.Records
         private IRecordService _recordService;
         private IFileTypeService _fileTypeService;
         private IUserService _userService;
-        private IAccessRightsService _accessRightsService;
-        public RecordModel(IRecordService recordService, IFileTypeService fileTypeService, IUserService userService, IAccessRightsService accessRightsService)
+        //private IAccessRightsService _accessRightsService;
+        public RecordModel(IRecordService recordService, IFileTypeService fileTypeService, IUserService userService)//, IAccessRightsService accessRightsService)
         {
             _recordService = recordService;
             _fileTypeService = fileTypeService;
             _userService = userService;
-            _accessRightsService = accessRightsService;
+            //_accessRightsService = accessRightsService;
         }
         [BindProperty(SupportsGet = true)]
         public string Mode { get; set; } // "create", "edit"
@@ -29,7 +29,7 @@ namespace EduVault.Pages.Records
         public long Id { get; set; } // Для редактирования
         public List<FileType> FileTypes { get; set; } = new();
         public List<Field> Fields { get; set; } = new();
-        public List<AccessRightsDTO> AccessRights { get; set; } = new();
+        //public List<AccessRightsDTO> AccessRights { get; set; } = new();
         public User Author { get; set; }
         [BindProperty]
         public RecordDTO Input { get; set; }
