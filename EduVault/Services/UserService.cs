@@ -56,9 +56,10 @@ namespace EduVault.Services
         }
         public async Task<OperationResult> UpdateAsync(UserDTO userDTO)
         {
-            if (await _repository.GetByIdAsync(userDTO.Id) == null)
+            User dbUser = await _repository.GetByIdAsync(userDTO.Id);
+            if (dbUser == null)
                 return OperationResult.Failed("Пользователя с таким Id не существует!", OperationStatusCode.NotFound);
-            if (await _repository.GetByLoginAsync(userDTO.Login) != null)
+            if (userDTO.Login != dbUser.Login && await _repository.GetByLoginAsync(userDTO.Login) != null)
                 return OperationResult.Failed("Логин занят", OperationStatusCode.Conflict);
 
             await _repository.UpdateAsync(new User(userDTO));

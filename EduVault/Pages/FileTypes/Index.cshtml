@@ -34,6 +34,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Тип файла</th>
+                    <th>Шаблон имени</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +43,7 @@
                     <tr class="clickable-row" data-id="@filetype.Id" onclick="selectRow(this, '@filetype.Id')">
                         <td>@filetype.Id</td>
                         <td>@filetype.Name</td>
+                        <td>@filetype.FileNameTemplate</td>
                     </tr>
                 }
             </tbody>

@@ -5,7 +5,8 @@
 }
 
 <div class="record-container">
-    <form method="post" asp-antiforgery="true">
+    <form asp-antiforgery="true" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
         <div>
             <div class="card-actions">
                 <button type="submit" asp-page-handler="Save" class="btn-primary">@(Model.Mode == "create" ? "Создать" : "Сохранить") карточку</button>
@@ -35,9 +36,36 @@
                             <option value="">-- Выберите тип файла --</option>
                         </select>
                     </div>
-                    <div>
+                    <!--<div>
+                    <label>Файл:</label>
+                    <input asp-for="Input.FilePath" type="text" placeholder="Файл" required>
+                    <input type="file" id="file" name="file">
+                    </div>-->
+                    <div class="card-form-group">
                         <label>Файл:</label>
-                        <input asp-for="Input.FilePath" type="text" placeholder="Файл" required>
+                        <!-- Блок с текущим файлом -->
+                        @if (!string.IsNullOrEmpty(Model.Input.FilePath))
+                        {
+                            <div class="file-info mb-2 p-2 bg-light rounded">
+                                <span class="me-2">
+                                    Текущий файл: @System.IO.Path.GetFileName(Model.Input.FileName)
+                                </span>
+                            </div>
+                        }
+                        <!-- Поле загрузки нового файла -->
+                        <div class="file-upload-wrapper">
+                            <input type="file" asp-for="UploadedFile" class="form-control">
+                            <small class="form-text text-muted">
+                                @if (!string.IsNullOrEmpty(Model.Input.FilePath))
+                                {
+                                    <text>Выберите новый файл для замены</text>
+                                }
+                                else
+                                {
+                                    <text>Загрузите файл</text>
+                                }
+                            </small>
+                        </div>
                     </div>
                     @if (Model.Mode == "edit")
                     {
@@ -51,6 +79,44 @@
                         </div>
                     }
                 </fieldset>
+                <fieldset class="form-group">
+                    <legend>Поля типа @(Model.Input.FileType)</legend>
+                    @foreach (var field in Model.Fields)
+                    {
+                        <div class="card-form-group">
+                            <label>field.Name:</label>
+                            <input type="text">
+                        </div>
+                    }
+                </fieldset>
+                <!--<div class="relationships-panel">
+                    <h3>Связанные карточки</h3>
+
+                    
+                    <div class="current-relationships">
+                        @foreach (var rel in Model.CurrentRelations)
+                        {
+                            <div class="relationship-item">
+                                <span>@rel.TargetRecord</span>
+                                <button type="button" class="btn-remove-relationship"
+                                        data-relationship-id="@rel.Id">
+                                    ×
+                                </button>
+                            </div>
+                        }
+                    </div>
+
+                    
+                    <select multiple asp-for="SelectedRelationships"
+                            asp-items="@(new SelectList(Model.AvailableRecords, "Id", "Name"))"
+                            class="form-control relationships-select">
+                    </select>
+
+                    <button type="submit" asp-page-handler="SaveRelationships"
+                            class="btn-primary">
+                        Сохранить связи
+                    </button>
+            </div>-->
             </div>
         </div>
     </form>

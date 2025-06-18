@@ -17,7 +17,14 @@
             <input asp-for="Input.Name" type="text" placeholder="Имя" required>
             <input asp-for="Input.Login" type="text" placeholder="Логин" required>
             <div class="password-container">
-                <input asp-for="Input.Password" id="password" type="password" placeholder="Пароль" style="padding: 1rem;" required>
+                @if (Model.Mode == "edit")
+                {
+                    <input asp-for="Input.Password" id="password" type="password" placeholder="Пароль" style="padding: 1rem;">
+                }
+                else
+                {
+                    <input asp-for="Input.Password" id="password" type="password" placeholder="Пароль" style="padding: 1rem;" required>
+                }
                 <button type="button" id="togglePassword" class="btn btn-outline-secondary">
                     <i class="bi bi-eye"></i>
                 </button>

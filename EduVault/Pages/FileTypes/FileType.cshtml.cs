@@ -1,60 +1,255 @@
-using EduVault.Models;
 using EduVault.Models.DataTransferObjects;
 using EduVault.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace EduVault.Pages.FileTypes
 {
     [Authorize(Roles = "Администратор")]
     public class FileTypeModel : PageModel
     {
-        private IFileTypeService _service;
-        public FileTypeModel(IFileTypeService service)
+        private readonly IFileTypeService _fileTypeService;
+        private readonly IFileTypeFieldService _fileTypeFieldService;
+
+        public FileTypeModel(
+            IFileTypeService fileTypeService,
+            IFileTypeFieldService fileTypeFieldService)
         {
-            _service = service;
+            _fileTypeService = fileTypeService;
+            _fileTypeFieldService = fileTypeFieldService;
         }
 
         [BindProperty(SupportsGet = true)]
         public string Mode { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        public long Id { get; set; }
         [BindProperty]
-        public FileTypeDTO Input { get; set; }
+        public long Id { get; set; }
 
-        public IActionResult OnGet()
+        [BindProperty]
+        public FileTypeDTO Input { get; set; } = new();
+
+        [BindProperty]
+        public List<FileTypeFieldDTO> Fields { get; set; } = new();
+
+        [BindProperty]
+        public FileTypeFieldDTO NewField { get; set; } = new();
+
+        public async Task<IActionResult> OnGetAsync()
         {
             return RedirectToPage("./Index");
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
+            ModelState.Remove("Name");
+            ModelState.Remove("FileNameTemplate");
             if (Mode == "create")
             {
                 Input = new FileTypeDTO();
+                return Page();
             }
             else if (Mode == "edit")
             {
-                Input = new FileTypeDTO(await _service.GetByIdAsync(Id));
+                TempData["SavedId"] = Id.ToString();
+                Input = new FileTypeDTO(await _fileTypeService.GetByIdAsync(Id));
+                if (Input == null)
+                    return NotFound();
+                TempData["InputData"] = JsonSerializer.Serialize(Input);
+                Fields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(Id);
+                TempData["TempFields"] = JsonSerializer.Serialize(Fields);
+                return Page();
             }
             return Page();
         }
-        public async Task<IActionResult> OnPostSaveAsync()
+
+        public async Task<IActionResult> OnPostAddFieldAsync()
         {
-            if (!ModelState.IsValid)
+            await LoadDataAsync();
+
+            // Очищаем все ошибки валидации
+            ModelState.Clear();
+
+            // Валидируем только NewField
+            var validationContext = new ValidationContext(NewField, null, null);
+            var validationResults = new List<ValidationResult>();
+
+            bool isValid = Validator.TryValidateObject(NewField, validationContext, validationResults, true);
+
+            if (!isValid)
+            {
+                foreach (var result in validationResults)
+                {
+                    foreach (var memberName in result.MemberNames)
+                    {
+                        ModelState.AddModelError($"{nameof(NewField)}.{memberName}", result.ErrorMessage);
+                    }
+                }
                 return Page();
-            if (Mode == "create")
-            {
-                await _service.CreateAsync(Input);
             }
-            else if (Mode == "edit")
+
+            // Устанавливаем FileTypeId (для edit - текущий ID, для create - временный -1)
+            NewField.FileTypeId = Mode == "edit" ? Id : -1;
+            Fields.Add(NewField);
+            TempData["TempFields"] = JsonSerializer.Serialize(Fields);
+            NewField = new FileTypeFieldDTO();
+
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
-                await _service.UpdateAsync(Input);
+                return Partial("_FieldsTablePartial", this);
             }
-            return RedirectToPage("./Index");
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostRemoveFieldAsync(int index)
+        {
+            await LoadDataAsync(); // Загружаем актуальные данные
+
+            if (index >= 0 && index < Fields.Count)
+            {
+                Fields.RemoveAt(index);
+                TempData["TempFields"] = JsonSerializer.Serialize(Fields);
+                TempData.Keep("TempFields"); // Явно сохраняем TempData
+            }
+
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                // Возвращаем обновлённый Partial с текущим состоянием модели
+                return Partial("_FieldsTablePartial", new FileTypeModel(_fileTypeService, _fileTypeFieldService)
+                {
+                    Fields = this.Fields,
+                    Mode = this.Mode,
+                    Id = this.Id,
+                    Input = this.Input
+                });
+            }
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostSaveAsync() // ОСТАНОВИЛСЯ НА КАСТОМНЫХ ПОЛЯХ ДЛЯ ТИПА ФАЙЛА, УДАЛЕНИЕ КРИВОЕ И СОЗДАНИЕ НОВОГО ТИПА ФАЙЛА ТОЖЕ (см. Дипсик)
+        {
+            ModelState.Remove("Name");
+            ModelState.Remove("FileNameTemplate");
+            if (TempData["SavedId"] is string savedIdStr && long.TryParse(savedIdStr, out var savedId))
+            {
+                // Используем savedId (тип long)
+                Id = savedId;
+            }
+            await LoadDataAsync();
+
+            if (string.IsNullOrWhiteSpace(Input.Name))
+            {
+                ModelState.AddModelError($"{nameof(Input)}.{nameof(Input.Name)}", "Название типа файла обязательно");
+            }
+
+            foreach (var field in Fields)
+            {
+                if (string.IsNullOrWhiteSpace(field.Name))
+                {
+                    ModelState.AddModelError("", "Все добавленные поля должны иметь название");
+                    break;
+                }
+            }
+
+            if (!ModelState.IsValid)
+            {
+                // Логируем все ошибки валидации
+                var errors = ModelState
+                    .Where(x => x.Value.Errors.Count > 0)
+                    .SelectMany(x => x.Value.Errors.Select(e => new
+                    {
+                        Field = x.Key,
+                        Error = e.ErrorMessage
+                    }))
+                    .ToList();
+
+                return Page();
+            }
+
+            Input.FileTypeFields = Fields.Where(f => !string.IsNullOrWhiteSpace(f.Name)).ToList();
+
+            try
+            {
+                if (Mode == "create")
+                {
+                    var createdId = await _fileTypeService.CreateAsync(Input);
+                    return RedirectToPage("./FileType", new { mode = "edit", id = createdId });
+                }
+
+                if (Mode == "edit")
+                {
+                    await _fileTypeService.UpdateAsync(Input);
+                }
+
+                return RedirectToPage("./Index");
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return Page();
+            }
+        }
+
+        private async Task LoadDataAsync()
+        {
+            // Всегда восстанавливаем Id из TempData если есть
+            if (TempData["SavedId"] is string savedIdStr && long.TryParse(savedIdStr, out var savedId))
+            {
+                Id = savedId;
+                TempData.Keep("SavedId");
+            }
+
+            if (Mode == "edit" && Id > 0)
+            {
+                Input ??= new FileTypeDTO(await _fileTypeService.GetByIdAsync(Id));
+
+                // Восстанавливаем Fields из TempData или из БД
+                if (TempData["TempFields"] is string serializedFields)
+                {
+                    try
+                    {
+                        Fields = JsonSerializer.Deserialize<List<FileTypeFieldDTO>>(serializedFields)
+                            ?? await _fileTypeFieldService.GetFieldsForFileTypeAsync(Id);
+                    }
+                    catch
+                    {
+                        Fields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(Id);
+                    }
+                    TempData.Keep("TempFields");
+                }
+                else
+                {
+                    Fields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(Id);
+                }
+            }
+            else if (Mode == "create")
+            {
+                Input ??= new FileTypeDTO();
+
+                if (TempData["TempFields"] is string serializedFields)
+                {
+                    try
+                    {
+                        Fields = JsonSerializer.Deserialize<List<FileTypeFieldDTO>>(serializedFields)
+                            ?? new List<FileTypeFieldDTO>();
+                        TempData.Keep("TempFields");
+                    }
+                    catch
+                    {
+                        Fields = new List<FileTypeFieldDTO>();
+                    }
+                }
+                else
+                {
+                    Fields = new List<FileTypeFieldDTO>();
+                }
+            }
         }
     }
 }

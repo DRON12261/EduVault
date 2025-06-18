@@ -1,7 +1,10 @@
 using EduVault.Data;
 using EduVault.Models;
+using EduVault.Models.DataTransferObjects;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using System;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace EduVault.Repositories
 {
@@ -12,6 +15,9 @@ namespace EduVault.Repositories
         Task UpdateAsync(Record record);
         Task DeleteAsync(long id);
         Task<List<Record>> GetAllAsync();
+        Task<List<Record>> GetFilteredRecordsAsync(FilterModel filters);
+
+
     }
     public class RecordRepository: IRecordRepository
     {
@@ -44,6 +50,7 @@ namespace EduVault.Repositories
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
             return await _context.Records
                 .AsNoTracking()
+                .OrderBy(r=>r.Id)
                 .ToListAsync();
         }
         public async Task DeleteAsync(long id)
@@ -55,6 +62,31 @@ namespace EduVault.Repositories
                 _context.Records.Remove(record);
                 await _context.SaveChangesAsync();
             }
+        }
+        public async Task<List<Record>> GetFilteredRecordsAsync(FilterModel filters)
+        {
+            await using PostgresDBContext _context = _contextFactory.CreateDbContext();
+            var query = _context.Records.AsQueryable();
+
+            if (filters.Id.HasValue)
+            {
+                query = query.Where(r => r.Id == filters.Id.Value);
+            }
+
+            if (!string.IsNullOrEmpty(filters.Name))
+            {
+                query = query.Where(r => r.Name.Contains(filters.Name));
+            }
+
+            if (filters.FileTypeId.HasValue)
+            {
+                query = query.Where(r => r.FileTypeId == filters.FileTypeId.Value);
+            }
+
+            return await query
+                .OrderBy(r => r.Id)
+                .Select(r => r)
+                .ToListAsync();
         }
     }
 }

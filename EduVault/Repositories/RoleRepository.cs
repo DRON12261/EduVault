@@ -26,6 +26,7 @@ namespace EduVault.Repositories
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
             return await _context.Roles
                 .AsNoTracking()
+                .OrderBy(r => r.Id)
                 .ToListAsync();
         }
     }
