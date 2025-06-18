@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EduVault.Models.DataTransferObjects
 {
@@ -11,7 +13,8 @@ namespace EduVault.Models.DataTransferObjects
         public long RecordAuthor { get; set; }
         public long FileType { get; set; }
         public DateTime RecordCreationDate { get; set; }
-        public Field[] Fields;
+        public string FileName { get; set; } // Дополнительное поле для отображения
+        //public Field[] Fields;
         public RecordDTO(Record record)
         {
             Id = record.Id;
@@ -19,7 +22,8 @@ namespace EduVault.Models.DataTransferObjects
             FilePath = record.FilePath;
             RecordAuthor = record.RecordAuthorId;
             FileType = record.FileTypeId;
-            RecordCreationDate = record.RecordCreationDate;
+            //RecordCreationDate = DateTime.SpecifyKind(record.RecordCreationDate.ToLocalTime(), DateTimeKind.Utc);
+            RecordCreationDate = record.RecordCreationDate.ToLocalTime();
         }
         public RecordDTO() { }
     }

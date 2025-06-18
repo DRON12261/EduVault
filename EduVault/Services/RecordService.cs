@@ -2,6 +2,7 @@ using BCrypt.Net;
 using EduVault.Models;
 using EduVault.Models.DataTransferObjects;
 using EduVault.Repositories;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ namespace EduVault.Services
         Task<OperationResult> CreateAsync(RecordDTO dto);
         Task<OperationResult> UpdateAsync(RecordDTO dto);
         Task<OperationResult> DeleteById(long id);
+        Task<List<Record>> GetFilteredRecordsAsync(FilterModel filters);
     }
     public class RecordService: IRecordService
     {
@@ -52,6 +54,10 @@ namespace EduVault.Services
             }
             await _repository.DeleteAsync(id);
             return OperationResult.Success();
+        }
+        public async Task<List<Record>> GetFilteredRecordsAsync(FilterModel filters)
+        {
+            return await _repository.GetFilteredRecordsAsync(filters);
         }
     }
 }

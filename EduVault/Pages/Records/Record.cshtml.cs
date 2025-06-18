@@ -14,12 +14,25 @@ namespace EduVault.Pages.Records
         private IRecordService _recordService;
         private IFileTypeService _fileTypeService;
         private IUserService _userService;
+        private IMongoFileService _mongoFileService;
+        private IRelationService _relationService;
+        private IFileNameTemplateService _fileNameTemplateService;
         //private IAccessRightsService _accessRightsService;
-        public RecordModel(IRecordService recordService, IFileTypeService fileTypeService, IUserService userService)//, IAccessRightsService accessRightsService)
+        public RecordModel(
+            IRecordService recordService,
+            IFileTypeService fileTypeService,
+            IUserService userService,
+            IMongoFileService mongoFileService,
+            IRelationService relationService,
+            IFileNameTemplateService fileNameTemplateService
+            /*, IAccessRightsService accessRightsService*/)
         {
             _recordService = recordService;
             _fileTypeService = fileTypeService;
             _userService = userService;
+            _mongoFileService = mongoFileService;
+            _relationService = relationService;
+            _fileNameTemplateService = fileNameTemplateService;
             //_accessRightsService = accessRightsService;
         }
         [BindProperty(SupportsGet = true)]
@@ -33,6 +46,13 @@ namespace EduVault.Pages.Records
         public User Author { get; set; }
         [BindProperty]
         public RecordDTO Input { get; set; }
+        [BindProperty]
+        public IFormFile UploadedFile { get; set; }
+        [BindProperty]
+        public List<long> SelectedRelationships { get; set; } = new(); // Выбранные связи
+
+        public List<Record> AvailableRecords { get; set; } = new();
+        public List<Relation> CurrentRelations { get; set; } = new();
         public IActionResult OnGet()
         {
             return RedirectToPage("./Index");
@@ -41,6 +61,13 @@ namespace EduVault.Pages.Records
         {
             FileTypes = await _fileTypeService.GetAllAsync();
             Author = await _userService.GetByLoginAsync(User.Identity.Name);
+            if (Mode == "edit")
+            {
+                //CurrentRelations = await _relationService.GetRelationshipsForRecordAsync(Id);
+            }
+            AvailableRecords = (await _recordService.GetAllAsync())
+                              .Where(r => r.Id != Id) // Исключаем текущую запись
+                              .ToList();
             if (Mode == "create")
             {
                 Input = new RecordDTO(); // Инициализация пустой модели для создания
@@ -49,11 +76,32 @@ namespace EduVault.Pages.Records
             {
                 //AccessRights = await _accessRightsService.GetAccessRightsForRecordAsync(Id);
                 Input = new RecordDTO(await _recordService.GetByIdAsync(Id));// Загрузка данных пользователя по Id
+                Input.FileName = await _mongoFileService.GetFileNameAsync(Input.FilePath);
             }
             return Page();
         }
+        public async Task<IActionResult> OnPostSaveRelationshipsAsync()
+        {
+            // Удаляем старые связи
+            var existing = await _relationService.GetRelationshipsForRecordAsync(Id);
+            foreach (var rel in existing)
+            {
+                await _relationService.DeleteRelationshipAsync(rel.Id);
+            }
+
+            // Добавляем новые
+            foreach (var targetId in SelectedRelationships)
+            {
+                await _relationService.CreateRelationshipAsync(new Relation(Id, targetId));
+            }
+
+            return RedirectToPage();
+        }
         public async Task<IActionResult> OnPostSaveAsync()
         {
+            string old_filepath = "";
+            ModelState.Remove("Input.FilePath");
+            ModelState.Remove("Input.FileName");
             if (!ModelState.IsValid)
             {
                 var errors = ModelState
@@ -70,16 +118,88 @@ namespace EduVault.Pages.Records
                 FileTypes = await _fileTypeService.GetAllAsync();
                 return Page();
             }
-            if (Mode == "create")
+            string uploadedFilePath = null;
+
+            if (UploadedFile != null && UploadedFile.Length > 0)
             {
-                Input.RecordAuthor = (await _userService.GetByLoginAsync(User.Identity.Name)).Id;
-                Input.RecordCreationDate = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
-                await _recordService.CreateAsync(Input);
+                // Получаем шаблон для типа файла
+                var template = (await _fileTypeService.GetByIdAsync(Input.FileType)).FileNameTemplate;
+
+                // Проверяем имя файла
+                if (!string.IsNullOrEmpty(template) &&
+                    !_fileNameTemplateService.ValidateFileName(UploadedFile.FileName, template))
+                {
+                    ModelState.AddModelError("", $"Имя файла не соответствует шаблону: {template}");
+                    return Page();
+                }
+
+                // Если имя файла соответствует шаблону, извлекаем данные
+                if (!string.IsNullOrEmpty(template))
+                {
+                    var extractedData = _fileNameTemplateService.ExtractValuesFromFileName(
+                        UploadedFile.FileName,
+                        template);
+
+                    // Заполняем поля карточки на основе извлеченных данных
+                    if (extractedData != null)
+                    {
+                        /*if (extractedData.TryGetValue("author", out var author))
+                            Input.Author = author;*/
+
+                        // ... заполнение других полей ...
+                        try
+                        {
+                            using var stream = UploadedFile.OpenReadStream();
+                            uploadedFilePath = await _mongoFileService.UploadFileAsync(
+                                stream,
+                                UploadedFile.FileName,
+                                UploadedFile.ContentType);
+                        }
+                        catch (Exception ex)
+                        {
+                            ModelState.AddModelError("", $"Ошибка загрузки файла: {ex.Message}");
+                            FileTypes = await _fileTypeService.GetAllAsync();
+                            return Page();
+                        }
+                    }
+                }
+                
             }
-            else if (Mode == "edit")
+            if (!string.IsNullOrEmpty(uploadedFilePath))
             {
-                Input.RecordCreationDate = DateTime.SpecifyKind(Input.RecordCreationDate, DateTimeKind.Utc);
-                await _recordService.UpdateAsync(Input);
+                if (Mode == "edit")
+                {
+                    old_filepath = (await _recordService.GetByIdAsync(Input.Id)).FilePath;
+                }
+                Input.FilePath = uploadedFilePath;
+            }
+            try
+            {
+                if (Mode == "create")
+                {
+                    Input.RecordAuthor = (await _userService.GetByLoginAsync(User.Identity.Name)).Id;
+                    Input.RecordCreationDate = DateTime.UtcNow;
+                    await _recordService.CreateAsync(Input);
+                }
+                else if (Mode == "edit")
+                {
+                    Input.RecordCreationDate = (await _recordService.GetByIdAsync(Input.Id)).RecordCreationDate;
+                    await _recordService.UpdateAsync(Input);
+                    await _mongoFileService.DeleteFileAsync(old_filepath);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Если сохранение не удалось - удаляем загруженный файл
+                if (!string.IsNullOrEmpty(uploadedFilePath))
+                {
+                    try { await _mongoFileService.DeleteFileAsync(uploadedFilePath); }
+                    catch { /* Игнорируем ошибки удаления */ }
+                }
+
+                ModelState.AddModelError("", $"Ошибка сохранения: {ex.Message}");
+                FileTypes = await _fileTypeService.GetAllAsync();
+                return Page();
             }
             return RedirectToPage("/Records/Index");
         }

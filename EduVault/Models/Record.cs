@@ -14,8 +14,9 @@ namespace EduVault.Models
 		private long _fileTypeId;
         private DateTime _recordCreationDate;
 		private Field[] _fields;
+        public List<Relation> Relationships { get; set; } = new();
 
-		public long Id { get { return _id; } set { _id = value; } }
+        public long Id { get { return _id; } set { _id = value; } }
 		public string Name
 		{
 			get
@@ -47,7 +48,8 @@ namespace EduVault.Models
             FilePath = dto.FilePath;
             RecordAuthorId = dto.RecordAuthor;
             FileTypeId = dto.FileType;
-            RecordCreationDate = dto.RecordCreationDate;
+            //RecordCreationDate = DateTime.SpecifyKind(dto.RecordCreationDate.ToUniversalTime(), DateTimeKind.Utc);
+            RecordCreationDate = dto.RecordCreationDate.ToUniversalTime();
         }
         Record(){}
 		~Record(){}

@@ -31,6 +31,12 @@ document.addEventListener('click', function (e) {
     }
 });
 
+/*document.querySelector('.btn-reset').addEventListener('click', function () {
+    document.querySelectorAll('.filter-panel input, .filter-panel select').forEach(el => {
+        el.value = '';
+    });
+});*/
+
 function clearSelection() {
     if (selectedRow) {
         selectedRow.classList.remove('table-active');
@@ -42,3 +48,4 @@ function clearSelection() {
         document.getElementById('deleteBtn').disabled = true;
     }
 }
+

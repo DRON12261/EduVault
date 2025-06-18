@@ -1,6 +1,7 @@
 using EduVault.Models;
 using EduVault.Models.DataTransferObjects;
 using EduVault.Repositories;
+using NuGet.Protocol.Core.Types;
 
 namespace EduVault.Services
 {
@@ -15,9 +16,11 @@ namespace EduVault.Services
     public class FileTypeService: IFileTypeService
     {
         private readonly IFileTypeRepository _fileTypeRepository;
-        public FileTypeService(IFileTypeRepository fileTypeRepository)
+        private readonly IFileTypeFieldService _fileTypeFieldService;
+        public FileTypeService(IFileTypeRepository fileTypeRepository, IFileTypeFieldService fileTypeFieldService)
         {
             _fileTypeRepository = fileTypeRepository;
+            _fileTypeFieldService = fileTypeFieldService;
         }
         public async Task<List<FileType>> GetAllAsync()
         {
@@ -25,7 +28,9 @@ namespace EduVault.Services
         }
         public async Task<FileType> GetByIdAsync(long id)
         {
-            return await _fileTypeRepository.GetByIdAsync(id);
+            FileType ft = await _fileTypeRepository.GetByIdAsync(id);
+            if (ft!=null) ft.FileTypeFields = (await _fileTypeFieldService.GetFieldsForFileTypeAsync(id)).Select(f=>new FileTypeField(f)).ToList();
+            return ft;
         }
         public async Task<OperationResult> CreateAsync(FileTypeDTO fileTypeDTO)
         {
@@ -41,6 +46,11 @@ namespace EduVault.Services
                 return OperationResult.Failed("Типа файлов с таким Id не существует!", OperationStatusCode.NotFound);
 
             await _fileTypeRepository.UpdateAsync(new FileType(fileTypeDTO));
+
+            // Полностью заменяем коллекцию полей
+            await _fileTypeFieldService.UpdateFieldsForFileTypeAsync(
+                fileTypeDTO.Id,
+                fileTypeDTO.FileTypeFields);
             return OperationResult.Success();
         }
         public async Task<OperationResult> DeleteById(long id)

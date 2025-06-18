@@ -1,8 +1,8 @@
-name: dockercompose8633863755715280692
+name: dockercompose6500096148212357217
 services:
   eduvault:
     build:
-      context: S:\Projects\Visual Studio\EduVault
+      context: C:\Users\User\Desktop\EduVault\EduVault
       dockerfile: EduVault/Dockerfile
     container_name: App_EduVault
     depends_on:
@@ -18,6 +18,7 @@ services:
       ASPNETCORE_HTTPS_PORTS: "8081"
       ConnectionStrings__MongoDocker: mongodb://mongo:1Qwerty@mongodb:27017/EduVault?authSource=admin
       ConnectionStrings__PostgresDocker: Host=postgresql;Port=5432;Database=EduVault;Username=postgres;Password=1Qwerty;
+      MongoDocker__DatabaseName: EduVault
     image: eduvault
     networks:
       app-network: null
@@ -30,13 +31,13 @@ services:
         protocol: tcp
     volumes:
       - type: bind
-        source: C:\Users\andro\AppData\Roaming/Microsoft/UserSecrets
+        source: C:\Users\User\AppData\Roaming/Microsoft/UserSecrets
         target: /home/app/.microsoft/usersecrets
         read_only: true
         bind:
           create_host_path: true
       - type: bind
-        source: C:\Users\andro\AppData\Roaming/ASP.NET/Https
+        source: C:\Users\User\AppData\Roaming/ASP.NET/Https
         target: /home/app/.aspnet/https
         read_only: true
         bind:
@@ -81,15 +82,15 @@ services:
         volume: {}
 networks:
   app-network:
-    name: dockercompose8633863755715280692_app-network
+    name: dockercompose6500096148212357217_app-network
     driver: bridge
 volumes:
   mongodb_data:
-    name: dockercompose8633863755715280692_mongodb_data
+    name: dockercompose6500096148212357217_mongodb_data
   postgres_data:
-    name: dockercompose8633863755715280692_postgres_data
+    name: dockercompose6500096148212357217_postgres_data
     driver: local
     driver_opts:
-      device: S:\Projects\Visual Studio\EduVault\pgdata
+      device: C:\Users\User\Desktop\EduVault\EduVault\pgdata
       o: bind
       type: none
