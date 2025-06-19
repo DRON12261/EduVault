@@ -6,12 +6,15 @@
 }
 
 <div class="records-actions">
+    @if (!User.IsInRole("Рядовой пользователь"))
+    {
     <form asp-page="./@ViewData["Entity"]" asp-route-mode="create" style="display: inline-block; margin: 0;">
         @Html.AntiForgeryToken()
         <button id="createBtn" type="submit" class="btn-alt">
             <i class="bi bi-plus-circle"></i> Добавить
         </button>
     </form>
+    }
     <form id="editForm" asp-page="./@ViewData["Entity"]" asp-route-mode="edit" style="display: inline-block; margin: 0;">
         @Html.AntiForgeryToken()
         <button id="editBtn" type="submit" class="btn-primary" disabled>
@@ -71,6 +74,23 @@
                     <select asp-for="Filters.FileTypeId" asp-items="@(new SelectList(Model.FileTypes, "Id", "Name", Model.Filters.FileTypeId))" class="form-control">
                         <option value="">Все</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Filters.RecordAuthor">Автор карточки:</label>
+                    <input type="text" asp-for="Filters.RecordAuthor" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Дата создания карточки:</label>
+                    <div style="display: flex; gap: 1rem;">
+                        <div style="flex: 1;">
+                            <label asp-for="Filters.StartDate">От</label>
+                            <input type="date" asp-for="Filters.StartDate" class="form-control">
+                        </div>
+                        <div style="flex: 1;">
+                            <label asp-for="Filters.EndDate">До</label>
+                            <input type="date" asp-for="Filters.EndDate" class="form-control">
+                        </div>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary" style="margin-top: auto;">Поиск</button>
                 <a asp-page="./Index" class="btn btn-secondary">Сбросить</a>

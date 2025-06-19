@@ -35,7 +35,6 @@ namespace EduVault.Pages.Records
             Users = await _userService.GetAllAsync() ?? new();
             FileTypes = await _fileTypeService.GetAllAsync() ?? new();
             Records = await _recordService.GetFilteredRecordsAsync(Filters) ?? new();
-            
         }
         public async Task<IActionResult> OnPostDeleteAsync(long id)
         {

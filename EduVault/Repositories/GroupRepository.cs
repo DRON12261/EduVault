@@ -1,5 +1,6 @@
 using EduVault.Data;
 using EduVault.Models;
+using EduVault.Models.DataTransferObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduVault.Repositories
@@ -12,6 +13,7 @@ namespace EduVault.Repositories
         Task UpdateAsync(Group group);
         Task DeleteAsync(long id);
         Task<List<Group>> GetAllAsync();
+        Task<List<Group>> GetFilteredRecordsAsync(FilterModel filters);
     }
     public class GroupRepository: IGroupRepository
     {
@@ -60,6 +62,25 @@ namespace EduVault.Repositories
                 _context.Groups.Remove(group);
                 await _context.SaveChangesAsync();
             }
+        }
+        public async Task<List<Group>> GetFilteredRecordsAsync(FilterModel filters)
+        {
+            await using PostgresDBContext _context = _contextFactory.CreateDbContext();
+            var query = _context.Groups.AsQueryable();
+
+            if (filters.Id.HasValue)
+            {
+                query = query.Where(r => r.Id == filters.Id.Value);
+            }
+            if (!string.IsNullOrEmpty(filters.Name))
+            {
+                query = query.Where(r => r.Name.Contains(filters.Name));
+            }
+
+            return await query
+                .OrderBy(r => r.Id)
+                .Select(r => r)
+                .ToListAsync();
         }
     }
 }

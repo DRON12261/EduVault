@@ -1,12 +1,10 @@
 @page "/Users/User/{mode}/{id?}"
 @model EduVault.Pages.Users.UserModel
 @{
+    ViewData["Title"] = ((Model.Mode == "create") ? "Создание" : "Редактирование") + " пользователя";
 }
 
 <div class="form-container">
-    <h2>
-        @(Model.Mode == "create"?"Создать":"Редактировать") пользователя
-    </h2>
     <form method="post" asp-page-handler="Save" asp-antiforgery="true">
         @Html.AntiForgeryToken()
         <div class="create-user-form-group">

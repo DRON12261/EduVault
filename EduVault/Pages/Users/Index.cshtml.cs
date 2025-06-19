@@ -5,6 +5,7 @@ using EduVault.Models;
 using EduVault.Data;
 using EduVault.Services;
 using Npgsql.TypeMapping;
+using EduVault.Models.DataTransferObjects;
 
 namespace EduVault.Pages.Users
 {
@@ -15,6 +16,8 @@ namespace EduVault.Pages.Users
         private IUserService _userService;
         public List<User> Users { get; set; } = new List<User>();
         public List<Role> Roles { get; set; } = new List<Role>();
+        [BindProperty(SupportsGet = true)]
+        public FilterModel Filters { get; set; } = new FilterModel();
         public IndexModel(IRoleService roleService, IUserService userService)
         {
             _roleService = roleService;
@@ -24,7 +27,7 @@ namespace EduVault.Pages.Users
         public async Task OnGetAsync()
         {
             Roles = await _roleService.GetAllAsync() ?? new List<Role>();
-            Users =  await _userService.GetAllAsync() ?? new List<User>();
+            Users = await _userService.GetFilteredRecordsAsync(Filters) ?? new();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(long id)

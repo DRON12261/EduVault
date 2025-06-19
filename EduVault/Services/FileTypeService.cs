@@ -12,6 +12,7 @@ namespace EduVault.Services
         Task<OperationResult> CreateAsync(FileTypeDTO fileTypeDTO);
         Task<OperationResult> UpdateAsync(FileTypeDTO fileTypeDTO);
         Task<OperationResult> DeleteById(long id);
+        Task<List<FileType>> GetFilteredRecordsAsync(FilterModel filters);
     }
     public class FileTypeService: IFileTypeService
     {
@@ -59,8 +60,16 @@ namespace EduVault.Services
             {
                 return OperationResult.Failed("Типа файлов с таким Id не существует!", OperationStatusCode.NotFound);
             }
+            if (await _fileTypeFieldService.GetFieldsForFileTypeAsync(id) != null)
+            {
+                await _fileTypeFieldService.DeleteByFileTypeIdAsync(id);
+            }
             await _fileTypeRepository.DeleteAsync(id);
             return OperationResult.Success();
+        }
+        public async Task<List<FileType>> GetFilteredRecordsAsync(FilterModel filters)
+        {
+            return await _fileTypeRepository.GetFilteredRecordsAsync(filters);
         }
     }
 }

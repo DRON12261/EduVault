@@ -5,6 +5,7 @@ using EduVault.Models;
 using EduVault.Data;
 using Npgsql.TypeMapping;
 using Microsoft.AspNetCore.Authorization;
+using EduVault.Models.DataTransferObjects;
 
 namespace EduVault.Pages.FileTypes
 {
@@ -13,13 +14,15 @@ namespace EduVault.Pages.FileTypes
     {
         private IFileTypeService _service;
         public List<FileType> FileTypes { get; set; } = new List<FileType>();
+        [BindProperty(SupportsGet = true)]
+        public FilterModel Filters { get; set; } = new FilterModel();
         public IndexModel(IFileTypeService service)
         {
             _service = service;
         }
         public async Task OnGetAsync()
         {
-            FileTypes = await _service.GetAllAsync() ?? new List<FileType>();
+            FileTypes = await _service.GetFilteredRecordsAsync(Filters) ?? new();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(long Id)

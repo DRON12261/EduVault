@@ -8,10 +8,10 @@ namespace EduVault.Services
     public interface IFileTypeFieldService
     {
         Task<FileTypeField> GetByIdAsync(long id);
+        Task<OperationResult> DeleteByFileTypeIdAsync(long fileTypeId);
         Task<List<FileTypeFieldDTO>> GetFieldsForFileTypeAsync(long fileTypeId);
 
         Task<long> CreateAsync(FileTypeFieldDTO fieldDto);
-
         Task<OperationResult> UpdateAsync(FileTypeFieldDTO fieldDto);
         Task UpdateFieldsForFileTypeAsync(long fileTypeId, List<FileTypeFieldDTO> fields);
     }
@@ -25,6 +25,10 @@ namespace EduVault.Services
         public async Task<FileTypeField> GetByIdAsync(long id)
         {
             return await _repository.GetByIdAsync(id);
+        }
+        public async Task<OperationResult> DeleteByFileTypeIdAsync(long fileTypeId)
+        {
+            return await _repository.DeleteByFileTypeIdAsync(fileTypeId);
         }
         public async Task<List<FileTypeFieldDTO>> GetFieldsForFileTypeAsync(long fileTypeId)
         {

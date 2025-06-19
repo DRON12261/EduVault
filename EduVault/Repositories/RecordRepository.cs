@@ -83,6 +83,25 @@ namespace EduVault.Repositories
                 query = query.Where(r => r.FileTypeId == filters.FileTypeId.Value);
             }
 
+            if (!string.IsNullOrEmpty(filters.RecordAuthor))
+            {
+                query = query.Where(r => _context.Users
+                .Where(u => u.Id == r.RecordAuthorId)
+                .Any(u => u.Name.Contains(filters.RecordAuthor)));
+            }
+
+            if (filters.StartDate.HasValue)
+            {
+                filters.StartDate = DateTime.SpecifyKind(filters.StartDate.Value, DateTimeKind.Utc);
+                query = query.Where(x => x.RecordCreationDate >= filters.StartDate);
+            }
+
+            if (filters.EndDate.HasValue)
+            {
+                // Добавляем 1 день, чтобы включить все записи за указанный день
+                var dateToInclusive = DateTime.SpecifyKind(filters.EndDate.Value, DateTimeKind.Utc).AddDays(1);
+                query = query.Where(x => x.RecordCreationDate < dateToInclusive);
+            }
             return await query
                 .OrderBy(r => r.Id)
                 .Select(r => r)

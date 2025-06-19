@@ -53,23 +53,18 @@
     <div style="display: flex; flex-direction: column; gap: 2rem;">
         <div class="filter-panel">
             <h3>Фильтры</h3>
-            <div class="form-group">
-                <label>ИД:</label>
-                <input type="number">
-            </div>
-            <div class="form-group">
-                <label>Название:</label>
-                <input type="text">
-            </div>
-            <div class="form-group">
-                <label>Тип файла:</label>
-                <select>
-                    <option>Все</option>
-                    <option>Тип файла 1</option>
-                    <option>Тип файла 2</option>
-                </select>
-            </div>
-            <button class="btn-primary" style="margin-top: auto;">Поиск</button>
+            <form method="get">
+                <div class="form-group">
+                    <label asp-for="Filters.Id">ИД:</label>
+                    <input type="number" asp-for="Filters.Id" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Filters.Name">Тип файла:</label>
+                    <input type="text" asp-for="Filters.Name" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: auto;">Поиск</button>
+                <a asp-page="./Index" class="btn btn-secondary">Сбросить</a>
+            </form>
         </div>
     </div>
 </div>

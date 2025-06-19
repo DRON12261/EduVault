@@ -158,7 +158,7 @@ th, td {
 
 th {
     background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
-    color: white;
+    color: white !important;
     position: sticky;
     top: 0;
 }
@@ -239,6 +239,7 @@ th {
     border-collapse: collapse;
     table-layout: fixed;
     font-size: 0.9em;
+    color: black !important;
 }
 
 .rights-table th,
@@ -254,9 +255,9 @@ th {
     color: white;
 }
 
-        .rights-table th:nth-child(1) {
-            width: 55%;
-        }
+.rights-table th:nth-child(1) {
+    width: 55%;
+}
 
 .rights-table th:nth-child(2) {
     width: 35%;
