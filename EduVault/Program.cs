@@ -79,39 +79,12 @@ namespace EduVault
 		}
 		public static WebApplication TuneApp(WebApplication app)
 		{
-            /*using (var scope = app.Services.CreateScope())
-			{
-				var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-				db.Database.EnsureCreated();
-				Console.WriteLine("              PostgreSQL        !");
-			}*/
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseAuthentication();   //            middleware                
-			app.UseAuthorization();   //            middleware             
-			
-			/*&app.MapControllerRoute(
-				name: "default",
-				pattern: "{controller=Home}/{action=Index}/{id?}");
-            */
+            app.UseAuthentication();
+			app.UseAuthorization();
             app.MapRazorPages();
-            /*app.Run(async (context) =>
-			{
-				context.Response.ContentType = "text/html; charset=utf-8";
-
-				var path = context.Request.Path;
-				var now = DateTime.Now;
-				var response = context.Response;
-
-				if (path == "/date")
-					await response.WriteAsync($"Date: {now}");
-				else if (path == "/hello")
-					await response.WriteAsync("      ");
-				else
-					await response.WriteAsync("               "); ;
-			});*/
             return app;
 		}
 	}

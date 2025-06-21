@@ -100,6 +100,16 @@ namespace EduVault.Repositories
         {
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
             return await _context.Users
+               .Join(
+                   _context.GroupUsers,
+                   user => user.Id,
+                   groupUser => groupUser.UserId,
+                   (user, groupUser) => new { User = user, GroupUser = groupUser }
+               )
+               .Where(x => x.GroupUser.GroupId == groupId)
+               .Select(x => x.User)
+               .ToListAsync();
+            return await _context.Users
                 .ToListAsync();//пока просто выводит всех пользователей
         }
     }
