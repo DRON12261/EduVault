@@ -5,19 +5,38 @@
 }
 
 <div class="record-container">
-    <form asp-antiforgery="true" enctype="multipart/form-data">
+    <form method="post" asp-antiforgery="true" enctype="multipart/form-data" asp-route-id="@(Model.Input.Id)">
         @Html.AntiForgeryToken()
         <div>
             <div class="record-actions">
                 <button type="submit" asp-page-handler="Save" class="btn-primary">@(Model.Mode == "create" ? "Создать" : "Сохранить") карточку</button>
-                <button class="btn-primary">Открыть файл</button>
-                <button class="btn-primary">Обновить файл</button>
-                <button class="btn-secondary">Удалить файл</button>
-                <button class="btn-secondary">Удалить карточку</button>
+
+                <!-- Кнопки для работы с файлом -->
+                @if (!string.IsNullOrEmpty(Model.Input.FilePath))
+                {
+                    <div class="btn-group">
+                        <!-- Кнопка просмотра (только для поддерживаемых форматов) -->
+                        <a asp-page-handler="DownloadFile"
+                        asp-route-fileId="@Model.Input.FilePath"
+                        target="_blank"
+                        class="btn btn-primary @(Model.CanPreviewFile ? "" : "d-none")">
+                            <i class="bi bi-eye"></i> Просмотреть
+                        </a>
+
+                        <!-- Кнопка скачивания -->
+                        <a asp-page-handler="DownloadFile"
+                        asp-route-fileId="@Model.Input.FilePath"
+                        download
+                        class="btn btn-primary">
+                            <i class="bi bi-download"></i> Скачать
+                        </a>
+                    </div>
+                }
+
                 @if (Model.Mode == "edit")
                 {
                     <div class="record-info" style="margin-right: 0; margin-left: auto;">ИД: @(Model.Input.Id)</div>
-                    <div class="record-info" style="margin-right: 0; margin-left: auto;">Создано @(Model.Input.RecordCreationDate.ToString("dd.MM.yyyy")) пользователем @(Model.Input.RecordAuthor)</div>
+                    <div class="record-info" style="margin-right: 0; margin-left: auto;">Создано @(Model.Input.RecordCreationDate.ToString("dd.MM.yyyy")) пользователем @(Model.Author.Name)</div>
                 }
             </div>
 
@@ -36,7 +55,7 @@
                         <label>Тип файла:</label>
                         <select asp-for="Input.FileType"
                         asp-items="@(new SelectList(Model.FileTypes, "Id", "Name"))"
-                                class="form-control" required>
+                        class="form-control" required>
                             <option value="">-- Выберите тип файла --</option>
                         </select>
                     </div>
@@ -83,44 +102,44 @@
                         </div>
                     }
                 </div>
-                <fieldset class="form-group">
-                    <legend>Поля типа @(Model.Input.FileType)</legend>
-                    @foreach (var field in Model.Fields)
-                    {
-                        <div class="card-form-group">
-                            <label>field.Name:</label>
-                            <input type="text">
-                        </div>
-                    }
-                </fieldset>
-                <!--<div class="relationships-panel">
-                    <h3>Связанные карточки</h3>
-
-                    
-                    <div class="current-relationships">
-                        @foreach (var rel in Model.CurrentRelations)
-                        {
-                            <div class="relationship-item">
-                                <span>@rel.TargetRecord</span>
-                                <button type="button" class="btn-remove-relationship"
-                                        data-relationship-id="@rel.Id">
-                                    ×
-                                </button>
-                            </div>
-                        }
+                <!--<fieldset class="form-group">
+                <legend>Поля типа @(Model.Input.FileType)</legend>
+                @foreach (var field in Model.Fields)
+                {
+                    <div class="card-form-group">
+                        <label>field.Name:</label>
+                        <input type="text">
                     </div>
+                }
+                </fieldset>-->
+                <!--<div class="relationships-panel">
+                <h3>Связанные карточки</h3>
 
-                    
-                    <select multiple asp-for="SelectedRelationships"
-                            asp-items="@(new SelectList(Model.AvailableRecords, "Id", "Name"))"
-                            class="form-control relationships-select">
-                    </select>
 
-                    <button type="submit" asp-page-handler="SaveRelationships"
-                            class="btn-primary">
-                        Сохранить связи
-                    </button>
-            </div>-->
+                <div class="current-relationships">
+                @foreach (var rel in Model.CurrentRelations)
+                {
+                    <div class="relationship-item">
+                        <span>@rel.TargetRecord</span>
+                        <button type="button" class="btn-remove-relationship"
+                        data-relationship-id="@rel.Id">
+                            ×
+                        </button>
+                    </div>
+                }
+                </div>
+
+
+                <select multiple asp-for="SelectedRelationships"
+                asp-items="@(new SelectList(Model.AvailableRecords, "Id", "Name"))"
+                class="form-control relationships-select">
+                </select>
+
+                <button type="submit" asp-page-handler="SaveRelationships"
+                class="btn-primary">
+                Сохранить связи
+                </button>
+                </div>-->
             </div>
         </div>
     </form>
@@ -140,30 +159,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Антон Епифанцев</td>
-                        <td>Изменение</td>
-                        <td>
+                    <!--<tr>
+                            <td>Скочко А.Е.</td>
+                            <td>Полный доступ</td>
+                            <td>
                             <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>-->
                     <tr>
-                        <td>Чипак Данила</td>
+                        <td>Чипак Д.И.</td>
                         <td>Полный доступ</td>
-                        <td>
-                            <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Иван Петров</td>
-                        <td>Полный доступ</td>
-                        <td>
-                            <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Все пользователи</td>
-                        <td>Чтение</td>
                         <td>
                             <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
                         </td>
@@ -173,3 +178,13 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        function confirmDeleteFile() {
+            if (confirm('Вы уверены, что хотите удалить файл?')) {
+                window.location.href = '?handler=DeleteFile&id=@Model.Input.Id';
+            }
+        }
+    </script>
+}

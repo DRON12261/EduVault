@@ -1,6 +1,7 @@
 using EduVault.Models;
 using EduVault.Models.DataTransferObjects;
 using EduVault.Repositories;
+using static NuGet.Packaging.PackagingConstants;
 using bCrypt = BCrypt.Net.BCrypt;
 
 namespace EduVault.Services
@@ -14,6 +15,8 @@ namespace EduVault.Services
         Task<OperationResult> CreateAsync(UserDTO userDTO);
         Task<OperationResult> UpdateAsync(UserDTO userDTO);
         Task<OperationResult> DeleteById(long id);
+        Task<List<User>> GetFilteredRecordsAsync(FilterModel filters);
+        Task<List<UserDTO>> GetUsersForGroupAsync(long groupId);
     }
     public class UserService : IUserService
     {
@@ -29,7 +32,7 @@ namespace EduVault.Services
             {
                 return OperationResult.Failed("Системный пользователь уже создан!", OperationStatusCode.Conflict);
             }
-            await _repository.CreateAsync(new User("testUser", "test", "test", 1));
+            await _repository.CreateAsync(new User("testUser", "test", bCrypt.HashPassword("test"), 1));
             return OperationResult.Success();
         }
         public async Task<List<User>> GetAllAsync()
@@ -73,6 +76,15 @@ namespace EduVault.Services
             }
             await _repository.DeleteAsync(id);
             return OperationResult.Success();
+        }
+        public async Task<List<User>> GetFilteredRecordsAsync(FilterModel filters)
+        {
+            return await _repository.GetFilteredRecordsAsync(filters);
+        }
+        public async Task<List<UserDTO>> GetUsersForGroupAsync(long groupId)
+        {
+            List<User> users = await _repository.GetUsersForGroupIdAsync(groupId);
+            return users.Select(u=>new UserDTO(u)).ToList();
         }
     }
 

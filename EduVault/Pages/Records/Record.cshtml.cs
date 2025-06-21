@@ -4,7 +4,13 @@ using EduVault.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.StaticFiles;
+using MongoDB.Bson;
+using MongoDB.Driver.GridFS;
+using MongoDB.Driver;
 using System.Data;
+using System.Text.Json;
+using System.Net;
 
 namespace EduVault.Pages.Records
 {
@@ -50,6 +56,7 @@ namespace EduVault.Pages.Records
         public IFormFile UploadedFile { get; set; }
         [BindProperty]
         public List<long> SelectedRelationships { get; set; } = new(); // Выбранные связи
+        public bool CanPreviewFile { get; set; }
 
         public List<Record> AvailableRecords { get; set; } = new();
         public List<Relation> CurrentRelations { get; set; } = new();
@@ -60,7 +67,7 @@ namespace EduVault.Pages.Records
         public async Task<IActionResult> OnPostAsync()
         {
             FileTypes = await _fileTypeService.GetAllAsync();
-            Author = await _userService.GetByLoginAsync(User.Identity.Name);
+            
             if (Mode == "edit")
             {
                 //CurrentRelations = await _relationService.GetRelationshipsForRecordAsync(Id);
@@ -70,6 +77,7 @@ namespace EduVault.Pages.Records
                               .ToList();
             if (Mode == "create")
             {
+                Author = await _userService.GetByLoginAsync(User.Identity.Name);
                 Input = new RecordDTO(); // Инициализация пустой модели для создания
             }
             else if (Mode == "edit")
@@ -77,8 +85,62 @@ namespace EduVault.Pages.Records
                 //AccessRights = await _accessRightsService.GetAccessRightsForRecordAsync(Id);
                 Input = new RecordDTO(await _recordService.GetByIdAsync(Id));// Загрузка данных пользователя по Id
                 Input.FileName = await _mongoFileService.GetFileNameAsync(Input.FilePath);
+                Author = await _userService.GetByIdAsync(Input.RecordAuthor);
             }
+            if (Mode == "edit" && Id > 0)
+            {
+                // Проверяем, можно ли просматривать файл
+                CanPreviewFile = CanFileBePreviewed(Input.FileName);
+            }
+            //TempData["InputData"] = JsonSerializer.Serialize(Input);
+            TempData["SavedId"] = JsonSerializer.Serialize(Id);
             return Page();
+        }
+        public async Task<IActionResult> OnGetDownloadFileAsync()
+        {
+            /*if(TempData["InputData"] is RecordDTO serializedInput){
+                Input = serializedInput;
+            }*/
+            if (TempData["SavedId"] is string savedIdStr && long.TryParse(savedIdStr, out var savedId))
+            {
+                Id = savedId;
+                TempData.Keep("SavedId");
+            }
+            var record = await _recordService.GetByIdAsync(Id);
+            if (record == null) return NotFound();
+
+            var (stream, contentType, fileName, error) = await _mongoFileService.DownloadFileAsync(record.FilePath);
+            if (stream == null) return NotFound(error);
+
+            // Определяем, можно ли открывать файл в браузере
+            CanPreviewFile = CanFileBePreviewed(Path.GetExtension(fileName)?.ToLower());
+
+            // Устанавливаем правильные заголовки
+            Response.Headers.Append("Content-Disposition",
+                CanPreviewFile
+                    ? $"inline; filename=\"{WebUtility.UrlEncode(fileName)}\""
+                    : $"attachment; filename=\"{WebUtility.UrlEncode(fileName)}\"");
+
+            // Для известных типов используем их Content-Type, для остальных - общий
+            return File(stream,
+                CanPreviewFile ? contentType : "application/octet-stream",
+                CanPreviewFile ? null : fileName); // null для inline отключает принудительное скачивание
+        }
+        private bool CanFileBePreviewed(string fileId)
+        {
+            var extension = Path.GetExtension(fileId)?.ToLower();
+            return new[] { ".pdf", ".jpg", ".jpeg", ".png", ".gif", ".txt", ".webp" }
+                .Contains(extension);
+        }
+
+        private string GetContentType(string fileName)
+        {
+            var provider = new FileExtensionContentTypeProvider();
+            if (!provider.TryGetContentType(fileName, out var contentType))
+            {
+                contentType = "application/octet-stream";
+            }
+            return contentType;
         }
         public async Task<IActionResult> OnPostSaveRelationshipsAsync()
         {

@@ -1,0 +1,36 @@
+@model EduVault.Pages.Groups.GroupModel
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Пользователь</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var member in Model.GroupMembers)
+        {
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <div>@member.Name</div>
+                            <small class="text-muted">@member.Login</small>
+                        </div>
+                    </div>
+                </td>
+                <td class="text-end">
+                    <button type="button" class="btn btn-sm btn-danger remove-member" data-user-id="@member.Id">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+        @if (!Model.GroupMembers.Any())
+        {
+            <tr>
+                <td colspan="4" class="text-center text-muted">Нет участников</td>
+            </tr>
+        }
+    </tbody>
+</table>

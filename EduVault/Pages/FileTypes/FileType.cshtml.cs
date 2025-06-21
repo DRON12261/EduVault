@@ -51,7 +51,6 @@ namespace EduVault.Pages.FileTypes
             if (Mode == "create")
             {
                 Input = new FileTypeDTO();
-                return Page();
             }
             else if (Mode == "edit")
             {
@@ -62,7 +61,6 @@ namespace EduVault.Pages.FileTypes
                 TempData["InputData"] = JsonSerializer.Serialize(Input);
                 Fields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(Id);
                 TempData["TempFields"] = JsonSerializer.Serialize(Fields);
-                return Page();
             }
             return Page();
         }
@@ -132,8 +130,16 @@ namespace EduVault.Pages.FileTypes
             return Page();
         }
 
-        public async Task<IActionResult> OnPostSaveAsync() // ОСТАНОВИЛСЯ НА КАСТОМНЫХ ПОЛЯХ ДЛЯ ТИПА ФАЙЛА, УДАЛЕНИЕ КРИВОЕ И СОЗДАНИЕ НОВОГО ТИПА ФАЙЛА ТОЖЕ (см. Дипсик)
+        public async Task<IActionResult> OnPostSaveFieldsAsync()
         {
+            //await LoadDataAsync();
+            TempData["TempFields"] = JsonSerializer.Serialize(Fields);
+            //return RedirectToPage($"./FileType/edit?id={(string)TempData["SavedId"]}");
+            return Page();
+        }
+        public async Task<IActionResult> OnPostSaveCardAsync()
+        {
+
             ModelState.Remove("Name");
             ModelState.Remove("FileNameTemplate");
             if (TempData["SavedId"] is string savedIdStr && long.TryParse(savedIdStr, out var savedId))
@@ -205,28 +211,36 @@ namespace EduVault.Pages.FileTypes
                 TempData.Keep("SavedId");
             }
 
-            if (Mode == "edit" && Id > 0)
+            if (Mode == "edit")
             {
-                Input ??= new FileTypeDTO(await _fileTypeService.GetByIdAsync(Id));
-
-                // Восстанавливаем Fields из TempData или из БД
-                if (TempData["TempFields"] is string serializedFields)
+                if (Id > 0)
                 {
-                    try
+                    Input ??= new FileTypeDTO(await _fileTypeService.GetByIdAsync(Id));
+                    if (TempData["TempFields"] is string serializedFields)
                     {
-                        Fields = JsonSerializer.Deserialize<List<FileTypeFieldDTO>>(serializedFields)
-                            ?? await _fileTypeFieldService.GetFieldsForFileTypeAsync(Id);
+                        try
+                        {
+                            Fields = JsonSerializer.Deserialize<List<FileTypeFieldDTO>>(serializedFields)
+                                ?? await _fileTypeFieldService.GetFieldsForFileTypeAsync(Id);
+                        }
+                        catch
+                        {
+                            Fields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(Id);
+                        }
+                        TempData.Keep("TempFields");
                     }
-                    catch
+                    else
                     {
                         Fields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(Id);
                     }
-                    TempData.Keep("TempFields");
                 }
                 else
                 {
-                    Fields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(Id);
+
                 }
+
+                // Восстанавливаем Fields из TempData или из БД
+                
             }
             else if (Mode == "create")
             {

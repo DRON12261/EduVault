@@ -66,7 +66,7 @@ namespace EduVault.Data
 				entity.HasKey(user => user.Id);
 
                 entity.Property(user => user.Id)
-                    .HasColumnName("User_id")
+                    //.HasColumnName("User_id")
                     .UseIdentityAlwaysColumn()
                     .ValueGeneratedOnAdd();
 

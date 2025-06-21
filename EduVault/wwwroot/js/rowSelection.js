@@ -25,11 +25,11 @@ function selectRow(row, id) {
 }
 
 // Очистка выделения при клике вне таблицы (опционально)
-document.addEventListener('click', function (e) {
+/*document.addEventListener('click', function (e) {
     if (!e.target.closest('.clickable-row') && !e.target.closest('.btn')) {
         clearSelection();
     }
-});
+});*/
 
 /*document.querySelector('.btn-reset').addEventListener('click', function () {
     document.querySelectorAll('.filter-panel input, .filter-panel select').forEach(el => {

@@ -11,6 +11,7 @@ namespace EduVault.Services
         Task<OperationResult> CreateAsync(GroupDTO groupDTO);
         Task<OperationResult> UpdateAsync(GroupDTO groupDTO);
         Task<OperationResult> DeleteById(long id);
+        Task<List<Group>> GetFilteredRecordsAsync(FilterModel filters);
     }
     public class GroupService: IGroupService
     {
@@ -51,6 +52,10 @@ namespace EduVault.Services
             }
             await _repository.DeleteAsync(id);
             return OperationResult.Success();
+        }
+        public async Task<List<Group>> GetFilteredRecordsAsync(FilterModel filters)
+        {
+            return await _repository.GetFilteredRecordsAsync(filters);
         }
     }
 }
