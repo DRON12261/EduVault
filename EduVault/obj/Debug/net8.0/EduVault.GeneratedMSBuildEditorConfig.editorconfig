@@ -36,16 +36,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/User/Desktop/EduVault/EduVault/EduVault/Pages/FileTypes/Fields.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmlsZVR5cGVzXEZpZWxkcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/User/Desktop/EduVault/EduVault/EduVault/Pages/FileTypes/FileType.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmlsZVR5cGVzXEZpbGVUeXBlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/Desktop/EduVault/EduVault/EduVault/Pages/FileTypes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmlsZVR5cGVzXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/User/Desktop/EduVault/EduVault/EduVault/Pages/FileTypes/_FieldsTablePartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmlsZVR5cGVzXF9GaWVsZHNUYWJsZVBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/Desktop/EduVault/EduVault/EduVault/Pages/Groups/Group.cshtml]
@@ -62,10 +62,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/User/Desktop/EduVault/EduVault/EduVault/Pages/Groups/_AvailableUsersDropdown.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR3JvdXBzXF9BdmFpbGFibGVVc2Vyc0Ryb3Bkb3duLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/User/Desktop/EduVault/EduVault/EduVault/Pages/Groups/_MembersTablePartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR3JvdXBzXF9NZW1iZXJzVGFibGVQYXJ0aWFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/Desktop/EduVault/EduVault/EduVault/Pages/Index.cshtml]

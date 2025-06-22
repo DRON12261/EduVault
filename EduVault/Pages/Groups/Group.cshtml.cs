@@ -98,31 +98,6 @@ namespace EduVault.Pages.Groups
                 .Where(u => !GroupMembers.Any(m => m.Id == u.Id))
                 .ToList();
         }
-        public async Task<IActionResult> OnPostAddMember(long userId)
-        {
-            //await LoadGroupData();
-            if (userId > 0)
-            {
-                await _groupService.AddUserToGroupAsync(userId, Id);
-               // GroupMembers.Add(new UserDTO(await _userService.GetByIdAsync(userId)));
-                //TempData["TempMembers"] = JsonSerializer.Serialize(GroupMembers);
-            }
-            await LoadGroupData();
-            return Partial("_MembersTablePartial", this);
-        }
-
-        public async Task<IActionResult> OnPostRemoveMember(long userId)
-        {
-            //await LoadGroupData();
-            if (userId > 0)
-            {
-                await _groupService.RemoveUserFromGroupAsync(userId, Id);
-                //GroupMembers.Remove(GroupMembers.Find(u=>u.Id==userId));
-                //TempData["TempMembers"] = JsonSerializer.Serialize(GroupMembers);
-            }
-            await LoadGroupData();
-            return Partial("_MembersTablePartial", this);
-        }
         public async Task<IActionResult> OnGetAvailableUsers()
         {
             await LoadGroupData();

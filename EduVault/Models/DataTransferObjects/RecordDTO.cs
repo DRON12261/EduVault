@@ -14,7 +14,10 @@ namespace EduVault.Models.DataTransferObjects
         public long FileType { get; set; }
         public DateTime RecordCreationDate { get; set; }
         public string FileName { get; set; } // Дополнительное поле для отображения
-        //public Field[] Fields;
+        // Для шаблонов полей (из FileTypeFields)
+        public Dictionary<long, string> CustomFieldsTemplate { get; set; } = new();
+        // Для значений полей (будет сохраняться в Fields)
+        public Dictionary<long, string> CustomFieldsValues { get; set; } = new();
         public RecordDTO(Record record)
         {
             Id = record.Id;

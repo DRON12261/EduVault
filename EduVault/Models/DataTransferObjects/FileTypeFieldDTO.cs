@@ -14,6 +14,7 @@ namespace EduVault.Models.DataTransferObjects
         public bool IsPrefilled { get; set; }
         [Range(-1, long.MaxValue, ErrorMessage = "Неверный FileTypeId")]
         public long FileTypeId { get; set; }
+        public string DefaultValue { get; set; }
         public FileTypeFieldDTO(FileTypeField fileTypeField)
         {
             Id = fileTypeField.Id;

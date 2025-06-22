@@ -23,6 +23,8 @@ namespace EduVault.Pages.Records
         private IMongoFileService _mongoFileService;
         private IRelationService _relationService;
         private IFileNameTemplateService _fileNameTemplateService;
+        private IFileTypeFieldService _fileTypeFieldService;
+        private IFieldService _fieldService;
         //private IAccessRightsService _accessRightsService;
         public RecordModel(
             IRecordService recordService,
@@ -30,7 +32,9 @@ namespace EduVault.Pages.Records
             IUserService userService,
             IMongoFileService mongoFileService,
             IRelationService relationService,
-            IFileNameTemplateService fileNameTemplateService
+            IFileNameTemplateService fileNameTemplateService,
+            IFileTypeFieldService fileTypeFieldService,
+            IFieldService fieldService
             /*, IAccessRightsService accessRightsService*/)
         {
             _recordService = recordService;
@@ -39,6 +43,8 @@ namespace EduVault.Pages.Records
             _mongoFileService = mongoFileService;
             _relationService = relationService;
             _fileNameTemplateService = fileNameTemplateService;
+            _fileTypeFieldService = fileTypeFieldService;
+            _fieldService = fieldService;
             //_accessRightsService = accessRightsService;
         }
         [BindProperty(SupportsGet = true)]
@@ -47,7 +53,9 @@ namespace EduVault.Pages.Records
         [BindProperty(SupportsGet = true)]
         public long Id { get; set; } // Для редактирования
         public List<FileType> FileTypes { get; set; } = new();
+        public List<FileTypeFieldDTO> FileTypeFields { get; set; } = new();
         public List<Field> Fields { get; set; } = new();
+
         //public List<AccessRightsDTO> AccessRights { get; set; } = new();
         public User Author { get; set; }
         [BindProperty]
@@ -75,6 +83,11 @@ namespace EduVault.Pages.Records
             {
                 Author = await _userService.GetByLoginAsync(User.Identity.Name);
                 Input = new RecordDTO(); // Инициализация пустой модели для создания
+                                         // Если сразу выбран тип файла (например, из query string)
+                if (Input.FileType > 0)
+                {
+                    await LoadFieldTemplates(Input.FileType);
+                }
             }
             else if (Mode == "edit")
             {
@@ -82,6 +95,14 @@ namespace EduVault.Pages.Records
                 Input = new RecordDTO(await _recordService.GetByIdAsync(Id));// Загрузка данных пользователя по Id
                 Input.FileName = await _mongoFileService.GetFileNameAsync(Input.FilePath);
                 Author = await _userService.GetByIdAsync(Input.RecordAuthor);
+                // Загружаем шаблоны полей для типа файла
+                await LoadFieldTemplates(Input.FileType);
+                // Загружаем значения полей
+                Input.CustomFieldsValues = await _fieldService.GetFieldsForRecordAsync(Id);
+            }
+            if (Input?.FileType > 0)
+            {
+                FileTypeFields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(Input.FileType);
             }
             if (Mode == "edit" && Id > 0)
             {
@@ -91,6 +112,13 @@ namespace EduVault.Pages.Records
             //TempData["InputData"] = JsonSerializer.Serialize(Input);
             TempData["SavedId"] = JsonSerializer.Serialize(Id);
             return Page();
+        }
+        private async Task LoadFieldTemplates(long fileTypeId)
+        {
+            FileTypeFields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(fileTypeId);
+            Input.CustomFieldsTemplate = FileTypeFields.ToDictionary(
+                f => f.Id,
+                f => f.DefaultValue ?? ""); // Используем DefaultValue из FileTypeField или пустую строку
         }
         public async Task<IActionResult> OnGetDownloadFileAsync()
         {
@@ -157,6 +185,20 @@ namespace EduVault.Pages.Records
         }
         public async Task<IActionResult> OnPostSaveAsync()
         {
+            if (Input?.FileType > 0)
+            {
+                FileTypeFields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(Input.FileType);
+            }
+
+            // Валидация обязательных полей
+            foreach (var field in FileTypeFields.Where(f => f.IsRequired))
+            {
+                if (string.IsNullOrWhiteSpace(Input.CustomFieldsTemplate.GetValueOrDefault(field.Id)))
+                {
+                    ModelState.AddModelError($"Input.CustomFields[{field.Id}]",
+                        $"Поле '{field.Name}' обязательно для заполнения");
+                }
+            }
             string old_filepath = "";
             ModelState.Remove("Input.FilePath");
             ModelState.Remove("Input.FileName");
@@ -237,11 +279,16 @@ namespace EduVault.Pages.Records
                 {
                     Input.RecordAuthor = (await _userService.GetByLoginAsync(User.Identity.Name)).Id;
                     Input.RecordCreationDate = DateTime.UtcNow;
+                    var recordId = await _recordService.CreateAsync(Input);
+                    // Сохраняем значения полей
+                    await _fieldService.SaveFieldsForRecordAsync(recordId, Input.CustomFieldsValues);
                     await _recordService.CreateAsync(Input);
                 }
                 else if (Mode == "edit")
                 {
                     Input.RecordCreationDate = (await _recordService.GetByIdAsync(Input.Id)).RecordCreationDate;
+                    // Обновляем значения полей
+                    await _fieldService.SaveFieldsForRecordAsync(Input.Id, Input.CustomFieldsValues);
                     await _recordService.UpdateAsync(Input);
                     await _mongoFileService.DeleteFileAsync(old_filepath);
                 }

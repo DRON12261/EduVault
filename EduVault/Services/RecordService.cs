@@ -12,7 +12,7 @@ namespace EduVault.Services
     {
         Task<List<Record>> GetAllAsync();
         Task<Record> GetByIdAsync(long id);
-        Task<OperationResult> CreateAsync(RecordDTO dto);
+        Task<long> CreateAsync(RecordDTO dto);
         Task<OperationResult> UpdateAsync(RecordDTO dto);
         Task<OperationResult> DeleteById(long id);
         Task<List<Record>> GetFilteredRecordsAsync(FilterModel filters);
@@ -32,14 +32,13 @@ namespace EduVault.Services
         {
             return await _repository.GetByIdAsync(id);
         }
-        public async Task<OperationResult> CreateAsync(RecordDTO dto)
+        public async Task<long> CreateAsync(RecordDTO dto)
         {
             // Валидация - хз пока как валидировать
 
 
             // Создание entity
-            await _repository.CreateAsync(new Record(dto));
-            return OperationResult.Success();
+            return await _repository.CreateAsync(new Record(dto));
         }
         public async Task<OperationResult> UpdateAsync(RecordDTO dto)
         {

@@ -34,6 +34,7 @@ namespace EduVault
             builder.Services.AddScoped<IGroupRepository, GroupRepository>();
             builder.Services.AddScoped<IRelationRepository, RelationRepository>();
             builder.Services.AddScoped<IFileTypeFieldRepository, FileTypeFieldRepository>();
+            builder.Services.AddScoped<IFieldRepository, FieldRepository>();
             // Регистрация сервисов
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IUserService, UserService>();
@@ -44,6 +45,7 @@ namespace EduVault
             builder.Services.AddScoped<IRelationService, RelationService>();
             builder.Services.AddScoped<IFileNameTemplateService, FileNameTemplateService>();
             builder.Services.AddScoped<IFileTypeFieldService, FileTypeFieldService>();
+            builder.Services.AddScoped<IFieldService, FieldService>();
             // Добавление необходимого для работы с данными MongoDB
             builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
             {

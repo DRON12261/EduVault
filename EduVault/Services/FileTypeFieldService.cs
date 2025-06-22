@@ -2,18 +2,22 @@ using EduVault.Models;
 using EduVault.Models.DataTransferObjects;
 using EduVault.Repositories;
 using NuGet.Protocol.Core.Types;
+using System.Text.RegularExpressions;
 
 namespace EduVault.Services
 {
     public interface IFileTypeFieldService
     {
         Task<FileTypeField> GetByIdAsync(long id);
+        //Task<FileTypeField> GetByNameAsync(string name);
         Task<OperationResult> DeleteByFileTypeIdAsync(long fileTypeId);
         Task<List<FileTypeFieldDTO>> GetFieldsForFileTypeAsync(long fileTypeId);
 
         Task<long> CreateAsync(FileTypeFieldDTO fieldDto);
         Task<OperationResult> UpdateAsync(FileTypeFieldDTO fieldDto);
         Task UpdateFieldsForFileTypeAsync(long fileTypeId, List<FileTypeFieldDTO> fields);
+        Task<OperationResult> AddFieldToFileTypeAsync(FileTypeField field);
+        Task<OperationResult> RemoveFieldFromFileTypeAsync(long fileTypeFieldId);
     }
     public class FileTypeFieldService: IFileTypeFieldService
     {
@@ -26,6 +30,10 @@ namespace EduVault.Services
         {
             return await _repository.GetByIdAsync(id);
         }
+        /*public async Task<FileTypeField> GetByNameAsync(string name)
+        {
+            return await _repository.GetByNameAsync(name);
+        }*/
         public async Task<OperationResult> DeleteByFileTypeIdAsync(long fileTypeId)
         {
             return await _repository.DeleteByFileTypeIdAsync(fileTypeId);
@@ -58,6 +66,24 @@ namespace EduVault.Services
                 fieldDto.FileTypeId = fileTypeId;
                 await CreateAsync(fieldDto);
             }
+        }
+        public async Task<OperationResult> AddFieldToFileTypeAsync(FileTypeField field)
+        {
+            if((await GetFieldsForFileTypeAsync(field.FileTypeId)).Select(f => f.Name).Contains(field.Name))
+            {
+                return OperationResult.Failed("У этого типа данных уже существует поле с таким именем!", OperationStatusCode.Conflict);
+            }
+            await _repository.AddFieldToFileTypeAsync(field);
+            return OperationResult.Success();
+        }
+        public async Task<OperationResult> RemoveFieldFromFileTypeAsync(long fieldId)
+        {
+            if ((await GetByIdAsync(fieldId)==null))
+            {
+                return OperationResult.Failed("Поля с таким ID не существует!", OperationStatusCode.Conflict);
+            }
+            await _repository.RemoveFieldFromFileTypeAsync(fieldId);
+            return OperationResult.Success();
         }
     }
 }

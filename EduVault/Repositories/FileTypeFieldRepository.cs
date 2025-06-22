@@ -12,11 +12,11 @@ namespace EduVault.Repositories
         Task<FileTypeField> GetByIdAsync(long id);
         Task<List<FileTypeField>> GetByFileTypeIdAsync(long fileTypeId);
         Task<List<FileTypeField>> GetFieldsForFileTypeAsync(long fileTypeId);
-
         Task<long> CreateAsync(FileTypeField field);
-
         Task<OperationResult> UpdateAsync(FileTypeField field);
         Task<OperationResult> DeleteByFileTypeIdAsync(long fileTypeId);
+        Task AddFieldToFileTypeAsync(FileTypeField field);
+        Task RemoveFieldFromFileTypeAsync(long fieldId);
     }
     public class FileTypeFieldRepository: IFileTypeFieldRepository
     {
@@ -70,6 +70,23 @@ namespace EduVault.Repositories
             context.FileTypeFields.RemoveRange(fields);
             await context.SaveChangesAsync();
             return OperationResult.Success();
+        }
+        public async Task AddFieldToFileTypeAsync(FileTypeField field)
+        {
+            await using var context = _contextFactory.CreateDbContext();
+            await context.AddAsync(field);
+            await context.SaveChangesAsync();
+        }
+        public async Task RemoveFieldFromFileTypeAsync(long Id)
+        {
+            await using var context = _contextFactory.CreateDbContext();
+            FileTypeField field = await context.FileTypeFields.FindAsync(Id);
+            if (field != null)
+            {
+                context.Remove(field);
+            }
+            
+            await context.SaveChangesAsync();
         }
     }
 }

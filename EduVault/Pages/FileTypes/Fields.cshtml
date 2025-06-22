@@ -1,0 +1,122 @@
+@page "/FileTypes/Fields/{id}"
+@model EduVault.Pages.FileTypes.FieldsModel
+@{
+    ViewData["Title"] = "Управление полями типа файла";
+}
+
+<div class="form-container">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <span>Поля типа файла: @Model.FileTypeName</span>
+                <a href="/FileTypes/FileType/edit/@Model.Id"
+                class="btn btn-sm btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Назад к редактированию
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div id="fields-container">
+                @if (Model.Fields != null && Model.Fields.Any())
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Название</th>
+                                <th>Обязательное</th>
+                                <th>Автозаполняемое</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var field in Model.Fields)
+                            {
+                                <tr>
+                                    <input type="hidden" asp-for="@field.Id" />
+                                    <input type="hidden" asp-for="@field.FileTypeId" />
+                                    <td>
+                                        <input asp-for="@field.Name" class="form-control" />
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" asp-for="@field.IsRequired" class="form-check-input" />
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" asp-for="@field.IsPrefilled" class="form-check-input" />
+                                    </td>
+                                    <td>
+                                        <form method="post" asp-page-handler="RemoveField">
+                                            <input type="hidden" name="fieldId" value="@field.Id" />
+                                            <button type="submit" class="btn btn-danger remove-field" onclick="return confirm('Вы уверены, что хотите удалить поле из типа файла??')">
+                                                Удалить
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>                            }
+                            @for (var i = 0; i < Model.Fields.Count; i++)
+                            {
+                                
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-info">Нет добавленных полей</div>
+                }
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Кнопка добавления нового поля -->
+    <button type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#addFieldModal">
+        <i class="bi bi-plus-circle"></i> Добавить поле
+    </button>
+</div>
+
+<!-- Модальное окно добавления нового поля -->
+<div class="modal fade" id="addFieldModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" asp-page-handler="AddField" id="addFieldForm">
+                <input type="hidden" asp-for="Id" />
+                <div class="modal-header">
+                    <h5 class="modal-title">Добавить новое поле</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label asp-for="NewField.Name" class="form-label">Название поля</label>
+                        <input asp-for="NewField.Name" class="form-control" required />
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="NewField.IsRequired" class="form-check-input" />
+                                <label asp-for="NewField.IsRequired" class="form-check-label">Обязательное поле</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input asp-for="NewField.IsPrefilled" class="form-check-input" />
+                                <label asp-for="NewField.IsPrefilled" class="form-check-label">Автозаполняемое</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+}
