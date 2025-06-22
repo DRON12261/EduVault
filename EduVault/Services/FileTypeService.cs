@@ -49,9 +49,7 @@ namespace EduVault.Services
             await _fileTypeRepository.UpdateAsync(new FileType(fileTypeDTO));
 
             // Полностью заменяем коллекцию полей
-            await _fileTypeFieldService.UpdateFieldsForFileTypeAsync(
-                fileTypeDTO.Id,
-                fileTypeDTO.FileTypeFields);
+            await _fileTypeFieldService.UpdateFieldsForFileTypeAsync(fileTypeDTO.Id, fileTypeDTO.FileTypeFields);
             return OperationResult.Success();
         }
         public async Task<OperationResult> DeleteById(long id)

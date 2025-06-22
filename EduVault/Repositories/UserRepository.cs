@@ -109,8 +109,6 @@ namespace EduVault.Repositories
                .Where(x => x.GroupUser.GroupId == groupId)
                .Select(x => x.User)
                .ToListAsync();
-            return await _context.Users
-                .ToListAsync();//пока просто выводит всех пользователей
         }
     }
 }

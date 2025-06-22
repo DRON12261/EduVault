@@ -27,7 +27,14 @@
                 </div>
             </div>
         </div>
-
+        <!-- Кнопки действий -->
+        <div class="d-flex gap-2">
+            <button type="submit" asp-page-handler="Save" class="btn btn-primary">
+                @(Model.Mode == "create" ? "Создать" : "Сохранить")
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Отмена</button>
+        </div>
+    </form>
         <!-- Секция участников группы -->
         <div class="card mb-4">
             <div class="card-header">
@@ -44,15 +51,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Кнопки действий -->
-        <div class="d-flex gap-2">
-            <button type="submit" asp-page-handler="Save" class="btn btn-primary">
-                @(Model.Mode == "create" ? "Создать" : "Сохранить")
-            </button>
-            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Отмена</button>
-        </div>
-    </form>
 </div>
 
 <!-- Модальное окно добавления участника -->
@@ -60,25 +58,37 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form method="post" asp-page-handler="AddMember" id="addMemberForm">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="Mode" />
                 <div class="modal-header">
                     <h5 class="modal-title">Добавить участника</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Пользователь</label>
-                        <select class="form-select" name="userId" required>
-                            <option value="">-- Выберите пользователя --</option>
-                            @foreach (var user in Model.AvailableUsers)
-                            {
-                                <option value="@user.Id">@user.Name (@user.Login)</option>
-                            }
-                        </select>
+                        <label class="form-label">Выберите пользователя</label>
+                        <div id="users-dropdown-container">
+                            <select class="form-select" name="userId" required>
+                                <option value="">-- Выберите пользователя --</option>
+                                @foreach (var user in Model.AvailableUsers)
+                                {
+                                    <option value="@user.Id">@user.Name (@user.Login)</option>
+                                }
+                            </select>
+                        </div>
+                        @if (!Model.AvailableUsers.Any())
+                        {
+                            <div class="alert alert-warning mt-2">
+                                Нет доступных пользователей для добавления
+                            </div>
+                        }
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-primary">Добавить</button>
+                    <button type="submit" class="btn btn-primary" @(Model.AvailableUsers.Any() ? "" : "disabled")>
+                        Добавить
+                    </button>
                 </div>
             </form>
         </div>
@@ -115,69 +125,68 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Инициализация модального окна
-        const addMemberModal = new bootstrap.Modal(document.getElementById('addMemberModal'));
+        // Функция для обновления списка доступных пользователей
+        function updateAvailableUsers() {
+            $.ajax({
+                url: '?handler=AvailableUsers',
+                type: 'GET',
+                success: function(data) {
+                    $('#users-dropdown-container').html(data);
+                },
+                error: function() {
+                    console.error('Ошибка при обновлении списка пользователей');
+                }
+            });
+        }
 
-        // Обработка отправки формы добавления участника
-        document.getElementById('addMemberForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        $(document).ready(function() {
+            // Обработка добавления участника
+            $('#addMemberForm').on('submit', function(e) {
+                e.preventDefault();
+                const form = $(this);
 
-            const form = e.target;
-            const formData = new FormData(form);
-            const submitButton = form.querySelector('button[type="submit"]');
-
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Добавление...';
-
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: new URLSearchParams(formData),
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value,
-                        'Content-Type': 'application/x-www-form-urlencoded',
+                $.ajax({
+                    url: form.attr('action'),
+                    type: 'POST',
+                    data: form.serialize(),
+                    success: function(data) {
+                        $('#members-container').html(data);
+                        updateAvailableUsers(); // Обновляем список после добавления
+                        $('#addMemberModal').modal('hide');
+                        form.trigger('reset');
+                    },
+                    error: function() {
+                        alert('Ошибка при добавлении участника');
                     }
                 });
+            });
 
-                if (response.ok) {
-                    const html = await response.text();
-                    document.getElementById('members-container').innerHTML = html;
-                    addMemberModal.hide();
-                    form.reset();
+            // Обработка удаления участника
+            $(document).on('click', '.remove-member', function() {
+                const userId = $(this).data('user-id');
+                if (confirm('Вы уверены, что хотите удалить этого пользователя из группы?')) {
+                    $.ajax({
+                        url: '?handler=RemoveMember',
+                        type: 'POST',
+                        data: {
+                            userId: userId,
+                            id: @Model.Id,
+                            mode: '@Model.Mode'
+                        },
+                        headers: {
+                            'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                        },
+                        success: function(data) {
+                            $('#members-container').html(data);
+                            updateAvailableUsers(); // Обновляем список после удаления
+                        },
+                        error: function() {
+                            alert('Ошибка при удалении участника');
+                        }
+                    });
                 }
-            } catch (error) {
-                console.error('Error:', error);
-            } finally {
-                submitButton.disabled = false;
-                submitButton.textContent = 'Добавить';
-            }
-        });
-
-        // Удаление участника
-        $(document).on('click', '.remove-member', async function() {
-            const userId = $(this).data('user-id');
-
-            if (!confirm('Вы уверены, что хотите удалить участника из группы?')) return;
-
-            $(this).html('<span class="spinner-border spinner-border-sm"></span>');
-
-            try {
-                const response = await fetch(`?handler=RemoveMember&userId=${userId}`, {
-                    method: 'POST',
-                    headers: {
-                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val(),
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                });
-
-                if (response.ok) {
-                    const html = await response.text();
-                    $('#members-container').html(html);
-                }
-            } catch (error) {
-                console.error('Ошибка:', error);
-            }
+            });
         });
     </script>
 }
+

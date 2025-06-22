@@ -2,6 +2,7 @@ using EduVault.Data;
 using EduVault.Models;
 using EduVault.Models.DataTransferObjects;
 using Microsoft.EntityFrameworkCore;
+//using System.Text.RegularExpressions;
 
 namespace EduVault.Repositories
 {
@@ -14,6 +15,9 @@ namespace EduVault.Repositories
         Task DeleteAsync(long id);
         Task<List<Group>> GetAllAsync();
         Task<List<Group>> GetFilteredRecordsAsync(FilterModel filters);
+        Task AddUserToGroupAsync(long userId, long groupId);
+        Task RemoveUserFromGroupAsync(long userId, long groupId);
+        Task UpdateUsersForGroupAsync(long groupId, List<UserDTO> users);
     }
     public class GroupRepository: IGroupRepository
     {
@@ -81,6 +85,38 @@ namespace EduVault.Repositories
                 .OrderBy(r => r.Id)
                 .Select(r => r)
                 .ToListAsync();
+        }
+        public async Task AddUserToGroupAsync(long userId, long groupId)
+        {
+            await using PostgresDBContext _context = _contextFactory.CreateDbContext();
+            _context.AddAsync(new GroupUser(userId, groupId));
+            await _context.SaveChangesAsync();
+        }
+        public async Task RemoveUserFromGroupAsync(long userId, long groupId)
+        {
+            await using PostgresDBContext _context = _contextFactory.CreateDbContext();
+            _context.Remove(new GroupUser(userId, groupId));
+            await _context.SaveChangesAsync();
+        }
+        public async Task DeleteUsersForGroupAsync(long groupId)
+        {
+            await using PostgresDBContext _context = _contextFactory.CreateDbContext();
+            var groupUser = await _context.GroupUsers
+                .Where(gu => gu.GroupId == groupId)
+                .ToListAsync();
+
+            _context.GroupUsers.RemoveRange(groupUser);
+            await _context.SaveChangesAsync();
+        }
+        public async Task UpdateUsersForGroupAsync(long groupId, List<UserDTO> users)
+        {
+            await using PostgresDBContext _context = _contextFactory.CreateDbContext();
+            await DeleteUsersForGroupAsync(groupId);
+            foreach (var user in users)
+            {
+                await AddUserToGroupAsync(user.Id, groupId);
+            }
+            await _context.SaveChangesAsync();
         }
     }
 }

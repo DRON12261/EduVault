@@ -114,7 +114,7 @@ namespace EduVault.Pages.FileTypes
                 TempData["TempFields"] = JsonSerializer.Serialize(Fields);
                 TempData.Keep("TempFields"); // Явно сохраняем TempData
             }
-
+            return Partial("_FieldsTablePartial", this);
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
                 // Возвращаем обновлённый Partial с текущим состоянием модели
@@ -126,7 +126,6 @@ namespace EduVault.Pages.FileTypes
                     Input = this.Input
                 });
             }
-
             return Page();
         }
 
@@ -135,7 +134,8 @@ namespace EduVault.Pages.FileTypes
             //await LoadDataAsync();
             TempData["TempFields"] = JsonSerializer.Serialize(Fields);
             //return RedirectToPage($"./FileType/edit?id={(string)TempData["SavedId"]}");
-            return Page();
+            //return Page();
+            return Partial("_FieldsTablePartial", this);
         }
         public async Task<IActionResult> OnPostSaveCardAsync()
         {
@@ -146,6 +146,7 @@ namespace EduVault.Pages.FileTypes
             {
                 // Используем savedId (тип long)
                 Id = savedId;
+                //TempData.Keep("SavedId");
             }
             await LoadDataAsync();
 
