@@ -25,27 +25,10 @@ namespace EduVault.Pages.Groups
         public long Id { get; set; }
         [BindProperty]
         public GroupDTO Input { get; set; }
-        public class GroupMemberViewModel
-        {
-            public long Id { get; set; }
-            public string Name { get; set; }
-            public string Login { get; set; }
-            public GroupMemberViewModel(UserDTO userDTO)
-            {
-                this.Id = userDTO.Id;
-                this.Name = userDTO.Name;
-                this.Login = userDTO.Login;
-            }
-        }
 
         public List<UserDTO> GroupMembers { get; set; } = new();
         public List<UserDTO> AvailableUsers { get; set; } = new();
-        public IActionResult OnGet()
-        {
-            return RedirectToPage("./Index");
-        }
-
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             if (Mode == "create")
             {
@@ -72,6 +55,8 @@ namespace EduVault.Pages.Groups
                 .ToList();
             return Page();
         }
+
+        
         public async Task<IActionResult> OnPostSaveAsync()
         {
             await LoadGroupData();

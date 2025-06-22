@@ -17,11 +17,9 @@ function selectRow(row, id) {
     document.getElementById('deleteBtn').disabled = false;
 
     // Обновляем ID для форм
+    document.getElementById('editId').value = id;
     document.getElementById('deleteId').value = id;
-
-    // Обновляем action формы редактирования (удаляем старый ID если был)
-    const editForm = document.getElementById('editForm');
-    editForm.action = editForm.action.split('?')[0] + '?id=' + id;
+    
 }
 
 // Очистка выделения при клике вне таблицы (опционально)

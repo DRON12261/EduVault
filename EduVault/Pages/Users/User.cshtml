@@ -35,7 +35,7 @@
         </div>
         <div class="create-user-form-group" style="display: flex; gap: 0.8rem;">
             <button type="submit" class="btn-primary">@(Model.Mode == "create" ? "Создать" : "Сохранить")</button>
-            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Отмена</button>
+            <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Page("/Users/Index")'">Отмена</button>
         </div>
     </form>
  </div>

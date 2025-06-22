@@ -60,14 +60,10 @@ namespace EduVault.Pages.Records
 
         public List<Record> AvailableRecords { get; set; } = new();
         public List<Relation> CurrentRelations { get; set; } = new();
-        public IActionResult OnGet()
-        {
-            return RedirectToPage("./Index");
-        }
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             FileTypes = await _fileTypeService.GetAllAsync();
-            
+
             if (Mode == "edit")
             {
                 //CurrentRelations = await _relationService.GetRelationshipsForRecordAsync(Id);

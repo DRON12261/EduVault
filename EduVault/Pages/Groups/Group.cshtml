@@ -32,25 +32,36 @@
             <button type="submit" asp-page-handler="Save" class="btn btn-primary">
                 @(Model.Mode == "create" ? "Создать" : "Сохранить")
             </button>
-            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Отмена</button>
+            <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Page("/Groups/Index")'">Отмена</button>
         </div>
     </form>
         <!-- Секция участников группы -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <div class="d-flex justify-content-between align-items-center">
-                    <span>Участники группы</span>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addMemberModal">
-                        <i class="bi bi-plus"></i> Добавить участника
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div id="members-container">
-                    <partial name="_MembersTablePartial" model="Model" />
-                </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <span>Участники группы</span>
+                <a href="/Groups/Members/@Model.Id"
+                   class="btn btn-sm btn-primary">
+                    <i class="bi bi-people"></i> Управление участниками
+                </a>
             </div>
         </div>
+        <div class="card-body">
+            @if (Model.GroupMembers.Any())
+            {
+                <ul>
+                    @foreach (var member in Model.GroupMembers.OrderBy(m => m.Name))
+                    {
+                        <li>@member.Name (@member.Login)</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="text-muted">Нет участников</p>
+            }
+        </div>
+    </div>
 </div>
 
 <!-- Модальное окно добавления участника -->

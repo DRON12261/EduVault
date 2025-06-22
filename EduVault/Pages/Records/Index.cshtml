@@ -15,8 +15,8 @@
         </button>
     </form>
     }
-    <form id="editForm" asp-page="./@ViewData["Entity"]" asp-route-mode="edit" style="display: inline-block; margin: 0;">
-        @Html.AntiForgeryToken()
+    <form method="get" id="editForm" asp-page="./@ViewData["Entity"]" asp-route-mode="edit" style="display: inline-block; margin: 0;">
+        <input type="hidden" name="id" id="editId" />
         <button id="editBtn" type="submit" class="btn-primary" disabled>
             <i class="bi bi-pencil-square"></i> Редактировать
         </button>

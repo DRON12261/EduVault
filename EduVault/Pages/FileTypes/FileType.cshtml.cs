@@ -27,7 +27,7 @@ namespace EduVault.Pages.FileTypes
         [BindProperty(SupportsGet = true)]
         public string Mode { get; set; }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public long Id { get; set; }
 
         [BindProperty]
@@ -40,11 +40,6 @@ namespace EduVault.Pages.FileTypes
         public FileTypeFieldDTO NewField { get; set; } = new();
 
         public async Task<IActionResult> OnGetAsync()
-        {
-            return RedirectToPage("./Index");
-        }
-
-        public async Task<IActionResult> OnPostAsync()
         {
             ModelState.Remove("Name");
             ModelState.Remove("FileNameTemplate");
@@ -115,18 +110,6 @@ namespace EduVault.Pages.FileTypes
                 TempData.Keep("TempFields"); // Явно сохраняем TempData
             }
             return Partial("_FieldsTablePartial", this);
-            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-            {
-                // Возвращаем обновлённый Partial с текущим состоянием модели
-                return Partial("_FieldsTablePartial", new FileTypeModel(_fileTypeService, _fileTypeFieldService)
-                {
-                    Fields = this.Fields,
-                    Mode = this.Mode,
-                    Id = this.Id,
-                    Input = this.Input
-                });
-            }
-            return Page();
         }
 
         public async Task<IActionResult> OnPostSaveFieldsAsync()
