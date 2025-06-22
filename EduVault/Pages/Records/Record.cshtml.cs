@@ -53,7 +53,7 @@ namespace EduVault.Pages.Records
         [BindProperty(SupportsGet = true)]
         public long Id { get; set; } // Для редактирования
         public List<FileType> FileTypes { get; set; } = new();
-        public List<FileTypeFieldDTO> FileTypeFields { get; set; } = new();
+        //public List<FileTypeFieldDTO> FileTypeFields { get; set; } = new();
         public List<Field> Fields { get; set; } = new();
 
         //public List<AccessRightsDTO> AccessRights { get; set; } = new();
@@ -86,7 +86,7 @@ namespace EduVault.Pages.Records
                                          // Если сразу выбран тип файла (например, из query string)
                 if (Input.FileType > 0)
                 {
-                    await LoadFieldTemplates(Input.FileType);
+                    //await LoadFieldTemplates(Input.FileType);
                 }
             }
             else if (Mode == "edit")
@@ -96,14 +96,15 @@ namespace EduVault.Pages.Records
                 Input.FileName = await _mongoFileService.GetFileNameAsync(Input.FilePath);
                 Author = await _userService.GetByIdAsync(Input.RecordAuthor);
                 // Загружаем шаблоны полей для типа файла
-                await LoadFieldTemplates(Input.FileType);
+                //await LoadFieldTemplates(Input.FileType);
                 // Загружаем значения полей
                 Input.CustomFieldsValues = await _fieldService.GetFieldsForRecordAsync(Id);
+                UploadedFile = await GetFileAsFormFileAsync(Input.FilePath);
             }
-            if (Input?.FileType > 0)
+            /*if (Input?.FileType > 0)
             {
                 FileTypeFields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(Input.FileType);
-            }
+            }*/
             if (Mode == "edit" && Id > 0)
             {
                 // Проверяем, можно ли просматривать файл
@@ -113,13 +114,13 @@ namespace EduVault.Pages.Records
             TempData["SavedId"] = JsonSerializer.Serialize(Id);
             return Page();
         }
-        private async Task LoadFieldTemplates(long fileTypeId)
-        {
-            FileTypeFields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(fileTypeId);
-            Input.CustomFieldsTemplate = FileTypeFields.ToDictionary(
-                f => f.Id,
-                f => f.DefaultValue ?? ""); // Используем DefaultValue из FileTypeField или пустую строку
-        }
+        /*private async Task LoadFieldTemplates(long fileTypeId)
+       {
+           FileTypeFields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(fileTypeId);
+           Input.CustomFieldsTemplate = FileTypeFields.ToDictionary(
+               f => f.Id,
+               f => f.DefaultValue ?? ""); // Используем DefaultValue из FileTypeField или пустую строку
+       }*/
         public async Task<IActionResult> OnGetDownloadFileAsync()
         {
             /*if(TempData["InputData"] is RecordDTO serializedInput){
@@ -183,9 +184,27 @@ namespace EduVault.Pages.Records
 
             return RedirectToPage();
         }
+        private async Task<IFormFile> GetFileAsFormFileAsync(string fileId)
+        {
+            var (stream, contentType, fileName, error) = await _mongoFileService.DownloadFileAsync(fileId);
+            if (stream == null) throw new FileNotFoundException(error ?? "File not found");
+
+            // Копируем в MemoryStream, так как GridFS stream может быть нечитаемым повторно
+            var memoryStream = new MemoryStream();
+            await stream.CopyToAsync(memoryStream);
+            memoryStream.Position = 0;
+            stream.Dispose();
+
+            return new InMemoryFormFile(
+                memoryStream,
+                fileName,
+                contentType,
+                memoryStream.Length
+            );
+        }
         public async Task<IActionResult> OnPostSaveAsync()
         {
-            if (Input?.FileType > 0)
+            /*if (Input?.FileType > 0)
             {
                 FileTypeFields = await _fileTypeFieldService.GetFieldsForFileTypeAsync(Input.FileType);
             }
@@ -198,10 +217,22 @@ namespace EduVault.Pages.Records
                     ModelState.AddModelError($"Input.CustomFields[{field.Id}]",
                         $"Поле '{field.Name}' обязательно для заполнения");
                 }
+            }*/
+            if (TempData["SavedId"] is string savedIdStr && long.TryParse(savedIdStr, out var savedId))
+            {
+                Id = savedId;
+                TempData.Keep("SavedId");
+            }
+            if (Mode == "edit" && Id > 0)
+            {
+                Input = new RecordDTO(await _recordService.GetByIdAsync(Id));
+                UploadedFile = await GetFileAsFormFileAsync(Input.FilePath);
             }
             string old_filepath = "";
             ModelState.Remove("Input.FilePath");
             ModelState.Remove("Input.FileName");
+            ModelState.Remove("UploadedFile");
+            
             if (!ModelState.IsValid)
             {
                 var errors = ModelState
@@ -281,14 +312,14 @@ namespace EduVault.Pages.Records
                     Input.RecordCreationDate = DateTime.UtcNow;
                     var recordId = await _recordService.CreateAsync(Input);
                     // Сохраняем значения полей
-                    await _fieldService.SaveFieldsForRecordAsync(recordId, Input.CustomFieldsValues);
-                    await _recordService.CreateAsync(Input);
+                    //await _fieldService.SaveFieldsForRecordAsync(recordId, Input.CustomFieldsValues);
+                    //await _recordService.CreateAsync(Input);
                 }
                 else if (Mode == "edit")
                 {
                     Input.RecordCreationDate = (await _recordService.GetByIdAsync(Input.Id)).RecordCreationDate;
                     // Обновляем значения полей
-                    await _fieldService.SaveFieldsForRecordAsync(Input.Id, Input.CustomFieldsValues);
+                    //await _fieldService.SaveFieldsForRecordAsync(Input.Id, Input.CustomFieldsValues);
                     await _recordService.UpdateAsync(Input);
                     await _mongoFileService.DeleteFileAsync(old_filepath);
                 }

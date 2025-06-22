@@ -8,7 +8,7 @@
 <div class="records-actions">
     @if (!User.IsInRole("Рядовой пользователь"))
     {
-    <form asp-page="./@ViewData["Entity"]" asp-route-mode="create" style="display: inline-block; margin: 0;">
+    <form method = "get" asp-page="./@ViewData["Entity"]" asp-route-mode="create" style="display: inline-block; margin: 0;">
         @Html.AntiForgeryToken()
         <button id="createBtn" type="submit" class="btn-alt">
             <i class="bi bi-plus-circle"></i> Добавить

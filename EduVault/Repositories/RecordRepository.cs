@@ -35,7 +35,7 @@ namespace EduVault.Repositories
         public async Task<long> CreateAsync(Record record)
         {
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
-            await _context.Fields.AddRangeAsync(record.CustomFieldsValues);
+            if(record.CustomFieldsValues!=null)await _context.Fields.AddRangeAsync(record.CustomFieldsValues);
             await _context.Records.AddAsync(record);
             await _context.SaveChangesAsync();
             return record.Id;
