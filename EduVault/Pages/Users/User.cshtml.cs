@@ -29,11 +29,7 @@ namespace EduVault.Pages.Users
         [BindProperty]
         public UserDTO Input { get; set; }
 
-        public IActionResult OnGet()
-        {
-            return RedirectToPage("./Index");
-        }
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             Roles = await _roleService.GetAllAsync();
             if (Mode == "create")

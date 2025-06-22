@@ -37632,8 +37632,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>pzw8rkigab</Fingerprint>
-      <Integrity>+7vHEnv2pJSA/mpeeo9PDmiStqIi/xN9j5NcIEfiCsQ=</Integrity>
+      <Fingerprint>17ayqvh3py</Fingerprint>
+      <Integrity>HW6YiFmE2UpPfUXikwMqlLl73Im4LxmVdXdkRKDwBrA=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\rowSelection.js'))</OriginalItemSpec>

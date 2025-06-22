@@ -7,6 +7,7 @@ namespace EduVault.Models.DataTransferObjects
         public long Id { get; set; }
         [Required]
         public string Name { get; set; }
+        public List<UserDTO> Users { get; set; }
 
         public GroupDTO(Group group)
         {

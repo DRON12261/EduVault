@@ -109,13 +109,13 @@ namespace EduVault.Data
 
                 // Настройка связи с User
                 entity.HasOne(gu => gu.User)
-                    .WithMany(u => u.GroupUsers)
+                    .WithMany(u => u.Groups)
                     .HasForeignKey(gu => gu.UserId)
                     .OnDelete(DeleteBehavior.Cascade); // Удаление GroupUser при удалении User
 
                 // Настройка связи с Group
                 entity.HasOne(gu => gu.Group)
-                    .WithMany(g => g.GroupUsers)
+                    .WithMany(g => g.Users)
                     .HasForeignKey(gu => gu.GroupId)
                     .OnDelete(DeleteBehavior.Cascade); // Удаление GroupUser при удалении Group
             });

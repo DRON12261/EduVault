@@ -42,76 +42,87 @@
 
             <div class="card-content">
                 <div class="form-group">
-                    <!--<legend>Базовые поля</legend>-->
-                    @if (Model.Mode == "edit")
-                    {
-                        <input style="display: none;" asp-for="Input.Id" type="text" placeholder="Id" readonly>
-                    }
-                    <div class="record-form-group">
-                        <label>Название:</label>
-                        <input asp-for="Input.Name" type="text" placeholder="Имя" required>
-                    </div>
-                    <div class="record-form-group">
-                        <label>Тип файла:</label>
-                        <select asp-for="Input.FileType"
-                        asp-items="@(new SelectList(Model.FileTypes, "Id", "Name"))"
-                        class="form-control" required>
-                            <option value="">-- Выберите тип файла --</option>
-                        </select>
-                    </div>
-                    <!--<div>
-                    <label>Файл:</label>
-                    <input asp-for="Input.FilePath" type="text" placeholder="Файл" required>
-                    <input type="file" id="file" name="file">
-                    </div>-->
-                    <div class="record-form-group">
-                        <label>Файл:</label>
-                        <!-- Блок с текущим файлом -->
-                        @if (!string.IsNullOrEmpty(Model.Input.FilePath))
+                    <fieldset>
+                        <legend>Базовые поля</legend>
+                        @if (Model.Mode == "edit")
                         {
-                            <div class="file-info mb-2 p-2 bg-light rounded">
-                                <span class="me-2">
-                                    Текущий файл: @System.IO.Path.GetFileName(Model.Input.FileName)
-                                </span>
+                            <input style="display: none;" asp-for="Input.Id" type="text" placeholder="Id" readonly>
+                        }
+                        <div class="record-form-group">
+                            <label>Название:</label>
+                            <input asp-for="Input.Name" type="text" placeholder="Имя" required>
+                        </div>
+                        <div class="record-form-group">
+                            <label>Тип файла:</label>
+                            <select asp-for="Input.FileType"
+                            asp-items="@(new SelectList(Model.FileTypes, "Id", "Name"))"
+                            class="form-control" required>
+                                <option value="">-- Выберите тип файла --</option>
+                            </select>
+                        </div>
+                        <div class="record-form-group">
+                            <label>Файл:</label>
+                            <!-- Блок с текущим файлом -->
+                            @if (!string.IsNullOrEmpty(Model.Input.FilePath))
+                            {
+                                <div class="file-info mb-2 p-2 bg-light rounded">
+                                    <span class="me-2">
+                                        Текущий файл: @System.IO.Path.GetFileName(Model.Input.FileName)
+                                    </span>
+                                </div>
+                            }
+                            <!-- Поле загрузки нового файла -->
+                            <div class="file-upload-wrapper">
+                                <input type="file" asp-for="UploadedFile" class="form-control">
+                                <small class="form-text text-muted">
+                                    @if (!string.IsNullOrEmpty(Model.Input.FilePath))
+                                    {
+                                        <text>Выберите новый файл для замены</text>
+                                    }
+                                    else
+                                    {
+                                        <text>Загрузите файл</text>
+                                    }
+                                </small>
+                            </div>
+                        </div>
+                        @if (Model.Mode == "edit")
+                        {
+                            <div class="card-form-group" style="display: none;">
+                                <label>Автор карточки:</label>
+                                <input type="text" asp-for="Input.RecordAuthor" readonly>
+                            </div>
+                            <div class="card-form-group" style="display: none;">
+                                <label>Дата создания карточки:</label>
+                                <input type="date" asp-for="Input.RecordCreationDate" readonly>
                             </div>
                         }
-                        <!-- Поле загрузки нового файла -->
-                        <div class="file-upload-wrapper">
-                            <input type="file" asp-for="UploadedFile" class="form-control">
-                            <small class="form-text text-muted">
-                                @if (!string.IsNullOrEmpty(Model.Input.FilePath))
+                    </fieldset>
+                </div>
+                <div class="form-group">
+                    <fieldset>
+                        <legend>Настраиваемые поля</legend>
+                        @foreach (var field in Model.FileTypeFields)
+                        {
+                            <div class="card-form-group">
+                                <label>@field.Name:</label>
+                                @if (field.IsPrefilled)
                                 {
-                                    <text>Выберите новый файл для замены</text>
+                                    <input type="text"
+                                           value="@(Model.Input.CustomFieldsTemplate?.GetValueOrDefault(field.Id) ?? "")"
+                                           readonly>
                                 }
                                 else
                                 {
-                                    <text>Загрузите файл</text>
+                                    <input type="text"
+                                           name="Input.CustomFieldsValues[@field.Id]"
+                                           value="@(Model.Input.CustomFieldsValues?.GetValueOrDefault(field.Id) ?? "")"
+                                    @(field.IsRequired ? "required" : "")>
                                 }
-                            </small>
-                        </div>
-                    </div>
-                    @if (Model.Mode == "edit")
-                    {
-                        <div class="card-form-group" style="display: none;">
-                            <label>Автор карточки:</label>
-                            <input type="text" asp-for="Input.RecordAuthor" readonly>
-                        </div>
-                        <div class="card-form-group" style="display: none;">
-                            <label>Дата создания карточки:</label>
-                            <input type="date" asp-for="Input.RecordCreationDate" readonly>
-                        </div>
-                    }
+                            </div>
+                        }
+                    </fieldset>
                 </div>
-                <!--<fieldset class="form-group">
-                <legend>Поля типа @(Model.Input.FileType)</legend>
-                @foreach (var field in Model.Fields)
-                {
-                    <div class="card-form-group">
-                        <label>field.Name:</label>
-                        <input type="text">
-                    </div>
-                }
-                </fieldset>-->
                 <!--<div class="relationships-panel">
                 <h3>Связанные карточки</h3>
 

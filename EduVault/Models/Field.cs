@@ -5,7 +5,8 @@ namespace EduVault.Models
 		private long _id;
 		private string _name;
 		private string _value;
-		private FileTypeField _fileTypeField;
+		private long _fileTypeFieldId;
+        private long _recordId;
 
 		public long Id { get { return _id; } set { _id = value; } }
 		public string Name
@@ -28,8 +29,12 @@ namespace EduVault.Models
 			}
 		}
 		public string Value { get { return _value; } set { _value = value; } }
-		public FileTypeField FileTypeField { get { return _fileTypeField; } set { _fileTypeField = value; } }
-		Field()
+		public long FileTypeFieldId { get { return _fileTypeFieldId; } set { _fileTypeFieldId = value; } }
+        public long RecordId { get { return _recordId; } set { _recordId = value; } }
+        // Навигационные свойства
+        public Record Record { get; set; }
+        public FileTypeField FileTypeField { get; set; }
+        public Field()
 		{
 
 		}

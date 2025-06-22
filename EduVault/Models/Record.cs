@@ -13,7 +13,7 @@ namespace EduVault.Models
 		private long _recordAuthorId;
 		private long _fileTypeId;
         private DateTime _recordCreationDate;
-		private Field[] _fields;
+		private Field[] _customFieldsValues;
         public List<Relation> Relationships { get; set; } = new();
 
         public long Id { get { return _id; } set { _id = value; } }
@@ -40,7 +40,7 @@ namespace EduVault.Models
 		public long RecordAuthorId { get { return _recordAuthorId; } set { _recordAuthorId = value; } }
 		public long FileTypeId { get { return _fileTypeId; } set { _fileTypeId = value; } }
         public DateTime RecordCreationDate { get { return _recordCreationDate; } set { _recordCreationDate = value; } }
-        public Field[] Fields { get { return _fields; } set { _fields = value; } }
+        public Field[] CustomFieldsValues { get { return _customFieldsValues; } set { _customFieldsValues = value; } }
         public Record(RecordDTO dto)
         {
             Id = dto.Id;

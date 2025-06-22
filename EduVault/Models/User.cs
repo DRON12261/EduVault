@@ -12,7 +12,7 @@ namespace EduVault.Models
 		private string _passwordHash;
 		private byte _userType;
         private int _roleId;
-		private List<GroupUser> _groupUsers;
+		private List<GroupUser> _groups;
 		public long Id { get { return _id; } set { _id = value; } }
 		public string Name
 		{
@@ -37,7 +37,7 @@ namespace EduVault.Models
 		public string PasswordHash { get { return _passwordHash; } set { _passwordHash = value; } }
 		public byte UserType { get { return _userType; } set { _userType = value; } }
         public int RoleId { get { return _roleId; } set { _roleId = value; } }
-        public List<GroupUser> GroupUsers { get { return _groupUsers; } set { _groupUsers = value; } }
+        public List<GroupUser> Groups { get { return _groups; } set { _groups = value; } }
         public User(string name, string login, string password, int roleId)
 		{
             Name = name;

@@ -1,0 +1,16 @@
+@model EduVault.Pages.Groups.GroupModel
+
+<select class="form-select" name="userId" required>
+    <option value="">-- Выберите пользователя --</option>
+    @foreach (var user in Model.AvailableUsers.OrderBy(u => u.Name))
+    {
+        <option value="@user.Id">@user.Name (@user.Login)</option>
+    }
+</select>
+
+@if (!Model.AvailableUsers.Any())
+{
+    <div class="alert alert-warning mt-2">
+        Нет доступных пользователей для добавления
+    </div>
+}

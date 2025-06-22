@@ -6,7 +6,7 @@ namespace EduVault.Models
 	{
 		private long _id;
 		private string _name;
-		private List<GroupUser> _groupUsers;
+		private List<GroupUser> _users;
 		public long Id { get { return _id; } set { _id = value; } }
 		public string Name
 		{
@@ -27,7 +27,7 @@ namespace EduVault.Models
 				}
 			}
 		}
-		public List<GroupUser> GroupUsers { get { return _groupUsers; } set { _groupUsers = value; } }
+		public List<GroupUser> Users { get { return _users; } set { _users = value; } }
         public Group(GroupDTO groupDTO)
         {
             Id = groupDTO.Id;
