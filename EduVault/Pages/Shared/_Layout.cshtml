@@ -36,7 +36,7 @@
                 }
                 <form method="post" asp-page="/Index" class="d-inline">
                     @Html.AntiForgeryToken()
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите выйти из системы?')">
+                    <button type="submit" class="btn-secondary" onclick="return confirm('Вы уверены, что хотите выйти из системы?')">
                         <i class="bi bi-box-arrow-right"></i> Выйти
                     </button>
                 </form>

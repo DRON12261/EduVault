@@ -26,7 +26,7 @@ namespace EduVault.Pages.Users
         [BindProperty(SupportsGet = true)]
         public long Id { get; set; }
         public List<Role> Roles { get; set; }
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public UserDTO Input { get; set; }
 
         public async Task<IActionResult> OnGetAsync()

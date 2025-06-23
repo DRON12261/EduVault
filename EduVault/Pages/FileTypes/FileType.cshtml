@@ -4,7 +4,7 @@
     ViewData["Title"] = ((Model.Mode == "create") ? "Создание" : "Редактирование") + " типа файла";
 }
 
-<div class="form-container">
+<div class="fields-container">
     <form method="post" asp-antiforgery="true">
         @Html.AntiForgeryToken()
 

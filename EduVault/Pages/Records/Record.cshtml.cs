@@ -58,9 +58,9 @@ namespace EduVault.Pages.Records
 
         //public List<AccessRightsDTO> AccessRights { get; set; } = new();
         public User Author { get; set; }
-        [BindProperty]
+        [BindProperty(SupportsGet =true)]
         public RecordDTO Input { get; set; }
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public IFormFile UploadedFile { get; set; }
         [BindProperty]
         public List<long> SelectedRelationships { get; set; } = new(); // Выбранные связи
@@ -225,8 +225,7 @@ namespace EduVault.Pages.Records
             }
             if (Mode == "edit" && Id > 0)
             {
-                Input = new RecordDTO(await _recordService.GetByIdAsync(Id));
-                UploadedFile = await GetFileAsFormFileAsync(Input.FilePath);
+                UploadedFile = UploadedFile??await GetFileAsFormFileAsync(new RecordDTO(await _recordService.GetByIdAsync(Id)).FilePath);
             }
             string old_filepath = "";
             ModelState.Remove("Input.FilePath");
@@ -251,7 +250,7 @@ namespace EduVault.Pages.Records
             }
             string uploadedFilePath = null;
 
-            if (UploadedFile != null && UploadedFile.Length > 0)
+            if (UploadedFile != null)// && UploadedFile.Length > 0)
             {
                 // Получаем шаблон для типа файла
                 var template = (await _fileTypeService.GetByIdAsync(Input.FileType)).FileNameTemplate;

@@ -66,3 +66,42 @@ C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\Newtonsoft.Json.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\NuGet.Versioning.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\NuGet.Common.dll
 C:\Users\User\Desktop\EduVault\EduVault\bin\Debug\NuGet.Configuration.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\appsettings.Development.json
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\appsettings.json
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\EduVault.deps.json
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\EduVault.runtimeconfig.json
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\EduVault.staticwebassets.runtime.json
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\EduVault.exe
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\EduVault.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\MongoDB.Driver.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Microsoft.EntityFrameworkCore.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\BCrypt.Net-Next.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\MongoDB.Bson.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\NuGet.Packaging.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Microsoft.Extensions.Primitives.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Microsoft.EntityFrameworkCore.Relational.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Microsoft.EntityFrameworkCore.Abstractions.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\DnsClient.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\SharpCompress.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\ZstdSharp.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Snappier.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Microsoft.Extensions.Caching.Abstractions.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Microsoft.Extensions.Logging.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Microsoft.Extensions.Caching.Memory.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Microsoft.Extensions.Options.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\NuGet.Frameworks.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Newtonsoft.Json.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\NuGet.Versioning.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\NuGet.Common.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\NuGet.Configuration.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\Npgsql.dll
+E:\Projects\Visual Studio Projects\EduVault\bin\Debug\EduVault.pdb
+E:\Projects\Visual Studio Projects\EduVault\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
+E:\Projects\Visual Studio Projects\EduVault\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
+E:\Projects\Visual Studio Projects\EduVault\obj\Debug\docker-c.35A3FFBA.Up2Date
