@@ -83,12 +83,12 @@ namespace EduVault.Pages.Groups
             }
             if (Mode == "create")
             {
-                Input = new GroupDTO();
+                Input = Input ?? new GroupDTO();
                 GroupMembers = new List<UserDTO>();
             }
             else if (Mode == "edit")
             {
-                Input = new GroupDTO(await _groupService.GetByIdAsync(Id));
+                Input = Input?? new GroupDTO(await _groupService.GetByIdAsync(Id));
                 GroupMembers = await _userService.GetUsersForGroupAsync(Id);
             }
 
