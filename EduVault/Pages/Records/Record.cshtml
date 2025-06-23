@@ -109,9 +109,9 @@
                 @foreach (var rel in Model.CurrentRelations)
                 {
                     <div class="relationship-item">
-                        <span>@rel.TargetRecord</span>
+                        <span>@rel.TargetRecordId</span>
                         <button type="button" class="btn-remove-relationship"
-                        data-relationship-id="@rel.Id">
+                        data-relationship-id="@rel">
                             ×
                         </button>
                     </div>
@@ -132,7 +132,46 @@
             </div>
         </div>
     </form>
-
+    <!-- Секция связанных карточек -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <span>Связанные карточки</span>
+                <a href="/Records/Relations/@Model.Id"
+                   class="btn btn-sm btn-primary">
+                    <i class="bi bi-list-check"></i> Управление связями
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            @if (Model.RelatedRecords.Any())
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Название карточки</th>
+                            <th>Тип файла</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var relation in Model.RelatedRecords.OrderBy(r => r.Id))
+                        {
+                            <tr>
+                                <td>@relation.Id</td>
+                                <td>@relation.Name</td>
+                                <td>@(Model.FileTypes.Where(ft=>ft.Id==relation.FileTypeId).Select(ft=>ft.Name).FirstOrDefault())</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="text-muted">Нет связанных карточек</p>
+            }
+        </div>
+    </div>
     <div class="rights-panel">
         <div style="display:flex;">
             <h3 style="display:inline;">Права доступа</h3>

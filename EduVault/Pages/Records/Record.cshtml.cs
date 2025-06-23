@@ -68,6 +68,7 @@ namespace EduVault.Pages.Records
 
         public List<Record> AvailableRecords { get; set; } = new();
         public List<Relation> CurrentRelations { get; set; } = new();
+        public List<Record> RelatedRecords {get; set; } = new();
         public async Task<IActionResult> OnGetAsync()
         {
             FileTypes = await _fileTypeService.GetAllAsync();
@@ -75,6 +76,7 @@ namespace EduVault.Pages.Records
             if (Mode == "edit")
             {
                 //CurrentRelations = await _relationService.GetRelationshipsForRecordAsync(Id);
+                RelatedRecords = await _relationService.GetRelatedRecordsForRecordAsync(Id);
             }
             AvailableRecords = (await _recordService.GetAllAsync())
                               .Where(r => r.Id != Id) // Исключаем текущую запись
@@ -173,7 +175,7 @@ namespace EduVault.Pages.Records
             var existing = await _relationService.GetRelationshipsForRecordAsync(Id);
             foreach (var rel in existing)
             {
-                await _relationService.DeleteRelationshipAsync(rel.Id);
+                await _relationService.DeleteRelationshipAsync(rel);
             }
 
             // Добавляем новые

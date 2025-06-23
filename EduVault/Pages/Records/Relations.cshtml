@@ -1,0 +1,54 @@
+@page "/Records/Relations/{id}"
+@model EduVault.Pages.Records.RelationsModel
+@{
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between mb-3">
+        <h2>Связи карточки @Model.RecordName</h2>
+        <a href="/Records/Record/edit/@Model.Id" class="btn btn-secondary">
+            ← Назад к карточке
+        </a>
+    </div>
+
+    <!-- Таблица связей -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Карточка</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var relation in Model.Relations)
+            {
+                <tr>
+                    <td>@relation.Name</td>
+                    <td>
+                        <form method="post" asp-page-handler="RemoveRelation">
+                            <input type="hidden" name="recordId" value="@relation.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Вы уверены, что хотите удалить связь?')">
+                                Удалить
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Форма добавления -->
+    <form method="post" asp-page-handler="AddRelation" class="mt-4">
+        <div class="input-group mb-3">
+            <select class="form-select" name="recordId" required>
+                <option value="">-- Выберите карточку --</option>
+                @foreach (var record in Model.AvailableRecords)
+                {
+                    <option value="@record.Id">@record.Name</option>
+                }
+            </select>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </div>
+    </form>
+</div>

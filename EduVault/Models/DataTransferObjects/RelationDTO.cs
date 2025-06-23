@@ -5,14 +5,12 @@ namespace EduVault.Models.DataTransferObjects
 {
     public class RelationDTO
     {
-        public long Id { get; set; }
         public long SourceRecordId { get; set; }
         public long TargetRecordId { get; set; }
         public RelationDTO(Relation relation)
         {
-            Id = relation.Id;
-            SourceRecordId = relation.SourceRecord;
-            TargetRecordId = relation.TargetRecord;
+            SourceRecordId = relation.SourceRecordId;
+            TargetRecordId = relation.TargetRecordId;
         }
         public RelationDTO() { }
     }
