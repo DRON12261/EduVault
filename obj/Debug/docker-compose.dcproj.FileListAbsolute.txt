@@ -105,3 +105,15 @@ E:\Projects\Visual Studio Projects\EduVault\bin\Debug\EduVault.pdb
 E:\Projects\Visual Studio Projects\EduVault\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
 E:\Projects\Visual Studio Projects\EduVault\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 E:\Projects\Visual Studio Projects\EduVault\obj\Debug\docker-c.35A3FFBA.Up2Date
+S:\Projects\Visual Studio\EduVault\bin\Debug\MongoDB.Driver.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\MongoDB.Bson.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\NuGet.Packaging.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\DnsClient.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\SharpCompress.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\ZstdSharp.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Snappier.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\NuGet.Frameworks.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\Newtonsoft.Json.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\NuGet.Versioning.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\NuGet.Common.dll
+S:\Projects\Visual Studio\EduVault\bin\Debug\NuGet.Configuration.dll

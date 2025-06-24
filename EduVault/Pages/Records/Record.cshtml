@@ -8,97 +8,90 @@
     <form method="post" asp-antiforgery="true" enctype="multipart/form-data" asp-route-id="@(Model.Input.Id)">
         @Html.AntiForgeryToken()
         <div>
-            <div class="record-actions">
-                <button type="submit" asp-page-handler="Save" class="btn-primary">@(Model.Mode == "create" ? "Создать" : "Сохранить") карточку</button>
+            <div class="record-actions" style="padding: 0 0 1rem 0; margin-bottom: 0.5rem;">
+                <button type="submit" asp-page-handler="Save" class="btn-alt">@(Model.Mode == "create" ? "Создать" : "Сохранить") карточку</button>
 
                 <!-- Кнопки для работы с файлом -->
                 @if (!string.IsNullOrEmpty(Model.Input.FilePath))
                 {
-                    <div class="btn-group">
-                        <!-- Кнопка просмотра (только для поддерживаемых форматов) -->
-                        <a asp-page-handler="DownloadFile"
-                        asp-route-fileId="@Model.Input.FilePath"
-                        target="_blank"
-                        class="btn btn-primary @(Model.CanPreviewFile ? "" : "d-none")">
-                            <i class="bi bi-eye"></i> Просмотреть
-                        </a>
+                    <!-- Кнопка просмотра (только для поддерживаемых форматов) -->
+                    <a asp-page-handler="DownloadFile"
+                       asp-route-fileId="@Model.Input.FilePath"
+                       target="_blank"
+                       class="link-button-primary @(Model.CanPreviewFile ? "" : "d-none")">
+                        <i class="bi bi-eye"></i> Просмотреть
+                    </a>
 
-                        <!-- Кнопка скачивания -->
-                        <a asp-page-handler="DownloadFile"
-                        asp-route-fileId="@Model.Input.FilePath"
-                        download
-                        class="btn btn-primary">
-                            <i class="bi bi-download"></i> Скачать
-                        </a>
-                    </div>
+                    <!-- Кнопка скачивания -->
+                    <a asp-page-handler="DownloadFile"
+                       asp-route-fileId="@Model.Input.FilePath"
+                       download
+                       class="link-button-primary">
+                        <i class="bi bi-download"></i> Скачать
+                    </a>
                 }
-
-                
             </div>
 
             <div class="card-content">
                 <div class="form-group">
-                    <fieldset>
-                        <legend>Базовые поля</legend>
-                        @if (Model.Mode == "edit")
+                    @if (Model.Mode == "edit")
+                    {
+                        <input style="display: none;" asp-for="Input.Id" type="text" placeholder="Id" readonly>
+                    }
+                    <div class="record-form-group">
+                        <label>Название:</label>
+                        <input asp-for="Input.Name" type="text" placeholder="Имя" required>
+                    </div>
+                    <div class="record-form-group">
+                        <label>Тип файла:</label>
+                        <select asp-for="Input.FileType"
+                                asp-items="@(new SelectList(Model.FileTypes, "Id", "Name"))"
+                                class="form-control" required>
+                            <option value="">-- Выберите тип файла --</option>
+                        </select>
+                    </div>
+                    <div class="record-form-group">
+                        <label>Файл:</label>
+                        <!-- Блок с текущим файлом -->
+                        @if (!string.IsNullOrEmpty(Model.Input.FilePath))
                         {
-                            <input style="display: none;" asp-for="Input.Id" type="text" placeholder="Id" readonly>
-                        }
-                        <div class="record-form-group">
-                            <label>Название:</label>
-                            <input asp-for="Input.Name" type="text" placeholder="Имя" required>
-                        </div>
-                        <div class="record-form-group">
-                            <label>Тип файла:</label>
-                            <select asp-for="Input.FileType"
-                            asp-items="@(new SelectList(Model.FileTypes, "Id", "Name"))"
-                            class="form-control" required>
-                                <option value="">-- Выберите тип файла --</option>
-                            </select>
-                        </div>
-                        <div class="record-form-group">
-                            <label>Файл:</label>
-                            <!-- Блок с текущим файлом -->
-                            @if (!string.IsNullOrEmpty(Model.Input.FilePath))
-                            {
-                                <div class="file-info mb-2 p-2 bg-light rounded">
-                                    <span class="me-2">
-                                        Текущий файл: @System.IO.Path.GetFileName(Model.Input.FileName)
-                                    </span>
-                                </div>
-                            }
-                            <!-- Поле загрузки нового файла -->
-                            <div class="file-upload-wrapper">
-                                <input type="file" asp-for="UploadedFile" class="form-control">
-                                <small class="form-text text-muted">
-                                    @if (!string.IsNullOrEmpty(Model.Input.FilePath))
-                                    {
-                                        <text>Выберите новый файл для замены</text>
-                                    }
-                                    else
-                                    {
-                                        <text>Загрузите файл</text>
-                                    }
-                                </small>
-                            </div>
-                        </div>
-                        @if (Model.Mode == "edit")
-                        {
-                            <div class="card-form-group" style="display: none;">
-                                <label>Автор карточки:</label>
-                                <input type="text" asp-for="Input.RecordAuthor" readonly>
-                            </div>
-                            <div class="card-form-group" style="display: none;">
-                                <label>Дата создания карточки:</label>
-                                <input type="date" asp-for="Input.RecordCreationDate" readonly>
+                            <div class="file-info mb-2 p-2 bg-light rounded">
+                                <span class="me-2">
+                                    Текущий файл: @System.IO.Path.GetFileName(Model.Input.FileName)
+                                </span>
                             </div>
                         }
-                    </fieldset>
+                        <!-- Поле загрузки нового файла -->
+                        <div class="file-upload-wrapper">
+                            <input type="file" asp-for="UploadedFile" class="form-control">
+                            <small class="form-text text-muted">
+                                @if (!string.IsNullOrEmpty(Model.Input.FilePath))
+                                {
+                                    <text>Выберите новый файл для замены</text>
+                                }
+                                else
+                                {
+                                    <text>Загрузите файл</text>
+                                }
+                            </small>
+                        </div>
+                    </div>
+                    @if (Model.Mode == "edit")
+                    {
+                        <div class="card-form-group" style="display: none;">
+                            <label>Автор карточки:</label>
+                            <input type="text" asp-for="Input.RecordAuthor" readonly>
+                        </div>
+                        <div class="card-form-group" style="display: none;">
+                            <label>Дата создания карточки:</label>
+                            <input type="date" asp-for="Input.RecordCreationDate" readonly>
+                        </div>
+                    }
                 </div>
                 <!--<div class="form-group">
                     <fieldset>
                         <legend>Настраиваемые поля</legend>
-                        
+
                     </fieldset>
                 </div>-->
                 <!--<div class="relationships-panel">
@@ -108,13 +101,13 @@
                 <div class="current-relationships">
                 @foreach (var rel in Model.CurrentRelations)
                 {
-                    <div class="relationship-item">
-                        <span>@rel.TargetRecord</span>
-                        <button type="button" class="btn-remove-relationship"
-                        data-relationship-id="@rel.Id">
-                            ×
-                        </button>
-                    </div>
+                                    <div class="relationship-item">
+                                        <span>@rel.TargetRecordId</span>
+                                        <button type="button" class="btn-remove-relationship"
+                                        data-relationship-id="@rel">
+                                            ×
+                                        </button>
+                                    </div>
                 }
                 </div>
 
@@ -133,37 +126,80 @@
         </div>
     </form>
 
-    <div class="rights-panel">
-        <div style="display:flex;">
-            <h3 style="display:inline;">Права доступа</h3>
-            <button class="btn-alt" style="padding: 0.2rem 0.5rem; display:inline; margin-left: auto; margin-right: 0;">+</button>
-        </div>
-        <div class="rights-table-wrapper">
-            <table class="rights-table">
-                <thead>
-                    <tr>
-                        <th>Имя</th>
-                        <th>Тип прав</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!--<tr>
-                            <td>Скочко А.Е.</td>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <div class="rights-panel" style="height: 60%">
+            <div style="display:flex;">
+                <h3 style="display:inline;">Права доступа</h3>
+                <button class="btn-alt" style="padding: 0.2rem 0.5rem; display:inline; margin-left: auto; margin-right: 0;">+</button>
+            </div>
+            <div class="rights-table-wrapper">
+                <table class="rights-table">
+                    <thead>
+                        <tr>
+                            <th>Имя</th>
+                            <th>Тип прав</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--<tr>
+                                <td>Скочко А.Е.</td>
+                                <td>Полный доступ</td>
+                                <td>
+                                <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
+                                </td>
+                            </tr>-->
+                        <tr>
+                            <td>Чипак Д.И.</td>
                             <td>Полный доступ</td>
                             <td>
-                            <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
+                                <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
                             </td>
-                        </tr>-->
-                    <tr>
-                        <td>Чипак Д.И.</td>
-                        <td>Полный доступ</td>
-                        <td>
-                            <button class="btn-secondary" style="padding: 0.2rem 0.5rem;">×</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Секция связанных карточек -->
+        <div class="card" style="height: 40%">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>Связанные карточки</span>
+                    <a href="/Records/Relations/@Model.Id"
+                       class="btn btn-sm btn-primary">
+                        <i class="bi bi-list-check"></i> Управление связями
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                @if (Model.RelatedRecords.Any())
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Название карточки</th>
+                                <th>Тип файла</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var relation in Model.RelatedRecords.OrderBy(r => r.Id))
+                            {
+                                <tr>
+                                    <td>@relation.Id</td>
+                                    <td>@relation.Name</td>
+                                    <td>@(Model.FileTypes.Where(ft => ft.Id == relation.FileTypeId).Select(ft => ft.Name).FirstOrDefault())</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-muted">Нет связанных карточек</p>
+                }
+            </div>
         </div>
     </div>
 </div>

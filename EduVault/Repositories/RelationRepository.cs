@@ -2,6 +2,7 @@ using EduVault.Data;
 using EduVault.Models;
 using EduVault.Models.DataTransferObjects;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 //using MongoDB.Driver.Linq;
 
 namespace EduVault.Repositories
@@ -12,8 +13,9 @@ namespace EduVault.Repositories
         Task CreateAsync(Relation relation);
         Task<bool> CheckIfExist(Relation relation);
         //Task UpdateAsync(Relation relation);
-        Task DeleteAsync(long id);
+        Task DeleteAsync(Relation relation);
         Task<List<Relation>> GetAllAsync();
+        Task<List<Record>> GetRelatedRecordsForRecordAsync(long id);
         Task<List<Relation>> GetAllForRecordAsync(long id);
     }
     public class RelationRepository: IRelationRepository
@@ -39,26 +41,56 @@ namespace EduVault.Repositories
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
             return await _context.Relationships
                 .AnyAsync(r =>
-                    r.SourceRecord == relation.SourceRecord &&
-                    r.TargetRecord == relation.TargetRecord);
+                    r.SourceRecordId == relation.SourceRecordId &&
+                    r.TargetRecordId == relation.TargetRecordId);
         }
-        public async Task DeleteAsync(long id)
+        public async Task DeleteAsync(Relation relation)
         {
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
+            if(await CheckIfExist(relation))
+            {
+                _context.Remove(relation);
+                await _context.SaveChangesAsync();
+            }
         }
         public async Task<List<Relation>> GetAllAsync()
         {
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
             return await _context.Relationships
                .AsNoTracking()
-               .OrderBy(r => r.Id)
+               .OrderBy(r => r.SourceRecordId)
                .ToListAsync();
+        }
+        public async Task<List<Record>> GetRelatedRecordsForRecordAsync(long recordId)
+        {
+            await using PostgresDBContext _context = _contextFactory.CreateDbContext();
+            List<Record> src = await _context.Relationships
+                .Join(
+                   _context.Records,
+                   relation => relation.SourceRecordId,
+                   record => record.Id,
+                   (relation, record) => new { Relationships = relation, Records = record }
+                )
+                .Where(x => x.Relationships.TargetRecordId == recordId)
+                .Select(x => x.Records)
+                .ToListAsync();
+            List<Record> trgt = await _context.Relationships
+                .Join(
+                   _context.Records,
+                   relation => relation.TargetRecordId,
+                   record => record.Id,
+                   (relation, record) => new { Relationships = relation, Records = record }
+                )
+                .Where(x => x.Relationships.SourceRecordId == recordId)
+                .Select(x => x.Records)
+                .ToListAsync();
+            return src.Union(trgt).ToList();
         }
         public async Task<List<Relation>> GetAllForRecordAsync(long recordId)
         {
             await using PostgresDBContext _context = _contextFactory.CreateDbContext();
             return await _context.Relationships
-                    .Where(rel => rel.SourceRecord == recordId)
+                    .Where(rel => rel.SourceRecordId == recordId || rel.TargetRecordId == recordId)
                     .ToListAsync();
         }
     }

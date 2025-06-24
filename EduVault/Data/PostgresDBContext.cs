@@ -54,7 +54,18 @@ namespace EduVault.Data
 
             modelBuilder.Entity<Relation>(entity =>
             {
-                entity.HasKey(relation => relation.Id);
+                entity.HasKey("SourceRecordId", "TargetRecordId");
+                // Настройка связи "один ко многим" для SourceRecord
+                entity.HasOne(r => r.SourceRecord)
+                    .WithMany(r => r.Relationships)
+                    .HasForeignKey(r => r.SourceRecordId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                // Настройка связи "один ко многим" для TargetRecord
+                entity.HasOne(r => r.TargetRecord)
+                    .WithMany() // Здесь не указываем обратную навигацию
+                    .HasForeignKey(r => r.TargetRecordId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Models.Group>(entity =>

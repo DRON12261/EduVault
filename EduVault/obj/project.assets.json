@@ -6848,19 +6848,19 @@
   },
   "packageFolders": {
     "C:\\Users\\andro\\.nuget\\packages\\": {},
-    "E:\\Programs\\Visual Studio 2022\\Shared\\NuGetPackages": {}
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Projects\\Visual Studio Projects\\EduVault\\EduVault\\EduVault.csproj",
+      "projectUniqueName": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\EduVault.csproj",
       "projectName": "EduVault",
-      "projectPath": "E:\\Projects\\Visual Studio Projects\\EduVault\\EduVault\\EduVault.csproj",
+      "projectPath": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\EduVault.csproj",
       "packagesPath": "C:\\Users\\andro\\.nuget\\packages\\",
-      "outputPath": "E:\\Projects\\Visual Studio Projects\\EduVault\\EduVault\\obj\\",
+      "outputPath": "S:\\Projects\\Visual Studio\\EduVault\\EduVault\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "E:\\Programs\\Visual Studio 2022\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
         "C:\\Users\\andro\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6872,6 +6872,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -6888,8 +6889,9 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "direct"
-      }
+        "auditMode": "all"
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -6941,8 +6943,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "У пакета \"System.Text.Json\" 7.0.3 есть известная уязвимость https://github.com/advisories/GHSA-hh2w-p6rv-4g7w (уровень серьезности: высокий)",
+      "libraryId": "System.Text.Json",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

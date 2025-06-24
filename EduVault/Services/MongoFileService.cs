@@ -126,7 +126,10 @@ namespace EduVault.Services
         // Удаление файла
         public async Task DeleteFileAsync(string fileId)
         {
-            await _gridFsBucket.DeleteAsync(new ObjectId(fileId));
+            if(fileId != null && _gridFsBucket.Find(fileId) != null)
+            {
+                await _gridFsBucket.DeleteAsync(new ObjectId(fileId));
+            }
         }
 
         // Получение информации о файле

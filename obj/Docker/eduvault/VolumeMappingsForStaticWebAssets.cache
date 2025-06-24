@@ -1,1 +1,1 @@
-{"E:\\Projects\\Visual Studio Projects\\EduVault":"/src","C:\\Users\\andro\\.nuget\\packages\\":"/.nuget/packages","E:\\Programs\\Visual Studio 2022\\Shared\\NuGetPackages":"/.nuget/fallbackpackages"}
+[{"SourcePath":"S:\\Projects\\Visual Studio\\EduVault","TargetPath":"/src","ReadOnly":false},{"SourcePath":"C:\\Users\\andro\\.nuget\\packages","TargetPath":"/.nuget/packages","ReadOnly":true},{"SourcePath":"C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages","TargetPath":"/.nuget/fallbackpackages","ReadOnly":true}]
