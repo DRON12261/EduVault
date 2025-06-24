@@ -4,41 +4,60 @@
     ViewData["Title"] = ((Model.Mode == "create") ? "Создание" : "Редактирование") + " пользователя";
 }
 
-<div class="form-container">
+<div class="fields-container">
     <form method="post" asp-page-handler="Save" asp-antiforgery="true">
         @Html.AntiForgeryToken()
-        <div class="create-user-form-group">
-            @if (Model.Mode == "edit")
-            {
-                <input asp-for="Input.Id" type="text" placeholder="Id" readonly>
-            }
-            <input asp-for="Input.Name" type="text" placeholder="Имя" required>
-            <input asp-for="Input.Login" type="text" placeholder="Логин" required>
-            <div class="password-container">
+        <div class="card">
+            <div class="card-header">Основные параметры</div>
+            <div style="margin: 1rem;">
                 @if (Model.Mode == "edit")
                 {
-                    <input asp-for="Input.Password" id="password" type="password" placeholder="Пароль" style="padding: 1rem;">
+                    <div class="form-group">
+                        <label>ИД:</label>
+                        <input asp-for="Input.Id" type="text" placeholder="Id" readonly>
+                    </div>
                 }
-                else
-                {
-                    <input asp-for="Input.Password" id="password" type="password" placeholder="Пароль" style="padding: 1rem;" required>
-                }
-                <button type="button" id="togglePassword" class="btn btn-outline-secondary">
-                    <i class="bi bi-eye"></i>
-                </button>
+                <div class="form-group">
+                    <label>Имя пользователя:</label>
+                    <input asp-for="Input.Name" type="text" placeholder="Имя" required>
+                </div>
+                <div class="form-group">
+                    <label>Логин:</label>
+                    <input asp-for="Input.Login" type="text" placeholder="Логин" required>
+                </div>
+                <div class="form-group">
+                    <label>Пароль:</label>
+                <div class="password-container">
+                    
+                    @if (Model.Mode == "edit")
+                    {
+                            <input asp-for="Input.Password" id="password" type="password" placeholder="Пароль" style="padding: 1rem;">
+                    }
+                    else
+                    {
+                            <input asp-for="Input.Password" id="password" type="password" placeholder="Пароль" style="padding: 1rem;" required>
+                    }
+                    <button type="button" id="togglePassword" class="btn btn-outline-secondary">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+                </div>
+                <div class="form-group">
+                    <label>Роль:</label>
+                    <select asp-for="Input.Role"
+                            asp-items="@(new SelectList(Model.Roles, "Id", "Name"))"
+                            class="form-control" required>
+                        <option value="">-- Выберите роль --</option>
+                    </select>
+                </div>
             </div>
-            <select asp-for="Input.Role"
-                    asp-items="@(new SelectList(Model.Roles, "Id", "Name"))"
-                    class="form-control" required>
-                <option value="">-- Выберите роль --</option>
-            </select>
         </div>
-        <div class="create-user-form-group" style="display: flex; gap: 0.8rem;">
-            <button type="submit" class="btn-primary">@(Model.Mode == "create" ? "Создать" : "Сохранить")</button>
-            <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Page("/Users/Index")'">Отмена</button>
+        <div class="d-flex" style="gap: 1rem; margin-bottom: 1rem; margin-top: 1rem;">
+            <button type="submit" class="btn-alt">@(Model.Mode == "create" ? "Создать" : "Сохранить")</button>
+            <button type="button" class="btn-primary" onclick="location.href='@Url.Page("/Users/Index")'">Отмена</button>
         </div>
     </form>
- </div>
+</div>
 
 @section Scripts {
     <script src="~/js/revealPwd.js"></script>

@@ -84,6 +84,9 @@ main {
 }
 
 .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
     margin-bottom: 0.1rem;
     margin-left: 0.1rem;
     margin-right: 0.1rem;
@@ -120,31 +123,51 @@ button {
 .btn-primary {
     background: var(--secondary-color);
     color: var(--text-light);
+    border-radius: 8px;
 }
 
     .btn-primary:hover {
         background: #5279e5;
         transform: translateY(-1px);
+        border-radius: 8px;
+    }
+
+.link-button-primary {
+    text-decoration: none;
+    padding: 1rem;
+    background: var(--secondary-color);
+    color: var(--text-light);
+    border-radius: 8px;
+}
+
+    .link-button-primary:hover {
+        background: #5279e5;
+        transform: translateY(-1px);
+        border-radius: 8px;
     }
 
 .btn-secondary {
     background: var(--accent-color);
     color: var(--text-light);
+    border-radius: 8px;
 }
 
     .btn-secondary:hover {
         background: #ff3b3b;
         transform: translateY(-1px);
+        border-radius: 8px;
     }
 
 .btn-alt {
     background: #11a861;
     color: var(--text-light);
+    border-radius: 8px;
 }
 
     .btn-alt:hover {
         background: #1cbd67;
         transform: translateY(-1px);
+        border-radius: 8px;
     }
 
 .table-container {
@@ -152,7 +175,7 @@ button {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     overflow: auto;
-    height: calc(100vh - 170px);
+    height: calc(100vh - 190px);
 }
 
 table {
@@ -193,7 +216,7 @@ th {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    height: calc(100vh - 170px);
+    height: calc(100vh - 190px);
 }
 
 .record-info {
@@ -208,7 +231,7 @@ th {
     display: grid;
     grid-template-columns: 1fr var(--panel-width);
     gap: 2rem;
-    height: calc(100vh - 110px);
+    height: calc(100vh - 120px);
     min-height: 500px;
 }
 
@@ -404,12 +427,6 @@ th {
     flex-direction: column;
     gap: 1rem;
     height: 100%;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
 }
 
 .form-control {

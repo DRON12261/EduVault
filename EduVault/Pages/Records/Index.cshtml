@@ -30,7 +30,7 @@
     </form>
 </div>
 
-<div style="display: grid; grid-template-columns: 1fr auto; gap: 2rem; height: calc(100vh - 170px);">
+<div style="display: grid; grid-template-columns: 1fr auto; gap: 2rem; height: calc(100vh - 190px);">
     <div class="table-container">
         <table class="table table-hover">
             <thead class="table-light">
@@ -92,8 +92,16 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" style="margin-top: auto;">Поиск</button>
-                <a asp-page="./Index" class="btn btn-secondary">Сбросить</a>
+                <div class="form-group">
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <div style="flex: 1;">
+                            <button type="submit" class="btn btn-primary" style="width: 100%">Поиск</button>
+                        </div>
+                        <div style="flex: 1;">
+                            <a asp-page="./Index" class="btn btn-secondary" style="width: 100%">Сбросить</a>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
