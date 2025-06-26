@@ -255,14 +255,16 @@ namespace EduVault.Pages.Records
             if (UploadedFile != null)// && UploadedFile.Length > 0)
             {
                 // Получаем шаблон для типа файла
-                var template = (await _fileTypeService.GetByIdAsync(Input.FileType)).FileNameTemplate;
+                var filetype = await _fileTypeService.GetByIdAsync(Input.FileType);
+                var template = filetype.FileNameTemplate;
 
                 // Проверяем имя файла
                 if (!string.IsNullOrEmpty(template) &&
                     !_fileNameTemplateService.ValidateFileName(UploadedFile.FileName, template))
                 {
-                    ModelState.AddModelError("", $"Имя файла не соответствует шаблону: {template}");
-                    return Page();
+                    ModelState.AddModelError("", $"Имя файла '{UploadedFile.FileName}' не соответствует шаблону выбранного типа файла ({filetype.Name}): {template}");
+                    TempData["FileNameError"] = $"Имя файла '{UploadedFile.FileName}' не соответствует шаблону выбранного типа файла ({filetype.Name}): {template}";
+                    return RedirectToPage(new { id = Id, mode = Mode });
                 }
 
                 // Если имя файла соответствует шаблону, извлекаем данные
