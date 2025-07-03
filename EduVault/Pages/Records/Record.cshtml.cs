@@ -58,7 +58,7 @@ namespace EduVault.Pages.Records
 
         //public List<AccessRightsDTO> AccessRights { get; set; } = new();
         public User Author { get; set; }
-        [BindProperty(SupportsGet =true)]
+        [BindProperty(SupportsGet = true)]
         public RecordDTO Input { get; set; }
         [BindProperty(SupportsGet = true)]
         public IFormFile UploadedFile { get; set; }
@@ -68,7 +68,7 @@ namespace EduVault.Pages.Records
 
         public List<Record> AvailableRecords { get; set; } = new();
         public List<Relation> CurrentRelations { get; set; } = new();
-        public List<Record> RelatedRecords {get; set; } = new();
+        public List<Record> RelatedRecords { get; set; } = new();
         public async Task<IActionResult> OnGetAsync()
         {
             FileTypes = await _fileTypeService.GetAllAsync();
@@ -186,10 +186,13 @@ namespace EduVault.Pages.Records
 
             return RedirectToPage();
         }
-        private async Task<IFormFile> GetFileAsFormFileAsync(string fileId)
+        private async Task<IFormFile?> GetFileAsFormFileAsync(string fileId)
         {
             var (stream, contentType, fileName, error) = await _mongoFileService.DownloadFileAsync(fileId);
-            if (stream == null) throw new FileNotFoundException(error ?? "File not found");
+            //if (stream == null) throw new FileNotFoundException(error ?? "File not found");
+
+            if (stream == null)
+                return null;
 
             // Копируем в MemoryStream, так как GridFS stream может быть нечитаемым повторно
             var memoryStream = new MemoryStream();
@@ -227,13 +230,13 @@ namespace EduVault.Pages.Records
             }
             if (Mode == "edit" && Id > 0)
             {
-                UploadedFile = UploadedFile??await GetFileAsFormFileAsync(new RecordDTO(await _recordService.GetByIdAsync(Id)).FilePath);
+                UploadedFile = UploadedFile ?? await GetFileAsFormFileAsync(new RecordDTO(await _recordService.GetByIdAsync(Id)).FilePath);
             }
             string old_filepath = "";
             ModelState.Remove("Input.FilePath");
             ModelState.Remove("Input.FileName");
             ModelState.Remove("UploadedFile");
-            
+
             if (!ModelState.IsValid)
             {
                 var errors = ModelState
@@ -297,7 +300,7 @@ namespace EduVault.Pages.Records
                         }
                     }
                 }
-                
+
             }
             if (!string.IsNullOrEmpty(uploadedFilePath))
             {

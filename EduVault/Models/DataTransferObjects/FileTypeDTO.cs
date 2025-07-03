@@ -13,10 +13,13 @@ namespace EduVault.Models.DataTransferObjects
 
         public FileTypeDTO(FileType fileType)
         {
-            Id = fileType.Id;
-            Name = fileType.Name;
-            FileNameTemplate = fileType.FileNameTemplate;
-            FileTypeFields = fileType.FileTypeFields.Select(f=>new FileTypeFieldDTO(f)).ToList();
+            if (fileType != null)
+            {
+                Id = fileType.Id;
+                Name = fileType.Name;
+                FileNameTemplate = fileType.FileNameTemplate;
+                FileTypeFields = fileType.FileTypeFields.Select(f => new FileTypeFieldDTO(f)).ToList();
+            }
         }
         public FileTypeDTO() {}
     }
